@@ -1,0 +1,12 @@
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Aplicacao.deps.json
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Aplicacao.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Aplicacao.pdb
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.csproj.AssemblyReference.cache
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.AssemblyInfoInputs.cache
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.AssemblyInfo.cs
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.csproj.CoreCompileInputs.cache
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\refint\eAgendaMedica.Aplicacao.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.pdb
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\eAgendaMedica\eAgenda.Aplicacao\obj\Debug\net6.0\ref\eAgendaMedica.Aplicacao.dll

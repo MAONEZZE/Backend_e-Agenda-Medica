@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "6fanElKrvm9qKo3cT4HfFbR9rd4i3Crry9yGLPUiP0nSkSl9MavHhq/K/X7TlArKku4Ux1ubSUtK//egUPuPHw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ruans\\.nuget\\packages\\fluentvalidation\\11.8.0\\fluentvalidation.11.8.0.nupkg.sha512",
+    "C:\\Users\\ruans\\.nuget\\packages\\sequentialguidgenerator\\1.1.0\\sequentialguidgenerator.1.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

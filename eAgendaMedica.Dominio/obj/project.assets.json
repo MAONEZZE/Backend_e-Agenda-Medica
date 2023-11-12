@@ -1,0 +1,162 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "FluentValidation/11.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "SequentialGuidGenerator/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard1.0/SequentialGuidGenerator.dll": {
+            "related": ".XML"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.0/SequentialGuidGenerator.dll": {
+            "related": ".XML"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FluentValidation/11.8.0": {
+      "sha512": "TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ==",
+      "type": "package",
+      "path": "fluentvalidation/11.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "fluent-validation-icon.png",
+        "fluentvalidation.11.8.0.nupkg.sha512",
+        "fluentvalidation.nuspec",
+        "lib/net5.0/FluentValidation.dll",
+        "lib/net5.0/FluentValidation.xml",
+        "lib/net6.0/FluentValidation.dll",
+        "lib/net6.0/FluentValidation.xml",
+        "lib/net7.0/FluentValidation.dll",
+        "lib/net7.0/FluentValidation.xml",
+        "lib/netstandard2.0/FluentValidation.dll",
+        "lib/netstandard2.0/FluentValidation.xml",
+        "lib/netstandard2.1/FluentValidation.dll",
+        "lib/netstandard2.1/FluentValidation.xml"
+      ]
+    },
+    "SequentialGuidGenerator/1.1.0": {
+      "sha512": "Jtw6Vy8xZol5WlKiFrAHbqPaD5o6XN6vdcLsvxZVbw2Nv/8xmxZoJCwD3P8BOxWnGeNDUnhACtLPsa3bpNKluA==",
+      "type": "package",
+      "path": "sequentialguidgenerator/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/SequentialGuidGenerator.XML",
+        "lib/net45/SequentialGuidGenerator.dll",
+        "lib/net451/SequentialGuidGenerator.XML",
+        "lib/net451/SequentialGuidGenerator.dll",
+        "lib/net452/SequentialGuidGenerator.XML",
+        "lib/net452/SequentialGuidGenerator.dll",
+        "lib/net46/SequentialGuidGenerator.XML",
+        "lib/net46/SequentialGuidGenerator.dll",
+        "lib/net461/SequentialGuidGenerator.XML",
+        "lib/net461/SequentialGuidGenerator.dll",
+        "lib/net462/SequentialGuidGenerator.XML",
+        "lib/net462/SequentialGuidGenerator.dll",
+        "lib/netstandard1.0/SequentialGuidGenerator.XML",
+        "lib/netstandard1.0/SequentialGuidGenerator.dll",
+        "sequentialguidgenerator.1.1.0.nupkg.sha512",
+        "sequentialguidgenerator.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "FluentValidation >= 11.8.0",
+      "SequentialGuidGenerator >= 1.1.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ruans\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
+      "projectName": "eAgendaMedica.Dominio",
+      "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
+      "packagesPath": "C:\\Users\\ruans\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\ruans\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "FluentValidation": {
+            "target": "Package",
+            "version": "[11.8.0, )"
+          },
+          "SequentialGuidGenerator": {
+            "target": "Package",
+            "version": "[1.1.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

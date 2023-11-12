@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\eAgendaMedica.Api.props" />
+</Project>

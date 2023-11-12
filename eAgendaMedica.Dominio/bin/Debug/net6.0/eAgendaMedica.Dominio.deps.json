@@ -1,0 +1,57 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "eAgendaMedica.Dominio/1.0.0": {
+        "dependencies": {
+          "FluentValidation": "11.8.0",
+          "SequentialGuidGenerator": "1.1.0"
+        },
+        "runtime": {
+          "eAgendaMedica.Dominio.dll": {}
+        }
+      },
+      "FluentValidation/11.8.0": {
+        "runtime": {
+          "lib/net6.0/FluentValidation.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.8.0.0"
+          }
+        }
+      },
+      "SequentialGuidGenerator/1.1.0": {
+        "runtime": {
+          "lib/netstandard1.0/SequentialGuidGenerator.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "eAgendaMedica.Dominio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FluentValidation/11.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TiEaaYqSIAS+wXQv46LRm8Mca092XYNePD0n231Hqlkmm5FuToZoWnjI1ef/vJUxBzqR7/k2vaVQXxijNgVKRQ==",
+      "path": "fluentvalidation/11.8.0",
+      "hashPath": "fluentvalidation.11.8.0.nupkg.sha512"
+    },
+    "SequentialGuidGenerator/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Jtw6Vy8xZol5WlKiFrAHbqPaD5o6XN6vdcLsvxZVbw2Nv/8xmxZoJCwD3P8BOxWnGeNDUnhACtLPsa3bpNKluA==",
+      "path": "sequentialguidgenerator/1.1.0",
+      "hashPath": "sequentialguidgenerator.1.1.0.nupkg.sha512"
+    }
+  }
+}
