@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Q6V+V8oC5MnTvef1rRE12BKw5o2i3Sd34klqQqYw1Qtg6FH64RmceyDNdVgdIuegwxSOBVQ0UW647eeGnW12iw==",
+  "dgSpecHash": "hvBiAGj97sbUJTcF/8yLn96PkvVlqHhnLpPkjF2hcxYxx/VbHaAODYOA5LqyTmZIRv5q6IluYphgPqeGOqix+A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Api\\eAgendaMedica.Api.csproj",
+  "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Api\\eAgendaMedica.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ruans\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

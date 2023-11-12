@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj",
+      "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj",
       "projectName": "eAgendaMedica.Aplicacao",
-      "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj",
+      "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj",
       "packagesPath": "C:\\Users\\ruans\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgenda.Aplicacao\\obj\\",
+      "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

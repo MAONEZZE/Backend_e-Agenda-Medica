@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MCTTjhDRwSNVnCtzSJVBCbt8ztmO4vKB2M/d1dD3CasbXUTaeuBn0FW5ihk+yK/y0IJL8jjwLaVk0sjTqWjpWQ==",
+  "dgSpecHash": "Wmooyt0uyy3afUeRglsJN5RVNizl9IayiC49s8leHid/rE4CvXrTFOzSzlirzI4PLBElzSthIfVVoBCbNm8mEA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
+  "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ruans\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

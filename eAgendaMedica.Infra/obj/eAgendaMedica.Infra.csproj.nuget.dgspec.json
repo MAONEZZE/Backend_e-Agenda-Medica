@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj": {}
+    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
+    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
+        "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
         "projectName": "eAgendaMedica.Dominio",
-        "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
+        "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj",
         "packagesPath": "C:\\Users\\ruans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\obj\\",
+        "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj": {
+    "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
+        "projectUniqueName": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
         "projectName": "eAgendaMedica.Infra",
-        "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
+        "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
         "packagesPath": "C:\\Users\\ruans\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Infra\\obj\\",
+        "outputPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -101,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
-                "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\eAgendaMedica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj"
+              "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
+                "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj"
               }
             }
           }
