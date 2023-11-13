@@ -10,6 +10,9 @@ namespace eAgendaMedica.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
+
+
             builder.Logging.ClearProviders();//limpa os provider de log da microsoft, isso é
                                              //necessário para poder usar o serilog 
 
@@ -21,6 +24,10 @@ namespace eAgendaMedica.Api
             logger.Debug("Iniciando Aplicação...");
 
             builder.Services.AddSerilog(logger);
+
+
+
+
 
             builder.Services.AddControllers();
 

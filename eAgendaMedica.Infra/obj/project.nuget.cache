@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Wmooyt0uyy3afUeRglsJN5RVNizl9IayiC49s8leHid/rE4CvXrTFOzSzlirzI4PLBElzSthIfVVoBCbNm8mEA==",
+  "dgSpecHash": "J7fuGxoxua7aMVL3Bri9c5MiO4q50vI7c5T/5vJ4pNXYKxWcb7UvnW91AvaTsCN27G1Oxc8D2W4DS1fnxSzeEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,6 @@
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.13\\microsoft.entityframeworkcore.design.7.0.13.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.13\\microsoft.entityframeworkcore.relational.7.0.13.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.13\\microsoft.entityframeworkcore.sqlserver.7.0.13.nupkg.sha512",
-    "C:\\Users\\ruans\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.13\\microsoft.entityframeworkcore.tools.7.0.13.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
     "C:\\Users\\ruans\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\7.0.0\\microsoft.extensions.configuration.abstractions.7.0.0.nupkg.sha512",

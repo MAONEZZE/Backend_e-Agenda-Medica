@@ -2,7 +2,7 @@
 
 namespace eAgendaMedica.Dominio.Compartilhado
 {
-    public class EntidadeBase<T>
+    public abstract class EntidadeBase<T>
     {
         public Guid Id { get; set; }
 
