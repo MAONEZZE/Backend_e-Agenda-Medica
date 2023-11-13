@@ -3,9 +3,11 @@ using eAgendaMedica.Dominio.ModuloPaciente;
 
 namespace eAgendaMedica.Dominio.ModuloConsulta
 {
-    public class Consulta : Atividade
+    public class Consulta : Atividade<Consulta>
     {
         public Medico Medico { get; set; }
+
+        public Consulta() { }
 
         public Consulta(Guid id, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico) 
         {

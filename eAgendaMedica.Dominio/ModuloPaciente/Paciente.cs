@@ -1,4 +1,7 @@
-﻿namespace eAgendaMedica.Dominio.ModuloPaciente
+﻿using eAgendaMedica.Dominio.ModuloCirurgia;
+using eAgendaMedica.Dominio.ModuloConsulta;
+
+namespace eAgendaMedica.Dominio.ModuloPaciente
 {
     public class Paciente : EntidadeBase<Paciente>
     {
@@ -7,6 +10,14 @@
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
+        public List<Consulta> Consultas { get; set; }
+        public List<Cirurgia> Cirurgias { get; set; }
+
+        public Paciente()
+        {
+            this.Consultas = new List<Consulta>();
+            this.Cirurgias = new List<Cirurgia>();
+        }
 
         public Paciente(Guid id, string nome, string email, string telefone, string cpf, DateTime data)
         {

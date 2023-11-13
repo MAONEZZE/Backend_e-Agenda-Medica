@@ -36,7 +36,6 @@ namespace eAgendaMedica.Dominio.ModuloMedico
 
         public void VerificadorDisponibilidade()
         {
-
         }
     }
 }

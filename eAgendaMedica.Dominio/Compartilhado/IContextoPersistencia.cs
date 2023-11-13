@@ -2,8 +2,6 @@
 {
     public interface IContextoPersistencia
     {
-        public void DesfazerAlteracoes();
-
         public Task GravarDadosAsync();
     }
 }

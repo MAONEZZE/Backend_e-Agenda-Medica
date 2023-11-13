@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace eAgendaMedica.Infra.Compartilhado
 {
@@ -6,18 +7,19 @@ namespace eAgendaMedica.Infra.Compartilhado
     {
         public eAgendaMedicaDbContext CreateDbContext(string[] args)
         {
-            DbContextOptionsBuilder builder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
 
-            builder.UseSqlServer(@"Data Source=(localdb)\\MSSQLLocalDB;Initial 
-                                Catalog=eAgendaMedica;
-                                Integrated Security=True;
-                                Connect Timeout=30;
-                                Encrypt=False;
-                                Trust Server Certificate=False;
-                                Application Intent=ReadWrite;
-                                Multi Subnet Failover=False");
+            var config = builder.Build();
 
-            return new eAgendaMedicaDbContext(builder.Options);
+            string connectionString = config.GetConnectionString("SqlServer");
+
+            var optionsBuilder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>();
+
+            optionsBuilder.UseSqlServer(connectionString);
+
+            return new eAgendaMedicaDbContext(optionsBuilder.Options);
         }
     }
 }

@@ -5,11 +5,12 @@ namespace eAgendaMedica.Infra.Compartilhado
     public class RepositorioBase<TEntity> : IRepositorioBase<TEntity>
         where TEntity : EntidadeBase<TEntity>
     {
+        protected DbSet<TEntity> dbset;
         private readonly DbContext dbContext;
-        private DbSet<TEntity> dbset;
+
         public RepositorioBase(IContextoPersistencia ctx)
             //O eAgendaMedicaDbContext implementa essa interface IContextoPersistencia.
-            //Isso é feito para que caso queira implementar outro DbContext
+            //Isso é feito para que caso queira implementar outro DbContext 
         {
             this.dbContext = (eAgendaMedicaDbContext)ctx;
 

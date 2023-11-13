@@ -3,7 +3,7 @@ using eAgendaMedica.Dominio.ModuloPaciente;
 
 namespace eAgendaMedica.Dominio.ModuloCirurgia
 {
-    public class Cirurgia : Atividade
+    public class Cirurgia : Atividade<Cirurgia>
     {
         public List<Medico> Medicos { get; set; }
 

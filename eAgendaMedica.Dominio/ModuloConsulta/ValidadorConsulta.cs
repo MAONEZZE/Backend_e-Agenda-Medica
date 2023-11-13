@@ -16,6 +16,7 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
                 .NotEmpty();
 
             RuleFor(x => x.HoraTermino)
+                .GreaterThan(x => x.HoraInicio)
                 .NotNull()
                 .NotEmpty();
 

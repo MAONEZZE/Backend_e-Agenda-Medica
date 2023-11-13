@@ -10,10 +10,10 @@ namespace eAgendaMedica.Infra.ModuloMedico
             builder.ToTable("TBMedico");
 
             builder.Property(m => m.Id).ValueGeneratedNever();
+
+            builder.Property(m => m.Nome).HasColumnType("varchar(50)").IsRequired();
             builder.Property(m => m.Cpf).HasColumnType("varchar(50)").IsRequired();
             builder.Property(m => m.Crm).HasColumnType("varchar(50)").IsRequired();
-
-            builder.HasOne(m => m.Atividades)
         }
     }
 }

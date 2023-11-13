@@ -8,6 +8,14 @@ namespace eAgendaMedica.Infra.ModuloPaciente
         public void Configure(EntityTypeBuilder<Paciente> builder)
         {
             builder.ToTable("TBPaciente");
+
+            builder.Property(m => m.Id).ValueGeneratedNever();
+
+            builder.Property(m => m.Nome).HasColumnType("varchar(50)").IsRequired();
+            builder.Property(m => m.Cpf).HasColumnType("varchar(50)").IsRequired();
+            builder.Property(m => m.Email).HasColumnType("varchar(50)").IsRequired();
+            builder.Property(m => m.Telefone).HasColumnType("varchar(50)").IsRequired();
+            builder.Property(m => m.DataNascimento).IsRequired();
         }
     }
 }
