@@ -4,7 +4,7 @@
 
 Uma clínica médica requer um sistema eficiente para gerenciar e organizar o cronograma de atividades, como consultas e cirurgias, realizadas por profissionais médicos. Neste contexto, os alunos da Academia do Programador 2023 foram contratados para desenvolver o aplicativo web "e-AGENDA MÉDICA".
 
-## Tecnologias e Ferramentas Utilizadas
+## Tecnologias e Ferramentas Principais
 
 - **C#**: Linguagem de programação principal para o desenvolvimento do backend.
 - **Entity Framework Core**: Ferramenta de mapeamento objeto-relacional (ORM) para interação com o banco de dados.
