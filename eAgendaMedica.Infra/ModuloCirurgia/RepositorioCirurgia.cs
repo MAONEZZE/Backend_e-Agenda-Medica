@@ -12,12 +12,12 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
 
         public Task<List<Cirurgia>> SelecionarCirurgiasFuturas()
         {
-            return base.dbset.Where(x => x.Data > DateTime.Now).ToListAsync();
+            return base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
         }
 
         public Task<List<Cirurgia>> SelecionarCirurgiasPassadas()
         {
-            return base.dbset.Where(x => x.Data < DateTime.Now).ToListAsync();
+            return base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
         }
     }
 }

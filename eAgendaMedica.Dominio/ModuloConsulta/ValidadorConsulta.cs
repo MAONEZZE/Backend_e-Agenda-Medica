@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using eAgendaMedica.Dominio.ModuloMedico;
+using FluentValidation;
 
 namespace eAgendaMedica.Dominio.ModuloConsulta
 {
@@ -26,7 +27,13 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 
             RuleFor(x => x.Medico)
                 .NotNull()
-                .NotEmpty();
+                .NotEmpty()
+                .Custom(VerificadorDisponibilidade);
+        }
+
+        private void VerificadorDisponibilidade(Medico medico, ValidationContext<Consulta> ctx)
+        {
+            
         }
     }
 }

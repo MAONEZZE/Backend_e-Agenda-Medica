@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aplicacao", "Aplicacao", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{31453207-B610-4305-82D6-9375337A3979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.Infra", "eAgendaMedica.Infra\eAgendaMedica.Infra.csproj", "{C7F954B0-BCA6-4666-87CB-44CB178C63CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgendaMedica.Infra", "eAgendaMedica.Infra\eAgendaMedica.Infra.csproj", "{C7F954B0-BCA6-4666-87CB-44CB178C63CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.Aplicacao", "eAgenda.Aplicacao\eAgendaMedica.Aplicacao.csproj", "{E71D7253-CB88-451C-A41E-304DE4FF8E15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgendaMedica.Aplicacao", "eAgenda.Aplicacao\eAgendaMedica.Aplicacao.csproj", "{E71D7253-CB88-451C-A41E-304DE4FF8E15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.Api", "eAgendaMedica.Api\eAgendaMedica.Api.csproj", "{193E8126-7FF7-4738-97E1-D8F54B2CD83D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgendaMedica.Api", "eAgendaMedica.Api\eAgendaMedica.Api.csproj", "{193E8126-7FF7-4738-97E1-D8F54B2CD83D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestesUnitarios", "TestesUnitarios", "{74CD5CDA-3DA9-4E7E-AE10-96538D3C8316}"
 EndProject

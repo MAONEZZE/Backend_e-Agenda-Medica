@@ -12,12 +12,12 @@ namespace eAgendaMedica.Infra.ModuloConsulta
 
         public Task<List<Consulta>> SelecionarConsultasFuturas()
         {
-            return base.dbset.Where(x => x.Data > DateTime.Now).ToListAsync();
+            return base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
         }
 
         public Task<List<Consulta>> SelecionarConsultasPassadas()
         {
-            return base.dbset.Where(x => x.Data < DateTime.Now).ToListAsync();
+            return base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
         }
     }
 }

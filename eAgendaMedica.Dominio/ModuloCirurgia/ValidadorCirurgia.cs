@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using eAgendaMedica.Dominio.ModuloMedico;
+using FluentValidation;
 
 namespace eAgendaMedica.Dominio.ModuloCirurgia
 {
@@ -25,7 +26,24 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
 
             RuleFor(x => x.Medicos)
                 .NotNull()
-                .NotEmpty();
+                .NotEmpty()
+                .Custom(VerificadorDisponibilidade);
+
+
+
+        }
+
+        private void VerificadorDisponibilidade(List<Medico> medicos, ValidationContext<Cirurgia> ctx)
+        {
+            foreach (var medico in medicos)
+            {
+                bool disponivel = medico.EstaDisponivelCirurgia();
+
+                if (!disponivel)
+                {
+                    ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 4 horas descansando, após uma cirurgia"));
+                }
+            }
         }
     }
 }

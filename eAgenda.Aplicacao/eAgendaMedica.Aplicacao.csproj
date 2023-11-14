@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Compartilhado\" />
-    <Folder Include="ModuloAtividade\" />
-    <Folder Include="ModuloMedico\" />
-    <Folder Include="ModuloPaciente\" />
+    <PackageReference Include="FluentResults" Version="3.15.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\eAgendaMedica.Dominio\eAgendaMedica.Dominio.csproj" />
+    <ProjectReference Include="..\eAgendaMedica.Infra\eAgendaMedica.Infra.csproj" />
   </ItemGroup>
 
 </Project>

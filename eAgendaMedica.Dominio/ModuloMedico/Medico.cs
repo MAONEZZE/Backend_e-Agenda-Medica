@@ -1,5 +1,7 @@
 ﻿using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
+using System.Globalization;
+using System.Runtime.CompilerServices;
 
 namespace eAgendaMedica.Dominio.ModuloMedico
 {
@@ -34,8 +36,29 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             this.Crm = crm;
         }
 
-        public void VerificadorDisponibilidade()
+        public bool EstaDisponivelCirurgia()
         {
+            Cirurgia cirurgia;
+            DateTime hora = new DateTime();
+
+            foreach(var c in Cirurgias)
+            {
+                var horaUltimaCirurgia = c.Data.Add(c.HoraTermino);
+
+
+                if (horaUltimaCirurgia > hora)
+                {
+                    hora = horaUltimaCirurgia;
+                    cirurgia = c;
+                }
+            }
+
+            if (DateTime.Now - hora < TimeSpan.FromHours(4))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -18,14 +18,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Compartilhado\" />
+    <Folder Include="Config\AutomapperConfig\Compartilhado\" />
+    <Folder Include="Config\AutomapperConfig\ModuloCirurgia\" />
+    <Folder Include="Config\AutomapperConfig\ModuloConsulta\" />
+    <Folder Include="Config\AutomapperConfig\ModuloMedico\" />
+    <Folder Include="Config\AutomapperConfig\ModuloPaciente\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Controllers\ModuloAtividade\" />
+    <Folder Include="Controllers\Compartilhado\" />
     <Folder Include="Controllers\ModuloMedico\" />
     <Folder Include="Controllers\ModuloPaciente\" />
-    <Folder Include="Config\" />
+    <Folder Include="Controllers\ModuloConsulta\" />
+    <Folder Include="Controllers\ModuloCirurgia\" />
     <Folder Include="ViewModels\Compartilhado\" />
-    <Folder Include="ViewModels\ModuloAtividade\" />
+    <Folder Include="ViewModels\ModuloCirurgia\" />
+    <Folder Include="ViewModels\ModuloConsulta\" />
     <Folder Include="ViewModels\ModuloMedico\" />
     <Folder Include="ViewModels\ModuloPaciente\" />
   </ItemGroup>

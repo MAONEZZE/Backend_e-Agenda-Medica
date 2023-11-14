@@ -22,3 +22,9 @@ C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicaca
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\obj\Debug\net6.0\refint\eAgendaMedica.Aplicacao.dll
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.pdb
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\obj\Debug\net6.0\ref\eAgendaMedica.Aplicacao.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\bin\Debug\net6.0\appsettings.json
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Dominio.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Infra.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Dominio.pdb
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\bin\Debug\net6.0\eAgendaMedica.Infra.pdb
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgenda.Aplicacao\obj\Debug\net6.0\eAgendaMedica.Aplicacao.csproj.CopyComplete
