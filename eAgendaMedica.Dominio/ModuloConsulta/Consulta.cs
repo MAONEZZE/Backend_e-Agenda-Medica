@@ -27,5 +27,10 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
             this.PacienteAtributo = pacienteatributo;
             this.Medico = medico;
         }
+
+        public void AdicionarMedico(Medico medico)
+        {
+            this.Medico = medico;
+        }
     }
 }

@@ -10,14 +10,14 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
         {
         }
 
-        public Task<List<Cirurgia>> SelecionarCirurgiasFuturas()
+        public async Task<List<Cirurgia>> SelecionarCirurgiasFuturasComDataAlvo(DateTime dataAlvo)
         {
-            return base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
+            return await base.dbset.Where(x => x.Data > dataAlvo).ToListAsync();
         }
 
-        public Task<List<Cirurgia>> SelecionarCirurgiasPassadas()
+        public async Task<List<Cirurgia>> SelecionarCirurgiasPassadasComDataAlvo(DateTime dataAlvo)
         {
-            return base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
+            return await base.dbset.Where(x => x.Data < dataAlvo).ToListAsync();
         }
     }
 }

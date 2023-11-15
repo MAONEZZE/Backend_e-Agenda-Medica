@@ -46,6 +46,16 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             return lista;
         }
 
+        public void AdicionarConsulta(Consulta consulta)
+        {
+            this.Consultas.Add(consulta);
+        }
+
+        public void AdicionarCirurgia(Cirurgia cirurgia)
+        {
+            this.Cirurgias.Add(cirurgia);
+        }
+
         public bool EstaDisponivelCirurgia(DateTime dataHoraMarcada)
         {
             //TODO - Fazer uma verificação, caso tenha uma cirurgia depois da dataHoraMarcada

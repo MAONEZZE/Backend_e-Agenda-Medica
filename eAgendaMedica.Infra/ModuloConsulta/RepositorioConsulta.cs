@@ -1,4 +1,5 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
+using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
 using eAgendaMedica.Infra.Compartilhado;
 
@@ -10,14 +11,14 @@ namespace eAgendaMedica.Infra.ModuloConsulta
         {
         }
 
-        public Task<List<Consulta>> SelecionarConsultasFuturas()
+        public async Task<List<Consulta>> SelecionarConsultasFuturasComDataAlvo(DateTime dataAlvo)
         {
-            return base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
+            return await base.dbset.Where(x => x.Data > dataAlvo).ToListAsync();
         }
 
-        public Task<List<Consulta>> SelecionarConsultasPassadas()
+        public async Task<List<Consulta>> SelecionarConsultasPassadasComDataAlvo(DateTime dataAlvo)
         {
-            return base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
+            return await base.dbset.Where(x => x.Data < dataAlvo).ToListAsync();
         }
     }
 }

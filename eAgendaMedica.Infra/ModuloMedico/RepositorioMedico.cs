@@ -10,17 +10,17 @@ namespace eAgendaMedica.Infra.ModuloMedico
         {
         }
 
-        public Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam()
+        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Medico> SelecionarPorCRM(string crm)
+        public async Task<Medico> SelecionarPorCRM(string crm)
         {
-            return base.dbset.SingleOrDefaultAsync(x => x.Crm == crm);
+            return await base.dbset.SingleOrDefaultAsync(x => x.Crm == crm);
         }
 
-        public Task<Medico> VerificarDisponibilidade()
+        public async Task<Medico> VerificarDisponibilidade()
         {
             throw new NotImplementedException();
         }

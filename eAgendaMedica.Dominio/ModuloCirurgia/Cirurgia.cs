@@ -28,5 +28,10 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
             HoraTermino = horatermino;
             PacienteAtributo = pacienteatributo;
         }
+
+        public void AdicioanrMedico(Medico medico)
+        {
+            this.Medicos.Add(medico);
+        }
     }
 }

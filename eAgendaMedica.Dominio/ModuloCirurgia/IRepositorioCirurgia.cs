@@ -2,7 +2,7 @@
 {
     public interface IRepositorioCirurgia : IRepositorioBase<Cirurgia>
     {
-        public Task<List<Cirurgia>> SelecionarCirurgiasPassadas();
-        public Task<List<Cirurgia>> SelecionarCirurgiasFuturas();
+        public Task<List<Cirurgia>> SelecionarCirurgiasPassadasComDataAlvo(DateTime dataAlvo);
+        public Task<List<Cirurgia>> SelecionarCirurgiasFuturasComDataAlvo(DateTime dataAlvo);
     }
 }
