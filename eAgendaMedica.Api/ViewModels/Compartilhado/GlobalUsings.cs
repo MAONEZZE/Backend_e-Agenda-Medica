@@ -1,0 +1,1 @@
+﻿global using eAgendaMedica.Api.ViewModels.Compartilhado;

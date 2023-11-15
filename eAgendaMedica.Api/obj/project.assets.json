@@ -75,6 +75,23 @@
           }
         }
       },
+      "FluentResults/3.15.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.1",
+          "System.Threading.Tasks.Extensions": "4.5.4"
+        },
+        "compile": {
+          "lib/netstandard2.1/FluentResults.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/FluentResults.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "FluentValidation/11.8.0": {
         "type": "package",
         "compile": {
@@ -1524,6 +1541,21 @@
           }
         }
       },
+      "eAgendaMedica.Aplicacao/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "FluentResults": "3.15.2",
+          "eAgendaMedica.Dominio": "1.0.0",
+          "eAgendaMedica.Infra": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/eAgendaMedica.Aplicacao.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/eAgendaMedica.Aplicacao.dll": {}
+        }
+      },
       "eAgendaMedica.Dominio/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -1624,6 +1656,22 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "FluentResults/3.15.2": {
+      "sha512": "yR3PD1SWKirYNpQ/t9TjJrsp1adazMmozLDPeamvSIljLAIjS0EQyyGvoupWsbZEryqW9SHbKXVL8YaJwURk8w==",
+      "type": "package",
+      "path": "fluentresults/3.15.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "FluentResults-Icon-128.png",
+        "fluentresults.3.15.2.nupkg.sha512",
+        "fluentresults.nuspec",
+        "lib/netstandard2.0/FluentResults.dll",
+        "lib/netstandard2.0/FluentResults.xml",
+        "lib/netstandard2.1/FluentResults.dll",
+        "lib/netstandard2.1/FluentResults.xml"
       ]
     },
     "FluentValidation/11.8.0": {
@@ -4001,6 +4049,11 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "eAgendaMedica.Aplicacao/1.0.0": {
+      "type": "project",
+      "path": "../eAgenda.Aplicacao/eAgendaMedica.Aplicacao.csproj",
+      "msbuildProject": "../eAgenda.Aplicacao/eAgendaMedica.Aplicacao.csproj"
+    },
     "eAgendaMedica.Dominio/1.0.0": {
       "type": "project",
       "path": "../eAgendaMedica.Dominio/eAgendaMedica.Dominio.csproj",
@@ -4019,8 +4072,8 @@
       "Microsoft.EntityFrameworkCore.Tools >= 7.0.13",
       "Serilog.AspNetCore >= 7.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
-      "eAgendaMedica.Dominio >= 1.0.0",
-      "eAgendaMedica.Infra >= 1.0.0"
+      "eAgendaMedica.Aplicacao >= 1.0.0",
+      "eAgendaMedica.Dominio >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4055,11 +4108,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj": {
+              "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj"
+            },
             "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
               "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj"
-            },
-            "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj": {
-              "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Infra\\eAgendaMedica.Infra.csproj"
             }
           }
         }

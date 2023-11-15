@@ -14,14 +14,45 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             this.ctxPersistencia = ctxPersistencia;
         }
 
-        public Task<Result<Consulta>> EditarAsync(Consulta registro)
+        public async Task<Result<Consulta>> EditarAsync(Consulta registro)
         {
-            throw new NotImplementedException();
+            var resultado = Validar(registro);
+
+            if (resultado.IsFailed)
+            {
+                return Result.Fail(resultado.Errors);
+            }
+
+            repConsulta.Editar(registro);
+
+            await ctxPersistencia.GravarDadosAsync();
+
+            Log.Logger.Information($"Consulta {registro.Id} editada com sucesso");
+
+            return Result.Ok(registro);
         }
 
-        public Task ExcluirAsync(Consulta registro)
+        public async Task<Result> ExcluirAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var resultado = await SelecionarPorIdAsync(id);
+
+            if (resultado.IsFailed)
+            {
+                return Result.Fail(resultado.Errors);
+            }
+
+            return await Excluir(resultado.Value);
+        }
+
+        private async Task<Result> Excluir(Consulta registro)
+        {
+            repConsulta.Excluir(registro);
+
+            await ctxPersistencia.GravarDadosAsync();
+
+            Log.Logger.Information($"Consulta {registro.Id} excluido com sucesso");
+
+            return Result.Ok();
         }
 
         public async Task<Result<Consulta>> InserirAsync(Consulta registro)
@@ -33,8 +64,6 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
                 return Result.Fail(resultado.Errors);
             }
 
-
-
             await this.repConsulta.InserirAsync(registro);
 
             await this.ctxPersistencia.GravarDadosAsync();
@@ -44,14 +73,29 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             return Result.Ok(registro);
         }
 
-        public Task<Result<Consulta>> SelecionarPorIdAsync(Guid id)
+        public async Task<Result<Consulta>> SelecionarPorIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var consulta = await repConsulta.SelecionarPorIdAsync(id);
+
+            if (consulta == null)
+            {
+                Log.Logger.Warning($"Consulta {id} não encontrado");
+
+                return Result.Fail("Consulta não encontrada");
+            }
+
+            Log.Logger.Information($"Consulta {id} selecionado com sucesso");
+
+            return Result.Ok(consulta);
         }
 
-        public Task<Result<List<Consulta>>> SelecionarTodosAsync()
+        public async Task<Result<List<Consulta>>> SelecionarTodosAsync()
         {
-            throw new NotImplementedException();
+            var consultas = await repConsulta.SelecionarTodosAsync();
+
+            Log.Logger.Information("Consultas selecionadas com sucesso!");
+
+            return Result.Ok(consultas);
         }
     }
 }

@@ -36,24 +36,36 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             this.Crm = crm;
         }
 
-        public bool EstaDisponivelCirurgia()
+        public List<object> SelecionarAtividades()
         {
-            Cirurgia cirurgia;
-            DateTime hora = new DateTime();
+            var lista = new List<object>();
 
-            foreach(var c in Cirurgias)
+            lista.AddRange(Consultas);
+            lista.AddRange(Cirurgias);
+
+            return lista;
+        }
+
+        public bool EstaDisponivelCirurgia(DateTime dataHoraMarcada)
+        {
+            //TODO - Fazer uma verificação, caso tenha uma cirurgia depois da dataHoraMarcada
+            //TODO - Fazer um metodo geral, para pegar a disponibilidade do medico a independente de uma Consulta ou Cirurgia
+            //TODO - Troacr o Cirurgias do foreach pelo metodo SelecionarAtividades()
+
+            DateTime dataHoraFinal = new DateTime();
+
+            foreach (var c in Cirurgias)
             {
-                var horaUltimaCirurgia = c.Data.Add(c.HoraTermino);
+                var dataHoraUltimaCirurgia = c.Data.Add(c.HoraTermino);
 
 
-                if (horaUltimaCirurgia > hora)
+                if (dataHoraUltimaCirurgia > dataHoraFinal)
                 {
-                    hora = horaUltimaCirurgia;
-                    cirurgia = c;
+                    dataHoraFinal = dataHoraUltimaCirurgia;
                 }
             }
 
-            if (DateTime.Now - hora < TimeSpan.FromHours(4))
+            if (Math.Abs((dataHoraMarcada - dataHoraFinal).Ticks) < TimeSpan.FromHours(4).Ticks)
             {
                 return false;
             }

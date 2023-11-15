@@ -1,32 +1,101 @@
 ﻿using eAgendaMedica.Dominio.ModuloCirurgia;
+using Serilog;
 
 namespace eAgendaMedica.Aplicacao.ModuloCirurgia
 {
     public class ServicoCirurgia : ServicoBase<Cirurgia, ValidadorCirurgia>, IServicoBase<Cirurgia>
     {
-        public Task<Result<Cirurgia>> EditarAsync(Cirurgia registro)
+        private IRepositorioCirurgia repCirurgia;
+        private IContextoPersistencia ctxPersistencia;
+
+        public ServicoCirurgia(IRepositorioCirurgia repCirurgia, IContextoPersistencia ctxPersistencia)
         {
-            throw new NotImplementedException();
+            this.repCirurgia = repCirurgia;
+            this.ctxPersistencia = ctxPersistencia;
         }
 
-        public Task ExcluirAsync(Cirurgia registro)
+        public async Task<Result<Cirurgia>> EditarAsync(Cirurgia registro)
         {
-            throw new NotImplementedException();
+            var resultado = Validar(registro);
+
+            if (resultado.IsFailed)
+            {
+                return Result.Fail(resultado.Errors);
+            }
+
+            repCirurgia.Editar(registro);
+
+            await ctxPersistencia.GravarDadosAsync();
+
+            Log.Logger.Information($"Cirurgia {registro.Id} editada com sucesso");
+
+            return Result.Ok(registro);
         }
 
-        public Task<Result<Cirurgia>> InserirAsync(Cirurgia registro)
+        public async Task<Result> ExcluirAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var resultado = await SelecionarPorIdAsync(id);
+
+            if (resultado.IsFailed)
+            {
+                return Result.Fail(resultado.Errors);
+            }
+
+            return await Excluir(resultado.Value);
         }
 
-        public Task<Result<Cirurgia>> SelecionarPorIdAsync(Guid id)
+        private async Task<Result> Excluir(Cirurgia registro)
         {
-            throw new NotImplementedException();
+            repCirurgia.Excluir(registro);
+
+            await ctxPersistencia.GravarDadosAsync();
+
+            Log.Logger.Information($"Cirurgia {registro.Id} excluido com sucesso");
+
+            return Result.Ok();
         }
 
-        public Task<Result<List<Cirurgia>>> SelecionarTodosAsync()
+        public async Task<Result<Cirurgia>> InserirAsync(Cirurgia registro)
         {
-            throw new NotImplementedException();
+            Result resultado = Validar(registro);
+
+            if (resultado.IsFailed)
+            {
+                return Result.Fail(resultado.Errors);
+            }
+
+            await this.repCirurgia.InserirAsync(registro);
+
+            await this.ctxPersistencia.GravarDadosAsync();
+
+            Log.Logger.Information($"Cirurgia {registro.Titulo} inserida com sucesso");
+
+            return Result.Ok(registro);
+        }
+
+        public async Task<Result<Cirurgia>> SelecionarPorIdAsync(Guid id)
+        {
+            var cirurgia = await repCirurgia.SelecionarPorIdAsync(id);
+
+            if (cirurgia == null)
+            {
+                Log.Logger.Warning($"Cirurgia {id} não encontrado");
+
+                return Result.Fail("Cirurgia não encontrada");
+            }
+
+            Log.Logger.Information($"Cirurgia {id} selecionado com sucesso");
+
+            return Result.Ok(cirurgia);
+        }
+
+        public async Task<Result<List<Cirurgia>>> SelecionarTodosAsync()
+        {
+            var cirurgias = await repCirurgia.SelecionarTodosAsync();
+
+            Log.Logger.Information("Cirurgias selecionadas com sucesso!");
+
+            return Result.Ok(cirurgias);
         }
     }
 }

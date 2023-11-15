@@ -23,22 +23,11 @@
     <Folder Include="Config\AutomapperConfig\ModuloConsulta\" />
     <Folder Include="Config\AutomapperConfig\ModuloMedico\" />
     <Folder Include="Config\AutomapperConfig\ModuloPaciente\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Controllers\Compartilhado\" />
-    <Folder Include="Controllers\ModuloMedico\" />
-    <Folder Include="Controllers\ModuloPaciente\" />
-    <Folder Include="Controllers\ModuloConsulta\" />
-    <Folder Include="Controllers\ModuloCirurgia\" />
-    <Folder Include="ViewModels\Compartilhado\" />
-    <Folder Include="ViewModels\ModuloCirurgia\" />
-    <Folder Include="ViewModels\ModuloConsulta\" />
-    <Folder Include="ViewModels\ModuloMedico\" />
-    <Folder Include="ViewModels\ModuloPaciente\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\eAgenda.Aplicacao\eAgendaMedica.Aplicacao.csproj" />
     <ProjectReference Include="..\eAgendaMedica.Dominio\eAgendaMedica.Dominio.csproj" />
-    <ProjectReference Include="..\eAgendaMedica.Infra\eAgendaMedica.Infra.csproj" />
   </ItemGroup>
 
 </Project>
