@@ -1,5 +1,5 @@
-
-
+using eAgendaMedica.Api.Config;
+using eAgendaMedica.Api.Filters;
 using Serilog;
 
 namespace eAgendaMedica.Api
@@ -9,31 +9,29 @@ namespace eAgendaMedica.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
-            
-
-
-            builder.Logging.ClearProviders();//limpa os provider de log da microsoft, isso é
-
-            var logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .CreateLogger();
-
-            logger.Debug("Iniciando Aplicação...");
-
-            builder.Services.AddSerilog(logger);
-
-
-
-
-
-            builder.Services.AddControllers();
-
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-
             var app = builder.Build();
+
+            //============== Logs =================
+            builder.Services.ConfigurarSerilog(builder.Logging);
+            //=====================================
+
+            //============ Extension ==============
+            builder.Services.ConfigurarSwaggerExtension();
+            builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
+            //=====================================
+
+            //============= Mappers ===============
+            //builder.Services.ConfigurarAutoMapper();
+            //=====================================
+
+            //== Controllers, Filtros e Exceções ==
+            builder.Services.AddControllers(config =>
+            {
+                config.Filters.Add<SerilogActionFilter>();
+            });
+
+            app.UseMiddleware<ManipuladorExcecoes>();
+            //=====================================
 
             if (app.Environment.IsDevelopment())
             {

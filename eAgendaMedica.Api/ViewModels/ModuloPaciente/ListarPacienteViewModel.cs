@@ -1,6 +1,6 @@
 ﻿namespace eAgendaMedica.Api.ViewModels.ModuloPaciente
 {
-    public class ListarPacienteViewModel
+    public class ListarPacienteViewModel : ListarBase<ListarPacienteViewModel>
     {
     }
 }

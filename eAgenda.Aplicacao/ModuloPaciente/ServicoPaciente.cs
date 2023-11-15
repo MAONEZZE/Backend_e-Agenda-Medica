@@ -32,7 +32,7 @@ namespace eAgendaMedica.Aplicacao.ModuloPaciente
             return Result.Ok(registro);
         }
 
-        public async Task<Result> ExcluirAsync(Guid id)
+        public async Task<Result> ExcluirPorIdAsync(Guid id)
         {
             var resultado = await SelecionarPorIdAsync(id);
 
@@ -41,10 +41,10 @@ namespace eAgendaMedica.Aplicacao.ModuloPaciente
                 return Result.Fail(resultado.Errors);
             }
 
-            return await Excluir(resultado.Value);
+            return await ExcluirPorRegistroAsync(resultado.Value);
         }
 
-        private async Task<Result> Excluir(Paciente registro)
+        public async Task<Result> ExcluirPorRegistroAsync(Paciente registro)
         {
             repPaciente.Excluir(registro);
 

@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgendaMedica.Api.Controllers.Compartilhado
 {
     public abstract class ControladorApiBase<TList, TForm, TVisu, TEntity> : ControllerBase
-        where TList : ViewModelBase<TList>
-        where TForm : ViewModelBase<TForm>
-        where TVisu : ViewModelBase<TVisu>
+        where TList : ListarBase<TList>
+        where TForm : FormBase<TForm>
+        where TVisu : VisualizarBase<TVisu>
         where TEntity : EntidadeBase<TEntity>
     {
         private IMapper _map;
@@ -67,9 +67,9 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [HttpGet("visualizacao-completa/{id}")] // O {} é para colocar o nome do parametro do metodo. É tipo o :id do angular
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]
-        public virtual IActionResult SelecionarPorId(Guid id)
+        public virtual async Task<IActionResult> SelecionarPorId(Guid id)
         {
-            var resultado = _service.SelecionarPorId(id);
+            var resultado = await _service.SelecionarPorIdAsync(id);
 
             if (resultado.IsFailed)
             {
@@ -92,20 +92,22 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [HttpPost("inserir")]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 500)]
-        public virtual IActionResult Inserir(TForm registroVM)
+        public virtual async Task<IActionResult> Inserir(TForm registroVM)
         {
             TEntity contato = this._map.Map<TEntity>(registroVM);
 
-            return ProcessarResposta(_service.Inserir(contato), registroVM);
+            var resultado = await _service.InserirAsync(contato);
+
+            return ProcessarResposta(resultado, registroVM);
         }
 
         [HttpPut("editar/{id}")]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]
-        public virtual IActionResult Editar(Guid id, TForm registroVM)
+        public virtual async Task<IActionResult> Editar(Guid id, TForm registroVM)
         {
-            var resultado = _service.SelecionarPorId(id);
+            var resultado = await _service.SelecionarPorIdAsync(id);
 
             if (resultado.IsFailed)
             {
@@ -130,7 +132,9 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
                 */
             #endregion
 
-            return ProcessarResposta(_service.Editar(contato), registroVM);
+            var resultadoEdicao = await _service.EditarAsync(contato);
+
+            return ProcessarResposta(resultadoEdicao, registroVM);
         }
 
         [HttpDelete("excluir/{id}")]
@@ -138,9 +142,9 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]//Isso daqui mostra os erros qeu podem retornar do endpoint
-        public virtual IActionResult Excluir(Guid id)
+        public virtual async Task<IActionResult> Excluir(Guid id)
         {
-            var resultado = _service.SelecionarPorId(id);
+            var resultado = await _service.SelecionarPorIdAsync(id);
 
             if (resultado.IsFailed)
             {
@@ -153,7 +157,9 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
 
             var registro = resultado.Value;
 
-            return ProcessarResposta(_service.Excluir(registro));
+            var resultadoExclusao = await _service.ExcluirPorRegistroAsync(registro);
+
+            return ProcessarResposta(resultadoExclusao);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace eAgendaMedica.Aplicacao.ModuloMedico
         private IRepositorioMedico repMedico;
         private IContextoPersistencia ctxPersistencia;
 
-        public ServicoPaciente(IRepositorioMedico repMedico, IContextoPersistencia ctxPersistencia)
+        public ServicoMedico(IRepositorioMedico repMedico, IContextoPersistencia ctxPersistencia)
         {
             this.repMedico = repMedico;
             this.ctxPersistencia = ctxPersistencia;
@@ -32,7 +32,7 @@ namespace eAgendaMedica.Aplicacao.ModuloMedico
             return Result.Ok(registro);
         }
 
-        public async Task<Result> ExcluirAsync(Guid id)
+        public async Task<Result> ExcluirPorIdAsync(Guid id)
         {
             var resultado = await SelecionarPorIdAsync(id);
 
@@ -41,10 +41,10 @@ namespace eAgendaMedica.Aplicacao.ModuloMedico
                 return Result.Fail(resultado.Errors);
             }
 
-            return await Excluir(resultado.Value);
+            return await ExcluirPorRegistroAsync(resultado.Value);
         }
 
-        private async Task<Result> Excluir(Medico registro)
+        public async Task<Result> ExcluirPorRegistroAsync(Medico registro)
         {
             repMedico.Excluir(registro);
 

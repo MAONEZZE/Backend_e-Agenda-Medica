@@ -22,10 +22,13 @@ namespace eAgendaMedica.Api.Config
         {
             string connectionString = config.GetConnectionString("SqlServer");
 
-            services.AddDbContext<IContextoPersistencia, eAgendaMedicaDbContext>(optionsBuilder =>
+            services.AddDbContext<IContextoPersistencia, eAgendaMedicaDbContext>(optionsBuilder => 
             {
                 optionsBuilder.UseSqlServer(connectionString);
             });
+
+            //Registrando esse contexto com a interface IContextoPersistencia
+            //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext
 
             services.AddTransient<IRepositorioCirurgia, RepositorioCirurgia>();
             services.AddTransient<ServicoCirurgia>();

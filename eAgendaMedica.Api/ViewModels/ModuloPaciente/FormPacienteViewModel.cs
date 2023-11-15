@@ -1,6 +1,6 @@
 ﻿namespace eAgendaMedica.Api.ViewModels.ModuloPaciente
 {
-    public class FormPacienteViewModel
+    public class FormPacienteViewModel : FormBase<FormPacienteViewModel>
     {
     }
 }
