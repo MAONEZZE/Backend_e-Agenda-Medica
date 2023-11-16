@@ -1,4 +1,5 @@
 using eAgendaMedica.Api.Config;
+using eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado;
 using eAgendaMedica.Api.Filters;
 
 namespace eAgendaMedica.Api
@@ -24,7 +25,7 @@ namespace eAgendaMedica.Api
             //=====================================
 
             //============= Mappers ===============
-            //builder.Services.ConfigurarAutoMapper();
+            builder.Services.ConfigurarAutoMapper();
             //=====================================
 
             //== Controllers, Filtros e Exceções ==

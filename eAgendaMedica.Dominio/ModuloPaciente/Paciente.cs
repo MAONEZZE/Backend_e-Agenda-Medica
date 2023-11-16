@@ -83,5 +83,16 @@ namespace eAgendaMedica.Dominio.ModuloPaciente
             this.Cpf = cpf;
             this.DataNascimento = data;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Paciente paciente &&
+                   Id.Equals(paciente.Id) &&
+                   Nome == paciente.Nome &&
+                   Email == paciente.Email &&
+                   Telefone == paciente.Telefone &&
+                   Cpf == paciente.Cpf &&
+                   DataNascimento == paciente.DataNascimento;
+        }
     }
 }

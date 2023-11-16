@@ -21,7 +21,7 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
                 .UsingEntity(x => x.ToTable("TBMedico_Cirurgia"));
 
             builder.HasOne(x => x.PacienteAtributo)
-                .WithMany(x => x.Cirurgias).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
+                .WithMany(x => x.Cirurgias).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace eAgendaMedica.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class TodasTabelas : Migration
+    public partial class TodasAsTabelas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -59,8 +59,7 @@ namespace eAgendaMedica.Infra.Migrations
                         name: "FK_TBCirurgia_TBPaciente_Paciente_id",
                         column: x => x.Paciente_id,
                         principalTable: "TBPaciente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -87,8 +86,7 @@ namespace eAgendaMedica.Infra.Migrations
                         name: "FK_TBConsulta_TBPaciente_Paciente_id",
                         column: x => x.Paciente_id,
                         principalTable: "TBPaciente",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(

@@ -12,8 +12,8 @@ using eAgendaMedica.Infra.Compartilhado;
 namespace eAgendaMedica.Infra.Migrations
 {
     [DbContext(typeof(eAgendaMedicaDbContext))]
-    [Migration("20231113211055_TodasTabelas")]
-    partial class TodasTabelas
+    [Migration("20231116201214_TodasAsTabelas")]
+    partial class TodasAsTabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,7 +172,7 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloPaciente.Paciente", "PacienteAtributo")
                         .WithMany("Cirurgias")
                         .HasForeignKey("Paciente_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("PacienteAtributo");
@@ -189,7 +189,7 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloPaciente.Paciente", "PacienteAtributo")
                         .WithMany("Consultas")
                         .HasForeignKey("Paciente_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Medico");

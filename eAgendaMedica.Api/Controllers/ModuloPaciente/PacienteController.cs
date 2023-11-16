@@ -1,4 +1,5 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloPaciente;
+using eAgendaMedica.Aplicacao.ModuloPaciente;
 using eAgendaMedica.Dominio.ModuloPaciente;
 
 namespace eAgendaMedica.Api.Controllers.ModuloPaciente
@@ -7,7 +8,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloPaciente
     [ApiController]
     public class PacienteController : ControladorApiBase<ListarPacienteViewModel, FormPacienteViewModel, VisualizarPacienteViewModel, Paciente>
     {
-        public PacienteController(IServicoBase<Paciente> service, IMapper map) : base(service, map)
+        public PacienteController(ServicoPaciente service, IMapper map) : base(service, map)
         {
         }
 
@@ -35,7 +36,6 @@ namespace eAgendaMedica.Api.Controllers.ModuloPaciente
             return base.Editar(id, registroVM);
         }
 
-        [ProducesResponseType(200)]
         public override Task<IActionResult> Excluir(Guid id)
         {
             return base.Excluir(id);

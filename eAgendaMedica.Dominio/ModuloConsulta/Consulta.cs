@@ -32,5 +32,16 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
         {
             this.Medico = medico;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Consulta consulta &&
+                   Id.Equals(consulta.Id) &&
+                   Titulo == consulta.Titulo &&
+                   Paciente_id.Equals(consulta.Paciente_id) &&
+                   Data == consulta.Data &&
+                   HoraInicio.Equals(consulta.HoraInicio) &&
+                   HoraTermino.Equals(consulta.HoraTermino);
+        }
     }
 }

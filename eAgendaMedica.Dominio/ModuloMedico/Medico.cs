@@ -130,5 +130,14 @@ namespace eAgendaMedica.Dominio.ModuloMedico
 
             return true;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Medico medico &&
+                   Id.Equals(medico.Id) &&
+                   Nome == medico.Nome &&
+                   Cpf == medico.Cpf &&
+                   Crm == medico.Crm;
+        }
     }
 }

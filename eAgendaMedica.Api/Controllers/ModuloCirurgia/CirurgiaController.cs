@@ -1,4 +1,5 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloCirurgia;
+using eAgendaMedica.Aplicacao.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloCirurgia;
 
 
@@ -8,7 +9,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
     [ApiController]
     public class CirurgiaController : ControladorApiBase<ListarCirurgiaViewModel, FormCirurgiaViewModel, VisualizarCirurgiaViewModel, Cirurgia>
     {
-        public CirurgiaController(IServicoBase<Cirurgia> service, IMapper map) : base(service, map)
+        public CirurgiaController(ServicoCirurgia service, IMapper map) : base(service, map)
         {
         }
 
@@ -36,7 +37,6 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
             return base.Editar(id, registroVM);
         }
 
-        [ProducesResponseType(200)]
         public override Task<IActionResult> Excluir(Guid id)
         {
             return base.Excluir(id);

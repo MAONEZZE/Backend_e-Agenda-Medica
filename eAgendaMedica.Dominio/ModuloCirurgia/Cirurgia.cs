@@ -33,5 +33,16 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
         {
             this.Medicos.Add(medico);
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Cirurgia cirurgia &&
+                   Id.Equals(cirurgia.Id) &&
+                   Titulo == cirurgia.Titulo &&
+                   Paciente_id.Equals(cirurgia.Paciente_id) &&
+                   Data == cirurgia.Data &&
+                   HoraInicio.Equals(cirurgia.HoraInicio) &&
+                   HoraTermino.Equals(cirurgia.HoraTermino);
+        }
     }
 }

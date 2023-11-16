@@ -169,7 +169,7 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloPaciente.Paciente", "PacienteAtributo")
                         .WithMany("Cirurgias")
                         .HasForeignKey("Paciente_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("PacienteAtributo");
@@ -186,7 +186,7 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloPaciente.Paciente", "PacienteAtributo")
                         .WithMany("Consultas")
                         .HasForeignKey("Paciente_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Medico");

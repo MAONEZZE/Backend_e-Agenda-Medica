@@ -1,4 +1,5 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloConsulta;
+using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloConsulta;
 
 namespace eAgendaMedica.Api.Controllers.ModuloConsulta
@@ -7,7 +8,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
     [ApiController]
     public class ConsultaController : ControladorApiBase<ListarConsultaViewModel, FormConsultaViewModel, VisualizarConsultaViewModel, Consulta>
     {
-        public ConsultaController(IServicoBase<Consulta> service, IMapper map) : base(service, map)
+        public ConsultaController(ServicoConsulta service, IMapper map) : base(service, map)
         {
         }
 
@@ -35,7 +36,6 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
             return base.Editar(id, registroVM);
         }
 
-        [ProducesResponseType(200)]
         public override Task<IActionResult> Excluir(Guid id)
         {
             return base.Excluir(id);
