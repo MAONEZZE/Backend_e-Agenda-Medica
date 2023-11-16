@@ -10,6 +10,52 @@ namespace eAgendaMedica.Dominio.ModuloPaciente
         public string Telefone { get; set; }
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
+
+        public List<string> TituloConsulta
+        {
+            get
+            {
+                var lista = new List<string>();
+
+                foreach (var item in Consultas)
+                {
+                    lista.Add(item.Titulo);
+                }
+
+                return lista;
+            }
+        }
+
+        public List<string> TituloCirurgia
+        {
+            get
+            {
+                var lista = new List<string>();
+
+                foreach (var item in Cirurgias)
+                {
+                    lista.Add(item.Titulo);
+                }
+
+                return lista;
+            }
+        }
+
+        public int QtdConsultas 
+        {
+            get
+            {
+                return Consultas.Count();
+            }
+        }
+        public int QtdCirurgias 
+        {
+            get
+            {
+                return Cirurgias.Count();
+            }
+        }
+
         public List<Consulta> Consultas { get; set; }
         public List<Cirurgia> Cirurgias { get; set; }
 

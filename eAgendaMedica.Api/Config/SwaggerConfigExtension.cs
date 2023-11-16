@@ -1,7 +1,4 @@
-﻿using Serilog;
-using System.Text.Json;
-
-namespace eAgendaMedica.Api.Config
+﻿namespace eAgendaMedica.Api.Config
 {
     public static class SwaggerConfigExtension
     {

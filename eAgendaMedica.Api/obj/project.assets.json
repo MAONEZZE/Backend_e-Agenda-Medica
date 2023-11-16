@@ -4051,8 +4051,8 @@
     },
     "eAgendaMedica.Aplicacao/1.0.0": {
       "type": "project",
-      "path": "../eAgenda.Aplicacao/eAgendaMedica.Aplicacao.csproj",
-      "msbuildProject": "../eAgenda.Aplicacao/eAgendaMedica.Aplicacao.csproj"
+      "path": "../eAgendaMedica.Aplicacao/eAgendaMedica.Aplicacao.csproj",
+      "msbuildProject": "../eAgendaMedica.Aplicacao/eAgendaMedica.Aplicacao.csproj"
     },
     "eAgendaMedica.Dominio/1.0.0": {
       "type": "project",
@@ -4110,6 +4110,9 @@
           "projectReferences": {
             "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj": {
               "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgenda.Aplicacao\\eAgendaMedica.Aplicacao.csproj"
+            },
+            "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Aplicacao\\eAgendaMedica.Aplicacao.csproj": {
+              "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Aplicacao\\eAgendaMedica.Aplicacao.csproj"
             },
             "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj": {
               "projectPath": "C:\\Users\\ruans\\OneDrive\\Área de Trabalho\\AcadP\\e-Agenda-Medica\\eAgendaMedica.Dominio\\eAgendaMedica.Dominio.csproj"

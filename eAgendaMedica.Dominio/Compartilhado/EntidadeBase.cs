@@ -12,5 +12,6 @@ namespace eAgendaMedica.Dominio.Compartilhado
         {
             this.Id = SequentialGuid.NewGuid();
         }
+
     }
 }

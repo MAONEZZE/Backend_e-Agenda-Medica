@@ -1,6 +1,5 @@
 using eAgendaMedica.Api.Config;
 using eAgendaMedica.Api.Filters;
-using Serilog;
 
 namespace eAgendaMedica.Api
 {
@@ -9,7 +8,11 @@ namespace eAgendaMedica.Api
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var app = builder.Build();
+
+            builder.Services.Configure<ApiBehaviorOptions>(config =>
+            {
+                config.SuppressModelStateInvalidFilter = true;
+            });
 
             //============== Logs =================
             builder.Services.ConfigurarSerilog(builder.Logging);
@@ -29,6 +32,8 @@ namespace eAgendaMedica.Api
             {
                 config.Filters.Add<SerilogActionFilter>();
             });
+
+            var app = builder.Build();
 
             app.UseMiddleware<ManipuladorExcecoes>();
             //=====================================

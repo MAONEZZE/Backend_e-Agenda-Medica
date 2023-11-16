@@ -35,15 +35,15 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
 
         private void VerificadorDisponibilidade(List<Medico> medicos, ValidationContext<Cirurgia> ctx)
         {
-            foreach (var medico in medicos)
-            {
-                bool disponivel = medico.EstaDisponivelCirurgia();
+            //foreach (var medico in medicos)
+            //{
+            //    bool disponivel = medico.EstaDisponivelCirurgia();
 
-                if (!disponivel)
-                {
-                    ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 4 horas descansando, após uma cirurgia"));
-                }
-            }
+            //    if (!disponivel)
+            //    {
+            //        ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 4 horas descansando, após uma cirurgia"));
+            //    }
+            //}
         }
     }
 }

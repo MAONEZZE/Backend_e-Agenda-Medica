@@ -29,6 +29,7 @@ namespace eAgendaMedica.Api.Config
 
             //Registrando esse contexto com a interface IContextoPersistencia
             //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext
+            services.AddTransient<ManipuladorExcecoes>();
 
             services.AddTransient<IRepositorioCirurgia, RepositorioCirurgia>();
             services.AddTransient<ServicoCirurgia>();

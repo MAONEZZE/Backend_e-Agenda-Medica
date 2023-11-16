@@ -171,3 +171,6 @@ C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Ap
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Json.dll
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\FluentResults.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\eAgendaMedica.Aplicacao.dll
+C:\Users\ruans\OneDrive\Área de Trabalho\AcadP\e-Agenda-Medica\eAgendaMedica.Api\bin\Debug\net6.0\eAgendaMedica.Aplicacao.pdb

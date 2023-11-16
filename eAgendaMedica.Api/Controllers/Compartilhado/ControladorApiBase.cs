@@ -1,8 +1,5 @@
-﻿using AutoMapper;
-using eAgendaMedica.Aplicacao.Compartilhado;
-using eAgendaMedica.Dominio.Compartilhado;
+﻿using eAgendaMedica.Dominio.Compartilhado;
 using FluentResults;
-using Microsoft.AspNetCore.Mvc;
 
 namespace eAgendaMedica.Api.Controllers.Compartilhado
 {
