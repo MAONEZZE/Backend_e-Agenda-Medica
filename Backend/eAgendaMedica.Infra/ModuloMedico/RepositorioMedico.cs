@@ -10,19 +10,21 @@ namespace eAgendaMedica.Infra.ModuloMedico
         {
         }
 
-        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam()
+        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
         {
-            throw new NotImplementedException();
+            var listaMedicos = await base.SelecionarTodosAsync();
+
+            foreach(var medico in listaMedicos)
+            {
+                medico.HorasTrabalhadasPeriodoTempo(dataInicio, dataFinal);
+            }
+
+            return listaMedicos.OrderByDescending(x => x.HorasTotaisTrabalhadas).ToList();
         }
 
         public async Task<Medico> SelecionarPorCRM(string crm)
         {
             return await base.dbset.SingleOrDefaultAsync(x => x.Crm == crm);
-        }
-
-        public async Task<Medico> VerificarDisponibilidade()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<List<Medico>> SelecionarMuitosAsync(List<Guid> idMedicosSelecionados)

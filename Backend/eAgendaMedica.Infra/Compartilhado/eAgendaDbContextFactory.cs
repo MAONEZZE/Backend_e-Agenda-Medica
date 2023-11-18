@@ -7,6 +7,7 @@ namespace eAgendaMedica.Infra.Compartilhado
     {
         public eAgendaMedicaDbContext CreateDbContext(string[] args)
         {
+            
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
@@ -19,7 +20,13 @@ namespace eAgendaMedica.Infra.Compartilhado
 
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new eAgendaMedicaDbContext(optionsBuilder.Options);
+            var dbcontext = new eAgendaMedicaDbContext(optionsBuilder.Options);
+
+            var migrador = new MigradorDb();
+
+            migrador.AtualizarDb(dbcontext);
+
+            return dbcontext;
         }
     }
 }

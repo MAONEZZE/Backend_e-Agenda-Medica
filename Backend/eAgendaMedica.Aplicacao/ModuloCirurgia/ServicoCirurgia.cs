@@ -1,4 +1,5 @@
 ﻿using eAgendaMedica.Dominio.ModuloCirurgia;
+using eAgendaMedica.Dominio.ModuloConsulta;
 using Serilog;
 
 namespace eAgendaMedica.Aplicacao.ModuloCirurgia
@@ -85,6 +86,24 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             }
 
             Log.Logger.Information($"Cirurgia {id} selecionado com sucesso");
+
+            return Result.Ok(cirurgia);
+        }
+
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas(DateTime data)
+        {
+            var cirurgia = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo(data);
+
+            Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
+
+            return Result.Ok(cirurgia);
+        }
+
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas(DateTime data)
+        {
+            var cirurgia = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo(data);
+
+            Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
 
             return Result.Ok(cirurgia);
         }

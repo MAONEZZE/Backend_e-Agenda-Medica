@@ -2,7 +2,7 @@
 {
     public class MigradorDb
     {
-        public static bool AtualizarDb(DbContext eAgendaDb)
+        public bool AtualizarDb(DbContext eAgendaDb)
         {
             int qtdMigracoesPendentes = eAgendaDb.Database.GetPendingMigrations().Count();
 

@@ -12,7 +12,7 @@ using eAgendaMedica.Infra.Compartilhado;
 namespace eAgendaMedica.Infra.Migrations
 {
     [DbContext(typeof(eAgendaMedicaDbContext))]
-    [Migration("20231116201214_TodasAsTabelas")]
+    [Migration("20231117174807_TodasAsTabelas")]
     partial class TodasAsTabelas
     {
         /// <inheritdoc />

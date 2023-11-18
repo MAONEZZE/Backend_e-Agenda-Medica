@@ -89,6 +89,24 @@ namespace eAgendaMedica.Aplicacao.ModuloMedico
             return Result.Ok(medico);
         }
 
+        public async Task<Result<List<Medico>>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
+        {
+            var medicos = await repMedico.SelecionarMedicosQueMaisTrabalharam(dataInicio, dataFinal);
+
+            Log.Logger.Information("Medicos que mais trabalharam selecionados com sucesso!");
+
+            return Result.Ok(medicos);
+        }
+
+        public async Task<Result<Medico>> SelecionarMedicoPorCrm(string crm)
+        {
+            var medico = await repMedico.SelecionarPorCRM(crm);
+
+            Log.Logger.Information("Medico selecionado com sucesso!");
+
+            return Result.Ok(medico);
+        }
+
         public async Task<Result<List<Medico>>> SelecionarTodosAsync()
         {
             var medicos = await repMedico.SelecionarTodosAsync();

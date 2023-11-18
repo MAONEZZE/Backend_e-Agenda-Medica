@@ -18,7 +18,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             this._service = service;
         }
 
-        private IActionResult ProcessarResposta(Result<TEntity> resultado, TForm registroVM = null)
+        protected IActionResult ProcessarResposta(Result<TEntity> resultado, TForm registroVM = null)
         {
             if (resultado.IsFailed)
             {
@@ -91,9 +91,9 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [ProducesResponseType(typeof(string[]), 500)]
         public virtual async Task<IActionResult> Inserir(TForm registroVM)
         {
-            TEntity contato = this._map.Map<TEntity>(registroVM);
+            TEntity registro = this._map.Map<TEntity>(registroVM);
 
-            var resultado = await _service.InserirAsync(contato);
+            var resultado = await _service.InserirAsync(registro);
 
             return ProcessarResposta(resultado, registroVM);
         }
@@ -115,7 +115,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
                 });
             }
 
-            TEntity contato = this._map.Map(registroVM, resultado.Value);
+            TEntity registro = this._map.Map(registroVM, resultado.Value);
             #region Porque usar esse outro Map?
             /* Ele pega a referencia do primeiro objeto passado pro ele
                 * this._map.Map(valor, referência)
@@ -129,7 +129,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
                 */
             #endregion
 
-            var resultadoEdicao = await _service.EditarAsync(contato);
+            var resultadoEdicao = await _service.EditarAsync(registro);
 
             return ProcessarResposta(resultadoEdicao, registroVM);
         }

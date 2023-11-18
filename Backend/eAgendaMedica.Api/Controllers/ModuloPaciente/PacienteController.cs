@@ -13,32 +13,32 @@ namespace eAgendaMedica.Api.Controllers.ModuloPaciente
         }
 
         [ProducesResponseType(typeof(ListarPacienteViewModel), 200)]
-        public override Task<IActionResult> SelecionarTodos()
+        public async override Task<IActionResult> SelecionarTodos()
         {
-            return base.SelecionarTodos();
+            return await base.SelecionarTodos();
         }
 
         [ProducesResponseType(typeof(VisualizarPacienteViewModel), 200)]
-        public override Task<IActionResult> SelecionarPorId(Guid id)
+        public async override Task<IActionResult> SelecionarPorId(Guid id)
         {
-            return base.SelecionarPorId(id);
+            return await base.SelecionarPorId(id);
         }
 
         [ProducesResponseType(typeof(FormPacienteViewModel), 200)]
-        public override Task<IActionResult> Inserir(FormPacienteViewModel registroVM)
+        public async override Task<IActionResult> Inserir(FormPacienteViewModel registroVM)
         {
-            return base.Inserir(registroVM);
+            return await base.Inserir(registroVM);
         }
 
         [ProducesResponseType(typeof(FormPacienteViewModel), 200)]
-        public override Task<IActionResult> Editar(Guid id, FormPacienteViewModel registroVM)
+        public async override Task<IActionResult> Editar(Guid id, FormPacienteViewModel registroVM)
         {
-            return base.Editar(id, registroVM);
+            return await base.Editar(id, registroVM);
         }
 
-        public override Task<IActionResult> Excluir(Guid id)
+        public async override Task<IActionResult> Excluir(Guid id)
         {
-            return base.Excluir(id);
+            return await base.Excluir(id);
         }
     }
 }

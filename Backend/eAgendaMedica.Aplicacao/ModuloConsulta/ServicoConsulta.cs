@@ -89,6 +89,24 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             return Result.Ok(consulta);
         }
 
+        public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas(DateTime data)
+        {
+            var consultas = await repConsulta.SelecionarConsultasFuturasComDataAlvo(data);
+
+            Log.Logger.Information("Consultas futuras selecionadas com sucesso!");
+
+            return Result.Ok(consultas);
+        }
+
+        public async Task<Result<List<Consulta>>> SelecionarConsultasPassadas(DateTime data)
+        {
+            var consultas = await repConsulta.SelecionarConsultasPassadasComDataAlvo(data);
+
+            Log.Logger.Information("Consultas passadas selecionadas com sucesso!");
+
+            return Result.Ok(consultas);
+        }
+
         public async Task<Result<List<Consulta>>> SelecionarTodosAsync()
         {
             var consultas = await repConsulta.SelecionarTodosAsync();

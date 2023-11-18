@@ -35,6 +35,7 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
 
         private void VerificadorDisponibilidade(List<Medico> medicos, ValidationContext<Cirurgia> ctx)
         {
+            //TODO - fazer acessar o metodo de verificação de disponibilidade do medico
             //foreach (var medico in medicos)
             //{
             //    bool disponivel = medico.EstaDisponivelCirurgia();
