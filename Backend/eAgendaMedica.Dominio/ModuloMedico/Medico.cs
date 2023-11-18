@@ -107,7 +107,7 @@ namespace eAgendaMedica.Dominio.ModuloMedico
 
         public void HorasTrabalhadasPeriodoTempo(DateTime dataInicio, DateTime dataFinal)
         {
-            long horasTrabalhadas = 0;
+            double horasTrabalhadas = 0;
             
 
             foreach (var item in Consultas)
@@ -129,77 +129,7 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             HorasTotaisTrabalhadas = TimeSpan.FromHours(horasTrabalhadas);
         }
 
-        public bool EstaDisponivelAtividade<T>(Atividade<T> atividadeNova)
-        {
-            //TODO - Acertar a lógica
-
-
-            return true;
-
-            //DateTime dataHoraFinal = DateTime.MinValue;
-            //DateTime dataHoraInicio = DateTime.MaxValue;
-
-            //bool disponivel = true;
-
-            //foreach (var item in SelecionarAtividades())
-            //{
-            //    if(item is Consulta)
-            //    {
-            //        var consulta = (Consulta)item;
-
-            //        var dataHoraFinalConsultaExistente = consulta.Data.Add(consulta.HoraTermino);
-            //        var dataHoraInicioConsultaExistente = consulta.Data.Add(consulta.HoraInicio);
-
-            //        if (dataHoraFinalConsultaExistente > dataHoraFinal && dataHoraFinalConsultaExistente < atividadeNova.Data.Add(atividadeNova.HoraInicio))
-            //        {
-            //            dataHoraFinal = dataHoraFinalConsultaExistente;
-            //        }
-                    
-            //        if (dataHoraInicioConsultaExistente < dataHoraInicio && dataHoraInicioConsultaExistente > atividadeNova.Data.Add(atividadeNova.HoraTermino))
-            //        {
-            //            dataHoraInicio = dataHoraInicioConsultaExistente;
-            //        }
-
-            //        if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraInicio) - dataHoraFinal).Ticks) < TimeSpan.FromMinutes(20).Ticks)
-            //        {
-            //            disponivel = false;
-            //        }
-            //        else if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraTermino) - dataHoraInicio).Ticks) < TimeSpan.FromMinutes(20).Ticks)
-            //        {
-            //            disponivel = false;
-            //        }
-
-            //    }
-            //    else
-            //    {
-            //        var cirurgia = (Cirurgia)item;
-
-            //        var dataHoraFinalCirurgiaExistente = cirurgia.Data.Add(cirurgia.HoraTermino);
-            //        var dataHoraInicioCirurgiaExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
-
-            //        if (dataHoraFinalCirurgiaExistente > dataHoraFinal && dataHoraFinalCirurgiaExistente < atividadeNova.Data.Add(atividadeNova.HoraInicio))
-            //        {
-            //            dataHoraFinal = dataHoraFinalCirurgiaExistente;
-            //        }
-                   
-            //        if (dataHoraInicioCirurgiaExistente < dataHoraInicio && dataHoraInicioCirurgiaExistente > atividadeNova.Data.Add(atividadeNova.HoraTermino))
-            //        {
-            //            dataHoraInicio = dataHoraInicioCirurgiaExistente;
-            //        }
-
-            //        if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraInicio) - dataHoraFinal).Ticks) < TimeSpan.FromHours(4).Ticks)
-            //        {
-            //            disponivel = false;
-            //        }
-            //        else if(Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraTermino) - dataHoraInicio).Ticks) < TimeSpan.FromHours(4).Ticks)
-            //        {
-            //            disponivel = false;
-            //        }
-            //    }
-            //}
-
-            //return disponivel;
-        }
+        
 
         public override bool Equals(object? obj)
         {

@@ -1,5 +1,6 @@
 
 
+using eAgendaMedica.Dominio.Compartilhado;
 using FluentAssertions;
 using Moq;
 
@@ -34,7 +35,7 @@ namespace eAgendaMedica.TestesUnitarios
             //Action
             var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), It.IsAny<Paciente>());
 
-            var disponivel = medico.EstaDisponivelAtividade<Cirurgia>(cirurgiaMarcada);
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
             //Assert
             disponivel.Should().Be(true);
@@ -50,7 +51,7 @@ namespace eAgendaMedica.TestesUnitarios
             //Action
             var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), oitoHoras, new TimeSpan(11, 14, 18), It.IsAny<Paciente>());
 
-            var disponivel = medico.EstaDisponivelAtividade<Cirurgia>(cirurgiaMarcada);
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
             //Assert
             disponivel.Should().Be(false);
@@ -65,9 +66,9 @@ namespace eAgendaMedica.TestesUnitarios
             medico.AdicionarCirurgia(cirurgia1);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, new TimeSpan(11, 14, 18), It.IsAny<Paciente>());
+            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, oitoHoras, It.IsAny<Paciente>());
 
-            var disponivel = medico.EstaDisponivelAtividade<Cirurgia>(cirurgiaMarcada);
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
             //Assert
             disponivel.Should().Be(false);
@@ -76,22 +77,41 @@ namespace eAgendaMedica.TestesUnitarios
 
 
         [TestMethod]
-        public void Deve()
+        public void Deve_inserir_novaCirurgia_entre_duas_cirurgiasExistente()
         {
             //Arrange
             var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, seisHoras, It.IsAny<Paciente>());
             medico.AdicionarCirurgia(cirurgia1);
 
             var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), It.IsAny<Paciente>());
-            medico.AdicionarCirurgia(cirurgia1);
+            medico.AdicionarCirurgia(cirurgia2);
 
             //Action
             var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), It.IsAny<Paciente>());
 
-            var disponivel = medico.EstaDisponivelAtividade<Cirurgia>(cirurgiaMarcada);
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
             //Assert
             disponivel.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Nao_Deve_inserir_novaCirurgia_entre_duas_cirurgiasExistente_comHoraFinal_maiorOUigual_CirurgiaExistenteHoraInicio()
+        {
+            //Arrange
+            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, seisHoras, It.IsAny<Paciente>());
+            medico.AdicionarCirurgia(cirurgia1);
+
+            var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), It.IsAny<Paciente>());
+            medico.AdicionarCirurgia(cirurgia2);
+
+            //Action
+            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 14, 18), It.IsAny<Paciente>());
+
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
+
+            //Assert
+            disponivel.Should().Be(false);
         }
 
     }

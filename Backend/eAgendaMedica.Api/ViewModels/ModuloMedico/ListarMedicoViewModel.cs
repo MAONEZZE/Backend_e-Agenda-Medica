@@ -6,5 +6,6 @@
         public string Crm { get; set; }
         public int QtdConsultas { get; set; }
         public int QtdCirurgias { get; set; }
+        public double HorasTotaisTrabalhadas { get; set; }
     }
 }

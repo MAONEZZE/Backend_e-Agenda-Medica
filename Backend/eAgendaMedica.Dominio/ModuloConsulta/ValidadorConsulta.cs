@@ -1,5 +1,6 @@
 ﻿using eAgendaMedica.Dominio.ModuloMedico;
 using FluentValidation;
+using System.Security.Cryptography.X509Certificates;
 
 namespace eAgendaMedica.Dominio.ModuloConsulta
 {
@@ -33,7 +34,14 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 
         private void VerificadorDisponibilidade(Medico medico, ValidationContext<Consulta> ctx)
         {
-            
+            var objConsulta = ctx.InstanceToValidate; // aqui eu tenho o objeto consulta
+
+            bool disponivel = medico.VerificadorDisponibilidadeMedico(objConsulta);
+
+            if (!disponivel)
+            {
+                ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 20 minutos descansando, após uma consulta"));
+            }
         }
     }
 }
