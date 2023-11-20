@@ -19,6 +19,4 @@ namespace eAgendaMedica.Api.Config
             writer.WriteStringValue(value.ToString());
         }
     }
-    {
-    }
 }
