@@ -12,8 +12,16 @@ namespace eAgendaMedica.Dominio.ModuloMedico
         public string Cpf { get; set; }
         public string Crm { get; set; }
 
-        public TimeSpan HorasTotaisTrabalhadas { get; private set; }
-        public List<string> TituloConsulta 
+        public TimeSpan HorasTotaisTrabalhadasPriodoTempo { get; private set; }
+        public TimeSpan HorasTotaisTrabalhadas
+        {
+            get
+            {
+                return HorasTrabalhadas();
+            }
+        }
+
+        public List<string> TitulosConsultas 
         {
             get
             {
@@ -28,7 +36,7 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             }
         }
 
-        public List<string> TituloCirurgia
+        public List<string> TitulosCirurgias
         {
             get
             {
@@ -105,10 +113,26 @@ namespace eAgendaMedica.Dominio.ModuloMedico
             this.Cirurgias.Add(cirurgia);
         }
 
+        private TimeSpan HorasTrabalhadas()
+        {
+            double horasTrabalhadas = 0;
+
+            foreach (var item in Consultas)
+            {
+                horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;   
+            }
+
+            foreach (var item in Cirurgias)
+            {
+                horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;
+            }
+
+            return TimeSpan.FromHours(horasTrabalhadas);
+        }
+
         public void HorasTrabalhadasPeriodoTempo(DateTime dataInicio, DateTime dataFinal)
         {
             double horasTrabalhadas = 0;
-            
 
             foreach (var item in Consultas)
             {
@@ -126,7 +150,7 @@ namespace eAgendaMedica.Dominio.ModuloMedico
                 }
             }
 
-            HorasTotaisTrabalhadas = TimeSpan.FromHours(horasTrabalhadas);
+            HorasTotaisTrabalhadasPriodoTempo = TimeSpan.FromHours(horasTrabalhadas);
         }
 
         

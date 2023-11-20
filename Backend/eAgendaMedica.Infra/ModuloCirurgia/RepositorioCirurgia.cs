@@ -1,5 +1,6 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
 using eAgendaMedica.Dominio.ModuloCirurgia;
+using eAgendaMedica.Dominio.ModuloMedico;
 using eAgendaMedica.Infra.Compartilhado;
 
 namespace eAgendaMedica.Infra.ModuloCirurgia
@@ -23,6 +24,11 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
         public async Task<List<Cirurgia>> SelecionarCirurgiasPassadasComDataAlvo(DateTime dataAlvo)
         {
             return await base.dbset.Where(x => x.Data < dataAlvo).ToListAsync();
+        }
+
+        public override async Task<Cirurgia> SelecionarPorIdAsync(Guid id)
+        {
+            return await base.dbset.Include(x => x.Medicos).Include(x => x.PacienteAtributo).FirstOrDefaultAsync();
         }
     }
 }

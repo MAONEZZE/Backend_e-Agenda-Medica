@@ -32,12 +32,12 @@ namespace eAgendaMedica.Infra.Compartilhado
             await this.dbset.AddAsync(registro);
         }
 
-        public async Task<TEntity> SelecionarPorIdAsync(Guid id)
+        public virtual async Task<TEntity> SelecionarPorIdAsync(Guid id)
         {
             return await this.dbset.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<TEntity>> SelecionarTodosAsync()
+        public virtual async Task<List<TEntity>> SelecionarTodosAsync()
         {
             return await dbset.ToListAsync();
         }

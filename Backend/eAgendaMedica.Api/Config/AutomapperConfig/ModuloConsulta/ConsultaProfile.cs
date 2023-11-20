@@ -15,8 +15,7 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta
             //CreateMap<O que é, O que vai virar>();
             CreateMap<Consulta, ListarConsultaViewModel>()
                 .ForMember(consultaVM => consultaVM.Data, opt => opt.MapFrom(consulta => consulta.Data.ToShortDateString()))
-                .ForMember(consultaVM => consultaVM.HoraInicio, opt => opt.MapFrom(consulta => consulta.HoraInicio.ToString(@"hh\:mm")))
-                .ForMember(consultaVM => consultaVM.HoraTermino, opt => opt.MapFrom(consulta => consulta.HoraTermino.ToString(@"hh\:mm"))); ;
+                .ForMember(consultaVM => consultaVM.HoraInicio, opt => opt.MapFrom(consulta => consulta.HoraInicio.ToString(@"hh\:mm")));
 
             CreateMap<Consulta, VisualizarConsultaViewModel>()
                 .ForMember(consultaVM => consultaVM.Data, opt => opt.MapFrom(consulta => consulta.Data.ToShortDateString()))
@@ -24,7 +23,6 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta
                 .ForMember(consultaVM => consultaVM.HoraTermino, opt => opt.MapFrom(consulta => consulta.HoraTermino.ToString(@"hh\:mm")));
 
             CreateMap<FormConsultaViewModel, Consulta>()
-                .ForMember(consulta => consulta.Data, opt => opt.MapFrom(consultaVM => DateTime.ParseExact(consultaVM.Data, "dd/MM/yyyy", CultureInfo.InvariantCulture)))
                 .AfterMap<InserirMedicoConsultaMappingAction>()
                 .AfterMap<InserirPacienteConsultaMappingAction>();
         }

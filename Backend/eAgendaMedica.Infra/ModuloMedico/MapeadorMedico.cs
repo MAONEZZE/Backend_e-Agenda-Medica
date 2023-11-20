@@ -11,7 +11,7 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
             builder.Property(m => m.Id).ValueGeneratedNever();
 
-            builder.Ignore(m => m.HorasTotaisTrabalhadas);
+            builder.Ignore(m => m.HorasTotaisTrabalhadasPriodoTempo);
 
             builder.Property(m => m.Nome).HasColumnType("varchar(50)").IsRequired();
 

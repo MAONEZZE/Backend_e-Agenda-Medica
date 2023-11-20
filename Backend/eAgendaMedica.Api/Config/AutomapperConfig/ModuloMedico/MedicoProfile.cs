@@ -10,7 +10,10 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico
             //CreateMap<O que é, O que vai virar>();
             CreateMap<Medico, ListarMedicoViewModel>();
 
-            CreateMap<Medico, VisualizarMedicoViewModel>();
+            CreateMap<Medico, VisualizarMedicoViewModel>()
+                .AfterMap<HorasTotaisTrabalhadasMappingAction>()
+                .AfterMap<TitulosConsultasMappingAction>()
+                .AfterMap<TitulosCirurgiasMappingAction>();
 
             CreateMap<FormMedicoViewModel, Medico>();
         }

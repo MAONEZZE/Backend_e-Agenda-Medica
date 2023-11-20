@@ -1,6 +1,7 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
 using eAgendaMedica.Dominio.ModuloMedico;
 using eAgendaMedica.Infra.Compartilhado;
+using Microsoft.EntityFrameworkCore;
 
 namespace eAgendaMedica.Infra.ModuloMedico
 {
@@ -19,7 +20,7 @@ namespace eAgendaMedica.Infra.ModuloMedico
                 medico.HorasTrabalhadasPeriodoTempo(dataInicio, dataFinal);
             }
 
-            return listaMedicos.OrderByDescending(x => x.HorasTotaisTrabalhadas).ToList();
+            return listaMedicos.OrderByDescending(x => x.HorasTotaisTrabalhadasPriodoTempo).ToList();
         }
 
         public async Task<Medico> SelecionarPorCRM(string crm)

@@ -13,8 +13,7 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloPaciente
 
             CreateMap<Paciente, VisualizarPacienteViewModel>();
 
-            CreateMap<FormPacienteViewModel, Paciente>()
-                .ForMember(paciente => paciente.DataNascimento, opt => opt.MapFrom(pacienteVM => DateTime.ParseExact(pacienteVM.DataNascimento, "dd/MM/yyyy", CultureInfo.InvariantCulture)));
+            CreateMap<FormPacienteViewModel, Paciente>();
         }
     }
 }

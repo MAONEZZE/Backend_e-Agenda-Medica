@@ -4,9 +4,9 @@
     {
         public string Titulo { get; set; }
         public Guid Paciente_id { get; set; }
-        public string Data { get; set; }
-        public string HoraInicio { get; set; }
-        public string HoraTermino { get; set; }
+        public DateTime Data { get; set; }
+        public TimeSpan HoraInicio { get; set; }
+        public TimeSpan HoraTermino { get; set; }
         public Guid Id_Medico { get; set; }
     }
 }
