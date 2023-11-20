@@ -17,7 +17,7 @@ namespace eAgendaMedica.Infra.ModuloConsulta
 
             builder.HasOne(x => x.Medico)
                 .WithMany(x => x.Consultas)
-                .IsRequired().OnDelete(DeleteBehavior.NoAction);
+                .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.PacienteAtributo)
                 .WithMany(x => x.Consultas).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.NoAction);

@@ -11,6 +11,8 @@ namespace eAgendaMedica.Infra.ModuloPaciente
 
             builder.Property(m => m.Id).ValueGeneratedNever();
 
+            builder.HasIndex(m => m.Cpf).IsUnique();
+
             builder.Property(m => m.Nome).HasColumnType("varchar(50)").IsRequired();
             builder.Property(m => m.Cpf).HasColumnType("varchar(50)").IsRequired();
             builder.Property(m => m.Email).HasColumnType("varchar(50)").IsRequired();

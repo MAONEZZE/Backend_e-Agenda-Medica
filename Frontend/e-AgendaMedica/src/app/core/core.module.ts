@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShellModule } from './shell/shell.module';
+import { MedicoRoutingModule } from '../views/medico/medico-routing.module';
 
 
 
@@ -8,10 +9,10 @@ import { ShellModule } from './shell/shell.module';
   declarations: [],
   imports: [
     CommonModule,
-    ShellModule
+    ShellModule,
   ],
   exports: [
-    ShellModule
+    ShellModule,
   ]
 })
 export class CoreModule { }

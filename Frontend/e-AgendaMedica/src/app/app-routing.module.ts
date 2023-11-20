@@ -25,7 +25,7 @@ const routes: Routes = [
     loadChildren: () => import("./views/medico/medico.module").then(modulo => modulo.MedicoModule)
   },
   {
-    path: 'paciente',
+    path: 'pacientes',
     loadChildren: () => import("./views/paciente/paciente.module").then(modulo => modulo.PacienteModule)
   }
 ];

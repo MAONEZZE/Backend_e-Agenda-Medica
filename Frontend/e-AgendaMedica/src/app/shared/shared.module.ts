@@ -6,11 +6,12 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import { CardHoverDirective } from './directives/card-hover.directive';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [CardHoverDirective],
   imports: [
     CommonModule,
     MatCardModule,
@@ -27,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
     MatListModule,
     MatTooltipModule,
     MatInputModule,
+    CardHoverDirective
   ],
 })
 export class SharedModule { }

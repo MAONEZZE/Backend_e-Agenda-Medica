@@ -15,3 +15,13 @@
   top: 0;
   z-index: 1;
 }
+
+.centralizar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-texto{
+  padding-left: 26px;
+}

@@ -11,21 +11,20 @@ import { InserirPacienteComponent } from './views/paciente/inserir-paciente/inse
 import { provideHttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ShellModule } from './core/shell/shell.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListarPacienteComponent,
-    ExcluirPacienteComponent,
-    EditarPacienteComponent,
-    InserirPacienteComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    DashboardModule
+    ShellModule,
+    NgbModule
   ],
   providers: [provideHttpClient()],
   bootstrap: [AppComponent]

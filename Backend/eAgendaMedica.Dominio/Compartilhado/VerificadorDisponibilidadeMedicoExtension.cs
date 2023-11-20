@@ -43,26 +43,36 @@ namespace eAgendaMedica.Dominio.Compartilhado
                     dataHoraInicioExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
                 }
 
-                if (dataHoraFinalExistente > dataHoraFinal && dataHoraFinalExistente <= atividadeNova.Data.Add(atividadeNova.HoraInicio))
-                //verifica o maior horario final mais proximo do inicio dessa nova atividade
-                {
-                    dataHoraFinal = dataHoraFinalExistente;
-                }
-
-                if (dataHoraInicioExistente < dataHoraInicio && dataHoraInicioExistente >= atividadeNova.Data.Add(atividadeNova.HoraTermino))
-                //verifica o menor horario inicial mais proximo do final dessa nova atividade
-                {
-                    dataHoraInicio = dataHoraInicioExistente;
-                }
-
-                //verifica se tem tempo de recuperação suficiente
-                if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraInicio) - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
+                if (dataHoraFinalExistente == atividadeNova.Data.Add(atividadeNova.HoraTermino) || dataHoraInicioExistente == atividadeNova.Data.Add(atividadeNova.HoraInicio))
                 {
                     disponivel = false;
+                    break;
                 }
-                else if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraTermino) - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
+                else
                 {
-                    disponivel = false;
+                    if (dataHoraFinalExistente > dataHoraFinal && dataHoraFinalExistente <= atividadeNova.Data.Add(atividadeNova.HoraInicio))
+                    //verifica o maior horario final mais proximo do inicio dessa nova atividade
+                    {
+                        dataHoraFinal = dataHoraFinalExistente;
+                    }
+
+                    if (dataHoraInicioExistente < dataHoraInicio && dataHoraInicioExistente >= atividadeNova.Data.Add(atividadeNova.HoraTermino))
+                    //verifica o menor horario inicial mais proximo do final dessa nova atividade
+                    {
+                        dataHoraInicio = dataHoraInicioExistente;
+                    }
+                    //verifica se tem tempo de recuperação suficiente
+                    if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraInicio) - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
+                    {
+                        disponivel = false;
+                        break;
+                    }
+                    else if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraTermino) - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
+                    {
+                        disponivel = false;
+                        break;
+                    }
+
                 }
             }
 

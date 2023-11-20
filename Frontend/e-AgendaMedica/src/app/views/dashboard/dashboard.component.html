@@ -1,1 +1,57 @@
-<p>dashboard works!</p>
+<section>
+  <mat-card class="borda-estilizada">
+    <mat-card-header class="centralizar">
+      <mat-card-title class="fs-2 mt-2">e-Agenda Medica</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="mt-3">
+      <mat-divider></mat-divider>
+      <div class="centralizar">
+        <div class="col-6">
+          <p class="mt-3 fs-6">
+            O <span class="cor-texto fw-semibold">e-Agenda</span> é uma plataforma projetada 
+            para otimizar a organização 
+            da sua rotina diária, oferecendo ferramentas para facilitar 
+            o acesso, controle e planejamento de suas atividades diárias. 
+            Com o <span class="cor-texto fw-semibold">e-Agenda</span>, você também pode 
+            gerenciar tarefas, manter uma lista detalhada 
+            de contatos, agendar compromissos com eficiência e controlar suas despesas, 
+            tudo em um só lugar, assim proporcionando um software 
+            simples e eficaz para ajudá-lo a gerenciar sua vida de forma mais 
+            produtiva e conveniente.
+          </p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="centralizar mt-3">
+    <h2 class="cor-texto">O que você deseja Gerenciar?</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-3">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/medicos/listar">
+        Medicos
+      </a>
+    </div>
+
+    <div class="col-3">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/cirurgias/listar">
+        Cirurgias
+      </a>
+    </div>
+
+    <div class="col-3">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/consultas/listar">
+        Consultas
+      </a>
+    </div>
+
+    <div class="col-3">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/pacientes/listar">
+        Pacientes
+      </a>
+    </div>
+  </div>
+</section>
