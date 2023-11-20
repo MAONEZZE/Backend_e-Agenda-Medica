@@ -20,7 +20,7 @@ namespace eAgendaMedica.Infra.ModuloConsulta
                 .IsRequired().OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(x => x.PacienteAtributo)
-                .WithMany(x => x.Consultas).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.NoAction);
+                .WithMany(x => x.Consultas).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -20,6 +20,30 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
             this.map = map;
         }
 
+        [HttpGet("cirurgias-para-hoje")]
+        [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
+        public async Task<IActionResult> SelecionarCirurgiasFuturas()
+        {
+            var resultado = await service.SelecionarCirurgiasParaHoje();
+
+            if (resultado.IsFailed)
+            {
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = resultado.Errors.Select(result => result.Message)
+                });
+            }
+
+            var registrosVM = map.Map<List<ListarCirurgiaViewModel>>(resultado.Value);
+
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = registrosVM
+            });
+        }
+
         [HttpGet("cirurgias-futuras/{data}")]
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
         public async Task<IActionResult> SelecionarCirurgiasFuturas(DateTime data)
@@ -35,7 +59,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
                 });
             }
 
-            var registrosVM = map.Map<ListarCirurgiaViewModel>(resultado.Value);
+            var registrosVM = map.Map<List<ListarCirurgiaViewModel>>(resultado.Value);
 
             return Ok(new
             {
@@ -59,7 +83,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
                 });
             }
 
-            var registrosVM = map.Map<ListarCirurgiaViewModel>(resultado.Value);
+            var registrosVM = map.Map<List<ListarCirurgiaViewModel>>(resultado.Value);
 
             return Ok(new
             {

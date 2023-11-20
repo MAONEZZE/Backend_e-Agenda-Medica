@@ -89,22 +89,45 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             return Result.Ok(consulta);
         }
 
-        public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas(DateTime data)
+        public async Task<Result<List<Consulta>>> SelecionarConsultasParaHoje()
         {
-            var consultas = await repConsulta.SelecionarConsultasFuturasComDataAlvo(data);
+            var consultas = await repConsulta.SelecionarConsultasParaHoje();
 
-            Log.Logger.Information("Consultas futuras selecionadas com sucesso!");
+            Log.Logger.Information("Consultas de hoje selecionadas com sucesso!");
 
             return Result.Ok(consultas);
         }
 
+        public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas(DateTime data)
+        {
+            if (data < DateTime.Now)
+            {
+                return Result.Fail("Data fornecida não corresponde a uma data futura!");
+            }
+            else
+            {
+                var consultas = await repConsulta.SelecionarConsultasFuturasComDataAlvo(data);
+
+                Log.Logger.Information("Consultas futuras selecionadas com sucesso!");
+
+                return Result.Ok(consultas);
+            }
+        }
+
         public async Task<Result<List<Consulta>>> SelecionarConsultasPassadas(DateTime data)
         {
-            var consultas = await repConsulta.SelecionarConsultasPassadasComDataAlvo(data);
+            if (data > DateTime.Now)
+            {
+                return Result.Fail("Data fornecida não corresponde a uma data passada!");
+            }
+            else
+            {
+                var consultas = await repConsulta.SelecionarConsultasPassadasComDataAlvo(data);
 
-            Log.Logger.Information("Consultas passadas selecionadas com sucesso!");
+                Log.Logger.Information("Consultas passadas selecionadas com sucesso!");
 
-            return Result.Ok(consultas);
+                return Result.Ok(consultas);
+            }
         }
 
         public async Task<Result<List<Consulta>>> SelecionarTodosAsync()

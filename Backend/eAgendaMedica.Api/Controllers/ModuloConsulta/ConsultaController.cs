@@ -17,6 +17,30 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
             this.map = map;
         }
 
+        [HttpGet("consultas-para-hoje")]
+        [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
+        public async Task<IActionResult> SelecionarConsultasFuturas()
+        {
+            var resultado = await service.SelecionarConsultasParaHoje();
+
+            if (resultado.IsFailed)
+            {
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = resultado.Errors.Select(result => result.Message)
+                });
+            }
+
+            var registrosVM = map.Map<List<ListarConsultaViewModel>>(resultado.Value);
+
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = registrosVM
+            });
+        }
+
         [HttpGet("consultas-futuras/{data}")]
         [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
         public async Task<IActionResult> SelecionarConsultasFuturas(DateTime data)
@@ -32,7 +56,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
                 });
             }
 
-            var registrosVM = map.Map<ListarConsultaViewModel>(resultado.Value);
+            var registrosVM = map.Map<List<ListarConsultaViewModel>>(resultado.Value);
 
             return Ok(new
             {
@@ -47,6 +71,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
         {
             var resultado = await service.SelecionarConsultasPassadas(data);
 
+
             if (resultado.IsFailed)
             {
                 return BadRequest(new
@@ -56,7 +81,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
                 });
             }
 
-            var registrosVM = map.Map<ListarConsultaViewModel>(resultado.Value);
+            var registrosVM = map.Map<List<ListarConsultaViewModel>>(resultado.Value);
 
             return Ok(new
             {

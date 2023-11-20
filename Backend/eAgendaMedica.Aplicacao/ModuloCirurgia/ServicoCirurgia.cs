@@ -90,22 +90,45 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             return Result.Ok(cirurgia);
         }
 
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasParaHoje()
+        {
+            var cirurgias = await repCirurgia.SelecionarCirurgiasParaHoje();
+
+            Log.Logger.Information("Cirurgias de hoje selecionadas com sucesso!");
+
+            return Result.Ok(cirurgias);
+        }
+
         public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas(DateTime data)
         {
-            var cirurgia = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo(data);
+            if (data < DateTime.Now)
+            {
+                return Result.Fail("Data fornecida não corresponde a uma data futura!");
+            }
+            else
+            {
+                var cirurgias = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo(data);
 
-            Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
+                Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
 
-            return Result.Ok(cirurgia);
+                return Result.Ok(cirurgias);
+            }
         }
 
         public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas(DateTime data)
         {
-            var cirurgia = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo(data);
+            if (data > DateTime.Now)
+            {
+                return Result.Fail("Data fornecida não corresponde a uma data passada!");
+            }
+            else
+            {
+                var cirurgias = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo(data);
 
-            Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
+                Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
 
-            return Result.Ok(cirurgia);
+                return Result.Ok(cirurgias);
+            }
         }
 
         public async Task<Result<List<Cirurgia>>> SelecionarTodosAsync()
