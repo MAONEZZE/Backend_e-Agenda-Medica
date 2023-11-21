@@ -1,13 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { FormCirurgiaVM } from '../models/form-cirurgia.view-model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CirurgiaService {
-  private url: string = "https://localhost:7124/api/cirurgia";
+export class MedicoService {
+  private url: string = "https://localhost:7124/api/medico";
 
   constructor(private http: HttpClient) { }
 
@@ -26,16 +25,16 @@ export class CirurgiaService {
     return throwError(() => new Error(msgErro));
   }
 
-  public inserir(cirurgia: any): Observable<any>{
-    return this.http.post<any>(this.url, cirurgia)
+  public inserir(medico: any): Observable<any>{
+    return this.http.post<any>(this.url, medico)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
       );
   }
 
-  public editar(id: string, cirurgia: any): Observable<any>{
-    return this.http.put<any>(`${this.url}/${id}`, cirurgia)
+  public editar(id: string, medico: any): Observable<any>{
+    return this.http.put<any>(`${this.url}/${id}`, medico)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))

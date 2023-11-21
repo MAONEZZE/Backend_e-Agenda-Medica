@@ -20,11 +20,11 @@ const routes: Routes = [
     component: InserirConsultaComponent
   },
   {
-    path: 'editar',
+    path: 'editar/:id',
     component: EditarConsultaComponent
   },
   {
-    path: 'excluir',
+    path: 'excluir/:id',
     component: ExcluirConsultaComponent
   }
 ];

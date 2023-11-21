@@ -30,7 +30,7 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
         public async Task<List<Medico>> SelecionarMuitosAsync(List<Guid> idMedicosSelecionados)
         {
-            return await base.dbset.Where(medico => idMedicosSelecionados.Contains(medico.Id)).ToListAsync();
+            return await base.dbset.Where(medico => idMedicosSelecionados.Contains(medico.Id)).Include(x => x.Consultas).Include(x => x.Cirurgias).ToListAsync();
         }
     }
 }

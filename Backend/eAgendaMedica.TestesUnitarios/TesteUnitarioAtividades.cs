@@ -2,8 +2,6 @@
 
 using eAgendaMedica.Dominio.Compartilhado;
 using FluentAssertions;
-using FluentAssertions.Equivalency;
-using Moq;
 
 namespace eAgendaMedica.TestesUnitarios
 {

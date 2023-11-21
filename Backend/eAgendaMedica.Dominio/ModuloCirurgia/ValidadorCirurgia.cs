@@ -32,6 +32,8 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
 
         private void VerificadorDisponibilidade(List<Medico> medicos, ValidationContext<Cirurgia> ctx)
         {
+            //TODO - Nos testes essa validação esta certa, mas na hora de inserir uma cirurgia ou consulta pelo swagger da errado, acho que tem a ver com os includes
+
             var objConsulta = ctx.InstanceToValidate; // aqui eu tenho o objeto consulta
 
             foreach(var medico in medicos)
