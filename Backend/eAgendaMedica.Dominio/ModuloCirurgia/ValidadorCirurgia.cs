@@ -28,9 +28,6 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
                 .NotNull()
                 .NotEmpty()
                 .Custom(VerificadorDisponibilidade);
-
-
-
         }
 
         private void VerificadorDisponibilidade(List<Medico> medicos, ValidationContext<Cirurgia> ctx)
@@ -43,7 +40,7 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
 
                 if (!disponivel)
                 {
-                    ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 20 minutos descansando, após uma consulta"));
+                    ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 4 horas descansando, após uma cirurgia"));
                     return;
                 }
             }

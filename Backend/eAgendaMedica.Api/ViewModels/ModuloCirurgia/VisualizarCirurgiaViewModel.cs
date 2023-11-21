@@ -6,7 +6,7 @@ namespace eAgendaMedica.Api.ViewModels.ModuloCirurgia
     public class VisualizarCirurgiaViewModel : VisualizarBase<VisualizarCirurgiaViewModel>
     {
         public string Titulo { get; set; }
-        public ListarPacienteViewModel Id_Paciente { get; set; }
+        public ListarPacienteViewModel Paciente_id { get; set; }
         public string Data { get; set; }
         public string HoraInicio { get; set; }
         public string HoraTermino { get; set; }

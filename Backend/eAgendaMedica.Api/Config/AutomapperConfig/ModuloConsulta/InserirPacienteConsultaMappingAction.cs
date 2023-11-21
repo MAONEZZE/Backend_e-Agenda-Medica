@@ -13,9 +13,9 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta
             this.repPaciente = repPaciente;
         }
 
-        public async void Process(FormConsultaViewModel consultaVM, Consulta consulta, ResolutionContext ctx)
+        public void Process(FormConsultaViewModel consultaVM, Consulta consulta, ResolutionContext ctx)
         {
-            consulta.PacienteAtributo = await repPaciente.SelecionarPorIdAsync(consultaVM.Paciente_id);
+            consulta.PacienteAtributo = repPaciente.SelecionarPorIdAsync(consultaVM.Paciente_id).Result;
         }
     }
 }

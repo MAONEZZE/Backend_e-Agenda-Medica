@@ -12,9 +12,9 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia
             this.repPaciente = repPaciente;
         }
 
-        public async void Process(FormCirurgiaViewModel cirurgiaVM, Cirurgia cirurgia, ResolutionContext ctxt)
+        public void Process(FormCirurgiaViewModel cirurgiaVM, Cirurgia cirurgia, ResolutionContext ctxt)
         {
-            cirurgia.PacienteAtributo = await repPaciente.SelecionarPorIdAsync(cirurgiaVM.Paciente_id);
+            cirurgia.PacienteAtributo = repPaciente.SelecionarPorIdAsync(cirurgiaVM.Paciente_id).Result;
         }
     }
 }

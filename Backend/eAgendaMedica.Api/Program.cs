@@ -10,10 +10,12 @@ namespace eAgendaMedica.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.Configure<ApiBehaviorOptions>(config =>
-            {
-                config.SuppressModelStateInvalidFilter = true;
-            });
+            builder.Services.AddCors();
+
+            //builder.Services.Configure<ApiBehaviorOptions>(config =>
+            //{
+            //    config.SuppressModelStateInvalidFilter = true;
+            //});
 
             //============== Logs =================
             builder.Services.ConfigurarSerilog(builder.Logging);
@@ -47,8 +49,9 @@ namespace eAgendaMedica.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
 
+            app.UseAuthorization();
 
             app.MapControllers();
 

@@ -1,4 +1,7 @@
-﻿using eAgendaMedica.Aplicacao.ModuloCirurgia;
+﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
+using eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta;
+using eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico;
+using eAgendaMedica.Aplicacao.ModuloCirurgia;
 using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Aplicacao.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloPaciente;
@@ -26,6 +29,11 @@ namespace eAgendaMedica.Api.Config
             {
                 optionsBuilder.UseSqlServer(connectionString);
             });
+
+            services.AddTransient<InserirMedicoCirurgiaMappingAction>();
+            services.AddTransient<InserirPacienteCirurgiaMappingAction>();
+            services.AddTransient<InserirMedicoConsultaMappingAction>();
+            services.AddTransient<InserirPacienteConsultaMappingAction>();
 
             //Registrando esse contexto com a interface IContextoPersistencia
             //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext

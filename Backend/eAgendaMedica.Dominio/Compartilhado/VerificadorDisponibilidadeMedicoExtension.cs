@@ -24,9 +24,13 @@ namespace eAgendaMedica.Dominio.Compartilhado
                 DateTime dataHoraFinalExistente;
                 DateTime dataHoraInicioExistente;
 
+                Guid idAtividadeExistente;
+
                 if (item is Consulta)
                 {
                     Consulta consulta = (Consulta)item;
+
+                    idAtividadeExistente = consulta.Id;
 
                     tempoRecuperacao = TimeSpan.FromMinutes(20);
 
@@ -37,42 +41,55 @@ namespace eAgendaMedica.Dominio.Compartilhado
                 {
                     Cirurgia cirurgia = (Cirurgia)item;
 
+                    idAtividadeExistente = cirurgia.Id;
+
                     tempoRecuperacao = TimeSpan.FromHours(4);
 
                     dataHoraFinalExistente = cirurgia.Data.Add(cirurgia.HoraTermino);
                     dataHoraInicioExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
                 }
 
-                if (dataHoraFinalExistente == atividadeNova.Data.Add(atividadeNova.HoraTermino) || dataHoraInicioExistente == atividadeNova.Data.Add(atividadeNova.HoraInicio))
+                var atividadeNovaDataHoraHoraTermino = atividadeNova.Data.Add(atividadeNova.HoraTermino);
+                var atividadeNovaDataHoraHoraInicio = atividadeNova.Data.Add(atividadeNova.HoraInicio);
+
+                bool idDiferente = idAtividadeExistente != atividadeNova.Id;
+                bool horariosIguais = dataHoraFinalExistente == atividadeNovaDataHoraHoraTermino || dataHoraInicioExistente == atividadeNovaDataHoraHoraInicio;
+
+
+                if (horariosIguais && idDiferente == false)
+                {
+                    break;
+                }
+                else if (horariosIguais && idDiferente)
                 {
                     disponivel = false;
                     break;
                 }
                 else
                 {
-                    if (dataHoraFinalExistente > dataHoraFinal && dataHoraFinalExistente <= atividadeNova.Data.Add(atividadeNova.HoraInicio))
+                    if (dataHoraFinalExistente > dataHoraFinal && dataHoraFinalExistente <= atividadeNovaDataHoraHoraInicio)
                     //verifica o maior horario final mais proximo do inicio dessa nova atividade
                     {
                         dataHoraFinal = dataHoraFinalExistente;
                     }
 
-                    if (dataHoraInicioExistente < dataHoraInicio && dataHoraInicioExistente >= atividadeNova.Data.Add(atividadeNova.HoraTermino))
+                    if (dataHoraInicioExistente < dataHoraInicio && dataHoraInicioExistente >= atividadeNovaDataHoraHoraTermino)
                     //verifica o menor horario inicial mais proximo do final dessa nova atividade
                     {
                         dataHoraInicio = dataHoraInicioExistente;
                     }
-                    //verifica se tem tempo de recuperação suficiente
-                    if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraInicio) - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
-                    {
-                        disponivel = false;
-                        break;
-                    }
-                    else if (Math.Abs((atividadeNova.Data.Add(atividadeNova.HoraTermino) - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
-                    {
-                        disponivel = false;
-                        break;
-                    }
 
+                    //verifica se tem tempo de recuperação suficiente
+                    if (Math.Abs((atividadeNovaDataHoraHoraInicio - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
+                    {
+                        disponivel = false;
+                        break;
+                    }
+                    else if (Math.Abs((atividadeNovaDataHoraHoraTermino - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
+                    {
+                        disponivel = false;
+                        break;
+                    }
                 }
             }
 

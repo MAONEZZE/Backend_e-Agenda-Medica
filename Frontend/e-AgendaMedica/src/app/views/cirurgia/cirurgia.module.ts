@@ -6,6 +6,7 @@ import { InserirCirurgiaComponent } from './inserir-cirurgia/inserir-cirurgia.co
 import { EditarCirurgiaComponent } from './editar-cirurgia/editar-cirurgia.component';
 import { ExcluirCirurgiaComponent } from './excluir-cirurgia/excluir-cirurgia.component';
 import { ListarCirurgiaComponent } from './listar-cirurgia/listar-cirurgia.component';
+import { CirurgiaService } from './services/cirurgia.service';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ListarCirurgiaComponent } from './listar-cirurgia/listar-cirurgia.compo
   imports: [
     CommonModule,
     CirurgiaRoutingModule
-  ]
+  ],
+  providers: [CirurgiaService]
 })
 export class CirurgiaModule { }

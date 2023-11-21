@@ -3,20 +3,20 @@ using System.Text.Json.Serialization;
 
 namespace eAgendaMedica.Api.Config
 {
-    public class ConversorTimeSpanParaString : JsonConverter<DateTime>
+    public class ConversorTimeSpanParaString : JsonConverter<TimeSpan>
     {
-        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             var value = reader.GetString();
 
-            var data = DateTime.Parse(value!);
+            var data = TimeSpan.Parse(value!);
 
             return data;
         }
 
-        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(value.ToShortDateString());
+            writer.WriteStringValue(value.ToString());
         }
     }
 }
