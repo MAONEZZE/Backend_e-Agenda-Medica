@@ -55,7 +55,7 @@ export class PacienteService {
     );
   }
 
-  public selecionarCirurgiaCompletaPorId(id: string){
+  public selecionarPacienteCompletaPorId(id: string){
     return this.http
     .get<any>(`${this.url}/visualizacao-completa/${id}`)
     .pipe(

@@ -17,7 +17,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
             this.map = map;
         }
 
-        [HttpGet("medico-mais-trabalhadores")]
+        [HttpGet("medicos-mais-trabalhadores")]
         [ProducesResponseType(typeof(ListarMedicoViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarMedicosQueMaisTrabalham(DateTime dataInicio, DateTime dataFinal)

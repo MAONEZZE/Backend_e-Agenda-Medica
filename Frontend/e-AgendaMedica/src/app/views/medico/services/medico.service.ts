@@ -55,9 +55,18 @@ export class MedicoService {
     );
   }
 
-  public selecionarCirurgiaCompletaPorId(id: string){
+  public selecionarMedicoCompletoPorId(id: string){
     return this.http
     .get<any>(`${this.url}/visualizacao-completa/${id}`)
+    .pipe(
+      map((res) => res.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarMedicosMaisTrabalharam(){
+    return this.http
+    .get<any>(`${this.url}/medico-mais-trabalhadores`)
     .pipe(
       map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))

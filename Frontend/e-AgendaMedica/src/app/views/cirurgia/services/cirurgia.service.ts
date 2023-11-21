@@ -49,7 +49,7 @@ export class CirurgiaService {
       );
   }
 
-  public selecionarTodos(){
+  public selecionarTodos(): Observable<any[]>{
     return this.http.get<any>(this.url).pipe(
       map((x: any) => x.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -61,6 +61,29 @@ export class CirurgiaService {
     .get<any>(`${this.url}/visualizacao-completa/${id}`)
     .pipe(
       map((res) => res.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarTodosCirurgiasParaHoje(){
+    return this.http.get<any>(`${this.url}/cirurgias-para-hoje`).pipe(
+      map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarCirurgiasFuturas(data: Date){
+    //formato yyyy-mm-dd
+    return this.http.get<any>(`${this.url}/cirurgias-futuras/${data}`).pipe(
+      map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarCirurgiasPassadas(data: Date){
+    //formato yyyy-mm-dd
+    return this.http.get<any>(`${this.url}/cirurgias-passadas/${data}`).pipe(
+      map((x: any) => x.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
     );
   }

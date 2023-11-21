@@ -55,11 +55,34 @@ export class ConsultaService {
     );
   }
 
-  public selecionarCirurgiaCompletaPorId(id: string){
+  public selecionarConsultaCompletaPorId(id: string){
     return this.http
     .get<any>(`${this.url}/visualizacao-completa/${id}`)
     .pipe(
       map((res) => res.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarTodosConsultasParaHoje(){
+    return this.http.get<any>(`${this.url}/consultas-para-hoje`).pipe(
+      map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarConsultasFuturas(data: Date){
+    //formato yyyy-mm-dd
+    return this.http.get<any>(`${this.url}/consultas-futuras/${data}`).pipe(
+      map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarConsultasPassadas(data: Date){
+    //formato yyyy-mm-dd
+    return this.http.get<any>(`${this.url}/consultas-passadas/${data}`).pipe(
+      map((x: any) => x.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
     );
   }
