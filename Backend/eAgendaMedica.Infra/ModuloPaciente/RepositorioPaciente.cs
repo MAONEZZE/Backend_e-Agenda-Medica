@@ -9,5 +9,15 @@ namespace eAgendaMedica.Infra.ModuloPaciente
         public RepositorioPaciente(IContextoPersistencia ctx) : base(ctx)
         {
         }
+
+        public override async Task<Paciente> SelecionarPorIdAsync(Guid id)
+        {
+            return await base.dbset.Where(x => x.Id == id).Include(x => x.Cirurgias).Include(x => x.Consultas).FirstOrDefaultAsync();
+        }
+
+        public override async Task<List<Paciente>> SelecionarTodosAsync()
+        {
+            return await base.dbset.Include(x => x.Cirurgias).Include(x => x.Consultas).ToListAsync();
+        }
     }
 }

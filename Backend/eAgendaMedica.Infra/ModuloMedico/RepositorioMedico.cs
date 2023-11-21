@@ -11,6 +11,11 @@ namespace eAgendaMedica.Infra.ModuloMedico
         {
         }
 
+        public override async Task<List<Medico>> SelecionarTodosAsync()
+        {
+            return await base.dbset.Include(x => x.Consultas).Include(x => x.Cirurgias).ToListAsync();
+        }
+
         public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
         {
             var listaMedicos = await base.SelecionarTodosAsync();
@@ -21,6 +26,11 @@ namespace eAgendaMedica.Infra.ModuloMedico
             }
 
             return listaMedicos.OrderByDescending(x => x.HorasTotaisTrabalhadasPriodoTempo).ToList();
+        }
+
+        public override async Task<Medico> SelecionarPorIdAsync(Guid id)
+        {
+            return await base.dbset.Where(x => x.Id == id).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
         public async Task<Medico> SelecionarPorCRM(string crm)

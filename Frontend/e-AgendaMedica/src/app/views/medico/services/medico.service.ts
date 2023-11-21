@@ -66,7 +66,16 @@ export class MedicoService {
 
   public selecionarMedicosMaisTrabalharam(){
     return this.http
-    .get<any>(`${this.url}/medico-mais-trabalhadores`)
+    .get<any>(`${this.url}/medicos-mais-trabalhadores`)
+    .pipe(
+      map((res) => res.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarMedicoPorCrm(crm: string){
+    return this.http
+    .get<any>(`${this.url}/selecionar-por-crm/${crm}`)
     .pipe(
       map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))

@@ -17,17 +17,17 @@ namespace eAgendaMedica.Infra.Compartilhado
             this.dbset = dbContext.Set<TEntity>();
         }
 
-        public void Editar(TEntity registro)
+        public virtual void Editar(TEntity registro)
         {
             this.dbset.Update(registro);
         }
 
-        public void Excluir(TEntity registro)
+        public virtual void Excluir(TEntity registro)
         {
             this.dbset.Remove(registro);
         }
 
-        public async Task InserirAsync(TEntity registro)
+        public virtual async Task InserirAsync(TEntity registro)
         {
             await this.dbset.AddAsync(registro);
         }
