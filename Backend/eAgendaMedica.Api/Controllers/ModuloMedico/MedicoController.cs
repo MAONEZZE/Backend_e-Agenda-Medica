@@ -43,7 +43,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
             });
         }
 
-        [HttpGet("{crm}")]
+        [HttpGet("crm/{crm}")]
         [ProducesResponseType(typeof(VisualizarMedicoViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarMedicoPorCrm(string crm)
@@ -92,7 +92,8 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
             return await base.Inserir(registroVM);
         }
 
-        [HttpPut("{crm}")]
+        [HttpPut("crm/{crm}")]
+        [ProducesResponseType(typeof(FormMedicoViewModel), 200)]
         public async Task<IActionResult> EditaPorCrm(string crm, FormMedicoViewModel medicoVM)
         {
             var resultado = await service.SelecionarMedicoPorCrm(crm);

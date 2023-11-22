@@ -4,5 +4,5 @@ export type FormCirurgiaVM = {
   data: Date;
   horaInicio: string;
   horaTermino: string;
-  id_medicos: string[]; 
+  id_Medicos: string[]; 
 }

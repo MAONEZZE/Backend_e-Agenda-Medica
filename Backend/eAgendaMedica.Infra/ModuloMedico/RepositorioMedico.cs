@@ -35,7 +35,7 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
         public async Task<Medico> SelecionarPorCRM(string crm)
         {
-            return await base.dbset.SingleOrDefaultAsync(x => x.Crm == crm);
+            return await base.dbset.Where(x => x.Crm == crm).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
         public async Task<List<Medico>> SelecionarMuitosAsync(List<Guid> idMedicosSelecionados)

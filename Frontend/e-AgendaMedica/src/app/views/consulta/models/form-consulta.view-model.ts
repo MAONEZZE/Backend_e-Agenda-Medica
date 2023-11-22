@@ -4,5 +4,5 @@ export type FormConsultaVM = {
   data: Date;
   horaInicio: string;
   horaTermino: string;
-  id_medicos: string; 
+  id_Medico: string; 
 }

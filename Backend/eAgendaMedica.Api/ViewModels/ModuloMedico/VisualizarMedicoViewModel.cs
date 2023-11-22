@@ -5,7 +5,7 @@
         public string Nome { get; set; }
         public string Cpf { get; set; }
         public string Crm { get; set; }
-        public double HorasTotaisTrabalhadas { get; set; }
+        public string HorasTotaisTrabalhadas { get; set; }
         public List<string> TitulosConsultas { get; set; }
         public List<string> TitulosCirurgias { get; set; }
     }

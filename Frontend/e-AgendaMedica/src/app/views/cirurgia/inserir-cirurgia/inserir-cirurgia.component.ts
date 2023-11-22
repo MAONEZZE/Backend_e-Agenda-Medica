@@ -32,10 +32,10 @@ export class InserirCirurgiaComponent implements OnInit{
     this.form = this.formBuilder.group({
       titulo: new FormControl('', [Validators.required, Validators.minLength(3)]),
       paciente_id: new FormControl('', [Validators.required]),
-      data: new FormControl('09/10/2023', [Validators.required]),
+      data: new FormControl(new Date(), [Validators.required]),
       horaInicio: new FormControl('08:00:00', [Validators.required]),
       horaTermino: new FormControl('09:00:00', [Validators.required]),
-      id_medicos: new FormControl('', [Validators.required]),
+      id_medicos: new FormControl([], [Validators.required]),
     });
 
     this.medicoService.selecionarTodos().subscribe(medicos => this.medicos = medicos);
@@ -59,7 +59,7 @@ export class InserirCirurgiaComponent implements OnInit{
 
   processarSucesso(res: FormCirurgiaVM) {
     this.toastrService.success(
-      `O compromisso "${res.titulo}" foi salvo com sucesso!`,
+      `A Cirurgia "${res.titulo}" foi salva com sucesso!`,
       'Sucesso'
     );
 

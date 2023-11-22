@@ -119,15 +119,17 @@ namespace eAgendaMedica.Dominio.ModuloMedico
 
             foreach (var item in Consultas)
             {
-                horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;   
+                horasTrabalhadas += item.HoraTermino.TotalHours - item.HoraInicio.TotalHours;   
             }
 
             foreach (var item in Cirurgias)
             {
-                horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;
+                horasTrabalhadas += item.HoraTermino.TotalHours - item.HoraInicio.TotalHours;
             }
 
-            return TimeSpan.FromHours(horasTrabalhadas);
+            var tempo = TimeSpan.FromHours(horasTrabalhadas);
+
+            return tempo;
         }
 
         public void HorasTrabalhadasPeriodoTempo(DateTime dataInicio, DateTime dataFinal)

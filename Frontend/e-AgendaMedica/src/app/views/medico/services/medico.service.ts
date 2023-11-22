@@ -42,7 +42,7 @@ export class MedicoService {
   }
 
   public editarPorCrm(crm: string, medico: any): Observable<any>{
-    return this.http.put<any>(`${this.url}/${crm}`, medico)
+    return this.http.put<any>(`${this.url}/crm/${crm}`, medico)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -92,7 +92,7 @@ export class MedicoService {
 
   public selecionarMedicoPorCrm(crm: string){
     return this.http
-    .get<any>(`${this.url}/${crm}`)
+    .get<any>(`${this.url}/crm/${crm}`)
     .pipe(
       map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
