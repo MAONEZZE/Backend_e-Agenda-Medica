@@ -14,6 +14,8 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloPaciente
             CreateMap<Paciente, VisualizarPacienteViewModel>();
 
             CreateMap<FormPacienteViewModel, Paciente>();
+
+            CreateMap<Paciente, FormPacienteViewModel>();
         }
     }
 }

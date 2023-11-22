@@ -22,6 +22,8 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia
             CreateMap<FormCirurgiaViewModel, Cirurgia>()
                 .AfterMap<InserirMedicoCirurgiaMappingAction>()
                 .AfterMap<InserirPacienteCirurgiaMappingAction>();
+
+            CreateMap<Cirurgia, FormCirurgiaViewModel>();
         }
     }
 }

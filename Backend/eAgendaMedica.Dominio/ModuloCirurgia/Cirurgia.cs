@@ -6,6 +6,20 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
     public class Cirurgia : Atividade<Cirurgia>
     {
         public List<Medico> Medicos { get; set; }
+        public List<Guid> Id_Medicos
+        {
+            get
+            {
+                var lista = new List<Guid>();
+
+                foreach(var item in Medicos)
+                {
+                    lista.Add(item.Id);
+                }
+
+                return lista;
+            }
+        }
 
         public Cirurgia()
         {

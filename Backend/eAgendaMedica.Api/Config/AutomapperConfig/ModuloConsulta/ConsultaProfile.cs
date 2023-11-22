@@ -25,6 +25,8 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta
             CreateMap<FormConsultaViewModel, Consulta>()
                 .AfterMap<InserirMedicoConsultaMappingAction>()
                 .AfterMap<InserirPacienteConsultaMappingAction>();
+
+            CreateMap<Consulta, FormConsultaViewModel>();
         }
     }
 }

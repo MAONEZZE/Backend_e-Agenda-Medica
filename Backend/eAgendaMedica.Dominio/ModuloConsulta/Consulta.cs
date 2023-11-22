@@ -7,6 +7,14 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
     {
         public Medico Medico { get; set; }
 
+        public Guid Id_Medico
+        {
+            get
+            {
+                return Medico.Id;
+            }
+        }
+
         public Consulta() { }
 
         public Consulta(Guid id, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico) 
