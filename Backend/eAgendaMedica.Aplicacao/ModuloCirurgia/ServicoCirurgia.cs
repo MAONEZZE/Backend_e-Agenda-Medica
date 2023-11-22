@@ -99,36 +99,24 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             return Result.Ok(cirurgias);
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas(DateTime data)
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas()
         {
-            if (data < DateTime.Now)
-            {
-                return Result.Fail("Data fornecida não corresponde a uma data futura!");
-            }
-            else
-            {
-                var cirurgias = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo(data);
+            var cirurgias = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo();
 
-                Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
+            Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
 
-                return Result.Ok(cirurgias);
-            }
+            return Result.Ok(cirurgias);
+            
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas(DateTime data)
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas()
         {
-            if (data > DateTime.Now)
-            {
-                return Result.Fail("Data fornecida não corresponde a uma data passada!");
-            }
-            else
-            {
-                var cirurgias = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo(data);
+            var cirurgias = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo();
 
-                Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
+            Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
 
-                return Result.Ok(cirurgias);
-            }
+            return Result.Ok(cirurgias);
+            
         }
 
         public async Task<Result<List<Cirurgia>>> SelecionarTodosAsync()

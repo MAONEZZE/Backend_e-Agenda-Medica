@@ -23,8 +23,8 @@ export class ListarCirurgiaComponent implements OnInit{
     });
   }
 
-  processarSucesso(pacientes: ListarCirurgiaVM[]){
-    this.cirurgias = pacientes;
+  processarSucesso(cirurgias: ListarCirurgiaVM[]){
+    this.cirurgias = cirurgias;
   }
 
   processarFalha(error: Error){

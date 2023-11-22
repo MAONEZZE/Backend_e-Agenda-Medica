@@ -11,19 +11,19 @@ namespace eAgendaMedica.Infra.ModuloConsulta
         {
         }
 
-        public async Task<List<Consulta>> SelecionarConsultasFuturasComDataAlvo(DateTime dataAlvo)
+        public async Task<List<Consulta>> SelecionarConsultasFuturasComDataAlvo()
         {
-            return await base.dbset.Where(x => x.Data > dataAlvo).ToListAsync();
+            return await base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
         }
 
         public async Task<List<Consulta>> SelecionarConsultasParaHoje()
         {
-            return await base.dbset.Where(x => x.Data == DateTime.Now).ToListAsync();
+            return await base.dbset.Where(x => x.Data == DateTime.Today).ToListAsync();
         }
 
-        public async Task<List<Consulta>> SelecionarConsultasPassadasComDataAlvo(DateTime dataAlvo)
+        public async Task<List<Consulta>> SelecionarConsultasPassadasComDataAlvo()
         {
-            return await base.dbset.Where(x => x.Data < dataAlvo).ToListAsync();
+            return await base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
         }
 
         public override async Task<Consulta> SelecionarPorIdAsync(Guid id)

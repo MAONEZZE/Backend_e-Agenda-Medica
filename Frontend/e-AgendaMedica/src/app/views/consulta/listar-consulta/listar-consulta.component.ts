@@ -21,8 +21,8 @@ export class ListarConsultaComponent {
     });
   }
 
-  processarSucesso(pacientes: ListarConsultaVM[]){
-    this.consultas = pacientes;
+  processarSucesso(consultas: ListarConsultaVM[]){
+    this.consultas = consultas;
   }
 
   processarFalha(error: Error){

@@ -22,7 +22,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
 
         [HttpGet("cirurgias-para-hoje")]
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
-        public async Task<IActionResult> SelecionarCirurgiasFuturas()
+        public async Task<IActionResult> SelecionarCirurgiasHoje()
         {
             var resultado = await service.SelecionarCirurgiasParaHoje();
 
@@ -44,11 +44,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
             });
         }
 
-        [HttpGet("cirurgias-futuras/{data}")]
+        [HttpGet("cirurgias-futuras")]
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
-        public async Task<IActionResult> SelecionarCirurgiasFuturas(DateTime data)
+        public async Task<IActionResult> SelecionarCirurgiasFuturas()
         {
-            var resultado = await service.SelecionarCirurgiasFuturas(data);
+            var resultado = await service.SelecionarCirurgiasFuturas();
 
             if (resultado.IsFailed)
             {
@@ -68,11 +68,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
             });
         }
 
-        [HttpGet("cirurgias-passadas/{data}")]
+        [HttpGet("cirurgias-passadas")]
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
-        public async Task<IActionResult> SelecionarConsultasPassadas(DateTime data)
+        public async Task<IActionResult> SelecionarConsultasPassadas()
         {
-            var resultado = await service.SelecionarCirurgiasPassadas(data);
+            var resultado = await service.SelecionarCirurgiasPassadas();
 
             if (resultado.IsFailed)
             {

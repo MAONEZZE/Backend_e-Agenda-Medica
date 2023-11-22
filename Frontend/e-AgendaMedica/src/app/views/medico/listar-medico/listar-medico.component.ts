@@ -33,8 +33,8 @@ export class ListarMedicoComponent {
     
   }
 
-  processarSucesso(pacientes: ListarMedicoVM[]){
-    this.medicos = pacientes;
+  processarSucesso(medicos: ListarMedicoVM[]){
+    this.medicos = medicos;
   }
 
   processarFalha(error: Error){

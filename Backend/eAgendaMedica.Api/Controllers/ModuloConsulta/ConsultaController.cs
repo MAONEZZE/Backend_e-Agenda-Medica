@@ -20,7 +20,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
 
         [HttpGet("consultas-para-hoje")]
         [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
-        public async Task<IActionResult> SelecionarConsultasFuturas()
+        public async Task<IActionResult> SelecionarConsultasHoje()
         {
             var resultado = await service.SelecionarConsultasParaHoje();
 
@@ -42,11 +42,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
             });
         }
 
-        [HttpGet("consultas-futuras/{data}")]
+        [HttpGet("consultas-futuras")]
         [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
-        public async Task<IActionResult> SelecionarConsultasFuturas(DateTime data)
+        public async Task<IActionResult> SelecionarConsultasFuturas()
         {
-            var resultado = await service.SelecionarConsultasFuturas(data);
+            var resultado = await service.SelecionarConsultasFuturas();
 
             if (resultado.IsFailed)
             {
@@ -66,11 +66,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloConsulta
             });
         }
 
-        [HttpGet("consultas-passadas/{data}")]
+        [HttpGet("consultas-passadas")]
         [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
-        public async Task<IActionResult> SelecionarConsultasPassadas(DateTime data)
+        public async Task<IActionResult> SelecionarConsultasPassadas()
         {
-            var resultado = await service.SelecionarConsultasPassadas(data);
+            var resultado = await service.SelecionarConsultasPassadas();
 
 
             if (resultado.IsFailed)
