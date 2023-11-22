@@ -26,7 +26,7 @@ export class ConsultaService {
   }
 
   public inserir(consulta: any): Observable<any>{
-    return this.http.post<any>(this.url, consulta)
+    return this.http.post<any>(`${this.url}`, consulta)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -51,6 +51,15 @@ export class ConsultaService {
   public selecionarTodos(){
     return this.http.get<any>(this.url).pipe(
       map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarConsultaPorId(id: string){
+    return this.http
+    .get<any>(`${this.url}/${id}`)
+    .pipe(
+      map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
     );
   }

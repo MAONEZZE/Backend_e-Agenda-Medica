@@ -26,7 +26,7 @@ export class MedicoService {
   }
 
   public inserir(medico: any): Observable<any>{
-    return this.http.post<any>(this.url, medico)
+    return this.http.post<any>(`${this.url}`, medico)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -35,6 +35,14 @@ export class MedicoService {
 
   public editar(id: string, medico: any): Observable<any>{
     return this.http.put<any>(`${this.url}/${id}`, medico)
+      .pipe(
+        map((res) => res.dados),
+        catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+      );
+  }
+
+  public editarPorCrm(crm: string, medico: any): Observable<any>{
+    return this.http.put<any>(`${this.url}/${crm}`, medico)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -51,6 +59,15 @@ export class MedicoService {
   public selecionarTodos(){
     return this.http.get<any>(this.url).pipe(
       map((x: any) => x.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarMedicoPorId(id: string){
+    return this.http
+    .get<any>(`${this.url}/${id}`)
+    .pipe(
+      map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
     );
   }
@@ -75,7 +92,7 @@ export class MedicoService {
 
   public selecionarMedicoPorCrm(crm: string){
     return this.http
-    .get<any>(`${this.url}/selecionar-por-crm/${crm}`)
+    .get<any>(`${this.url}/${crm}`)
     .pipe(
       map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))

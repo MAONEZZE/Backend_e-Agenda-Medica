@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { CirurgiaService } from '../services/cirurgia.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { ListarCirurgiaVM } from '../models/listar-cirurgia.view-model';
 import { OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listar-cirurgia',
@@ -10,15 +12,22 @@ import { OnInit } from '@angular/core';
   styleUrls: ['./listar-cirurgia.component.scss']
 })
 export class ListarCirurgiaComponent implements OnInit{
-  cirurgias$!: Observable<ListarCirurgiaVM[]>;
+  cirurgias: ListarCirurgiaVM[] = [];
 
-  constructor(private cirurgiaService: CirurgiaService) {
-
-  }
+  constructor(private toastrService: ToastrService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.cirurgias$ = this.cirurgiaService.selecionarTodos();
+    this.route.data.pipe(map((dados) => dados['cirurgias'])).subscribe({
+      next: (pacientes) => this.processarSucesso(pacientes),
+      error: (err: Error) => this.processarFalha(err)
+    });
   }
 
+  processarSucesso(pacientes: ListarCirurgiaVM[]){
+    this.cirurgias = pacientes;
+  }
 
+  processarFalha(error: Error){
+    this.toastrService.error(error.message, 'Error')
+  }
 }

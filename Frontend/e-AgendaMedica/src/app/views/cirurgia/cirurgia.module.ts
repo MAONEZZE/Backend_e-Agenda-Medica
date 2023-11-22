@@ -7,6 +7,11 @@ import { EditarCirurgiaComponent } from './editar-cirurgia/editar-cirurgia.compo
 import { ExcluirCirurgiaComponent } from './excluir-cirurgia/excluir-cirurgia.component';
 import { ListarCirurgiaComponent } from './listar-cirurgia/listar-cirurgia.component';
 import { CirurgiaService } from './services/cirurgia.service';
+import { MedicoService } from '../medico/services/medico.service';
+import { PacienteService } from '../paciente/services/paciente.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
@@ -14,12 +19,15 @@ import { CirurgiaService } from './services/cirurgia.service';
     InserirCirurgiaComponent,
     EditarCirurgiaComponent,
     ExcluirCirurgiaComponent,
-    ListarCirurgiaComponent
+    ListarCirurgiaComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
-    CirurgiaRoutingModule
+    CirurgiaRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
   ],
-  providers: [CirurgiaService]
+  providers: [CirurgiaService, MedicoService, PacienteService]
 })
 export class CirurgiaModule { }

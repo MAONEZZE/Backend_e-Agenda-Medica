@@ -7,6 +7,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { CardHoverDirective } from './directives/card-hover.directive';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
 
 
 
@@ -19,7 +22,9 @@ import { CardHoverDirective } from './directives/card-hover.directive';
     MatIconModule,
     MatListModule,
     MatTooltipModule,
+    RouterModule,
     MatInputModule,
+    FormsModule
   ],
   exports: [
     MatCardModule,
@@ -28,7 +33,9 @@ import { CardHoverDirective } from './directives/card-hover.directive';
     MatListModule,
     MatTooltipModule,
     MatInputModule,
-    CardHoverDirective
+    RouterModule,
+    CardHoverDirective,
+    FormsModule
   ],
 })
 export class SharedModule { }

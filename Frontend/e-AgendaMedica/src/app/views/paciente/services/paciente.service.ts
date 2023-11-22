@@ -26,7 +26,7 @@ export class PacienteService {
   }
 
   public inserir(paciente: any): Observable<any>{
-    return this.http.post<any>(this.url, paciente)
+    return this.http.post<any>(`${this.url}`, paciente)
       .pipe(
         map((res) => res.dados),
         catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
@@ -55,7 +55,16 @@ export class PacienteService {
     );
   }
 
-  public selecionarPacienteCompletaPorId(id: string){
+  public selecionarPacientePorId(id: string){
+    return this.http
+    .get<any>(`${this.url}/${id}`)
+    .pipe(
+      map((res) => res.dados),
+      catchError((error: HttpErrorResponse) => this.processarErroHttp(error))
+    );
+  }
+
+  public selecionarPacienteCompletoPorId(id: string){
     return this.http
     .get<any>(`${this.url}/visualizacao-completa/${id}`)
     .pipe(

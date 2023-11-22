@@ -6,6 +6,8 @@ import { ListarConsultaComponent } from './listar-consulta/listar-consulta.compo
 import { InserirConsultaComponent } from './inserir-consulta/inserir-consulta.component';
 import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
 import { ExcluirConsultaComponent } from './excluir-consulta/excluir-consulta.component';
+import { CardComponent } from './card/card.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -13,11 +15,13 @@ import { ExcluirConsultaComponent } from './excluir-consulta/excluir-consulta.co
     ListarConsultaComponent,
     InserirConsultaComponent,
     EditarConsultaComponent,
-    ExcluirConsultaComponent
+    ExcluirConsultaComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
-    ConsultaRoutingModule
+    ConsultaRoutingModule,
+    SharedModule
   ]
 })
 export class ConsultaModule { }

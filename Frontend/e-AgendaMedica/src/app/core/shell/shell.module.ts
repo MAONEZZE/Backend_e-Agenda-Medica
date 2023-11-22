@@ -4,8 +4,8 @@ import { ShellComponent } from './shell.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MedicoRoutingModule } from 'src/app/views/medico/medico-routing.module';
-import { RouterModule } from '@angular/router';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
     SharedModule,
     MatToolbarModule, 
     MatSidenavModule,
-    
+    MatProgressSpinnerModule
   ],
   exports: [
     ShellComponent

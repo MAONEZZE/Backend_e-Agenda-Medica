@@ -1,9 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
 import { ListarPacienteComponent } from './listar-paciente/listar-paciente.component';
 import { InserirPacienteComponent } from './inserir-paciente/inserir-paciente.component';
 import { EditarPacienteComponent } from './editar-paciente/editar-paciente.component';
 import { ExcluirPacienteComponent } from './excluir-paciente/excluir-paciente.component';
+import { ListarPacienteVM } from './models/listar-paciente.view-model';
+import { PacienteService } from './services/paciente.service';
+import { FormPacienteVM } from './models/form-paciente.view-model';
+import { VisualizarPacienteVM } from './models/visualizar-paciente.view-model';
+
+const listarPacienteResolver: ResolveFn<ListarPacienteVM[]> = () => {
+  return inject(PacienteService).selecionarTodos();
+};
+
+const formPacienteResolver: ResolveFn<FormPacienteVM> = (route: ActivatedRouteSnapshot) => {
+  return inject(PacienteService).selecionarPacientePorId(route.paramMap.get('id')!);
+};
+
+const visualizarPacienteResolver: ResolveFn<VisualizarPacienteVM> = (route: ActivatedRouteSnapshot) => {
+  return inject(PacienteService).selecionarPacienteCompletoPorId(route.paramMap.get('id')!);
+};
 
 const routes: Routes = [
   {
@@ -13,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'listar',
-    component: ListarPacienteComponent
+    component: ListarPacienteComponent,
+    resolve: { pacientes: listarPacienteResolver }
   },
   {
     path: 'inserir',
@@ -21,12 +38,19 @@ const routes: Routes = [
   },
   {
     path: 'editar/:id',
-    component: EditarPacienteComponent
+    component: EditarPacienteComponent,
+    resolve: { paciente: formPacienteResolver }
   },
   {
     path: 'excluir/:id',
-    component: ExcluirPacienteComponent
-  }
+    component: ExcluirPacienteComponent,
+    resolve: { paciente: visualizarPacienteResolver } 
+  },
+  // {
+  //   path: 'vizualizacao-completa/:id',
+  //   component: ,
+  //   resolve: { paciente: visualizarPacienteResolver } 
+  // }
 ];
 
 @NgModule({

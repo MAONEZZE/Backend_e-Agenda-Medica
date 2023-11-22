@@ -1,4 +1,5 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloMedico;
+﻿using eAgendaMedica.Api.ViewModels.ModuloConsulta;
+using eAgendaMedica.Api.ViewModels.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloMedico;
 using eAgendaMedica.Dominio.ModuloMedico;
 
@@ -42,7 +43,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
             });
         }
 
-        [HttpGet("selecionar-por-crm/{crm}")]
+        [HttpGet("{crm}")]
         [ProducesResponseType(typeof(VisualizarMedicoViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarMedicoPorCrm(string crm)
@@ -74,6 +75,12 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
         }
 
         [ProducesResponseType(typeof(VisualizarMedicoViewModel), 200)]
+        public async override Task<IActionResult> SelecionarPorIdCompleto(Guid id)
+        {
+            return await base.SelecionarPorIdCompleto(id);
+        }
+
+        [ProducesResponseType(typeof(FormMedicoViewModel), 200)]
         public async override Task<IActionResult> SelecionarPorId(Guid id)
         {
             return await base.SelecionarPorId(id);
@@ -85,7 +92,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
             return await base.Inserir(registroVM);
         }
 
-        [HttpPut("editar-por-crm/{crm}")]
+        [HttpPut("{crm}")]
         public async Task<IActionResult> EditaPorCrm(string crm, FormMedicoViewModel medicoVM)
         {
             var resultado = await service.SelecionarMedicoPorCrm(crm);

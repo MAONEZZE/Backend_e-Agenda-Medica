@@ -61,10 +61,35 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             });
         }
 
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(string[]), 500)]
+        public virtual async Task<IActionResult> SelecionarPorId(Guid id)
+        {
+            var resultado = await _service.SelecionarPorIdAsync(id);
+
+            if (resultado.IsFailed)
+            {
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = resultado.Errors.Select(result => result.Message)
+                });
+            }
+
+            TForm registrosVM = this._map.Map<TForm>(resultado.Value);
+            //O que está em parenteses será convertido no que está entre <>
+
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = registrosVM
+            });
+        }
+
         [HttpGet("visualizacao-completa/{id}")] // O {} é para colocar o nome do parametro do metodo. É tipo o :id do angular
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]
-        public virtual async Task<IActionResult> SelecionarPorId(Guid id)
+        public virtual async Task<IActionResult> SelecionarPorIdCompleto(Guid id)
         {
             var resultado = await _service.SelecionarPorIdAsync(id);
 
@@ -86,7 +111,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             });
         }
 
-        [HttpPost("inserir")]
+        [HttpPost]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 500)]
         public virtual async Task<IActionResult> Inserir(TForm registroVM)
@@ -98,7 +123,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             return ProcessarResposta(resultado, registroVM);
         }
 
-        [HttpPut("editar/{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]
@@ -134,7 +159,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             return ProcessarResposta(resultadoEdicao, registroVM);
         }
 
-        [HttpDelete("excluir/{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 404)]

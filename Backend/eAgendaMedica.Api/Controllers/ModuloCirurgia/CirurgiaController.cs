@@ -99,6 +99,12 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
         }
 
         [ProducesResponseType(typeof(VisualizarCirurgiaViewModel), 200)]
+        public async override Task<IActionResult> SelecionarPorIdCompleto(Guid id)
+        {
+            return await base.SelecionarPorIdCompleto(id);
+        }
+
+        [ProducesResponseType(typeof(FormCirurgiaViewModel), 200)]
         public async override Task<IActionResult> SelecionarPorId(Guid id)
         {
             return await base.SelecionarPorId(id);

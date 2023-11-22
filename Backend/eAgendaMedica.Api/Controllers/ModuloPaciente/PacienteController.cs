@@ -1,4 +1,5 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloPaciente;
+﻿using eAgendaMedica.Api.ViewModels.ModuloMedico;
+using eAgendaMedica.Api.ViewModels.ModuloPaciente;
 using eAgendaMedica.Aplicacao.ModuloPaciente;
 using eAgendaMedica.Dominio.ModuloPaciente;
 
@@ -19,6 +20,12 @@ namespace eAgendaMedica.Api.Controllers.ModuloPaciente
         }
 
         [ProducesResponseType(typeof(VisualizarPacienteViewModel), 200)]
+        public async override Task<IActionResult> SelecionarPorIdCompleto(Guid id)
+        {
+            return await base.SelecionarPorIdCompleto(id);
+        }
+
+        [ProducesResponseType(typeof(FormPacienteViewModel), 200)]
         public async override Task<IActionResult> SelecionarPorId(Guid id)
         {
             return await base.SelecionarPorId(id);

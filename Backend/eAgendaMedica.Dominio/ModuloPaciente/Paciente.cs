@@ -11,7 +11,7 @@ namespace eAgendaMedica.Dominio.ModuloPaciente
         public string Cpf { get; set; }
         public DateTime DataNascimento { get; set; }
 
-        public List<string> TituloConsulta
+        public List<string> TitulosConsultas
         {
             get
             {
@@ -26,7 +26,7 @@ namespace eAgendaMedica.Dominio.ModuloPaciente
             }
         }
 
-        public List<string> TituloCirurgia
+        public List<string> TitulosCirurgias
         {
             get
             {

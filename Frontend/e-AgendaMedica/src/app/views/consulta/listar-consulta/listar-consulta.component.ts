@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ListarConsultaVM } from '../models/listar-consulta.view-model';
+import { map, tap } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-listar-consulta',
@@ -6,5 +10,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./listar-consulta.component.scss']
 })
 export class ListarConsultaComponent {
+  consultas: ListarConsultaVM[] = [];
 
+  constructor(private toastrService: ToastrService, private route: ActivatedRoute){}
+
+  ngOnInit(): void {
+    this.route.data.pipe(map((dados) => dados['consultas'])).subscribe({
+      next: (consultas) => this.processarSucesso(consultas),
+      error: (err: Error) => this.processarFalha(err)
+    });
+  }
+
+  processarSucesso(pacientes: ListarConsultaVM[]){
+    this.consultas = pacientes;
+  }
+
+  processarFalha(error: Error){
+    this.toastrService.error(error.message, 'Error')
+  }
 }

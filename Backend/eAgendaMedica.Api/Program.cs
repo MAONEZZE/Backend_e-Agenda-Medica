@@ -12,10 +12,10 @@ namespace eAgendaMedica.Api
 
             builder.Services.AddCors();
 
-            //builder.Services.Configure<ApiBehaviorOptions>(config =>
-            //{
-            //    config.SuppressModelStateInvalidFilter = true;
-            //});
+            builder.Services.Configure<ApiBehaviorOptions>(config =>
+            {
+                config.SuppressModelStateInvalidFilter = false;
+            });
 
             //============== Logs =================
             builder.Services.ConfigurarSerilog(builder.Logging);

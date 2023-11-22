@@ -1,9 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule, inject } from '@angular/core';
+import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angular/router';
 import { ListarCirurgiaComponent } from './listar-cirurgia/listar-cirurgia.component';
 import { InserirCirurgiaComponent } from './inserir-cirurgia/inserir-cirurgia.component';
 import { EditarCirurgiaComponent } from './editar-cirurgia/editar-cirurgia.component';
 import { ExcluirCirurgiaComponent } from './excluir-cirurgia/excluir-cirurgia.component';
+import { CirurgiaService } from './services/cirurgia.service';
+import { VisualizarPacienteVM } from '../paciente/models/visualizar-paciente.view-model';
+import { FormCirurgiaVM } from './models/form-cirurgia.view-model';
+import { ListarCirurgiaVM } from './models/listar-cirurgia.view-model';
+
+const listarCirurgiaResolver: ResolveFn<ListarCirurgiaVM[]> = () => {
+  return inject(CirurgiaService).selecionarTodos();
+};
+
+const formCirurgiaResolver: ResolveFn<FormCirurgiaVM> = (route: ActivatedRouteSnapshot) => {
+  return inject(CirurgiaService).selecionarCirurgiaPorId(route.paramMap.get('id')!);
+};
+
+const visualizarCirurgiaResolver: ResolveFn<VisualizarPacienteVM> = (route: ActivatedRouteSnapshot) => {
+  return inject(CirurgiaService).selecionarCirurgiaCompletaPorId(route.paramMap.get('id')!);
+};
 
 const routes: Routes = [
   {
@@ -13,19 +29,23 @@ const routes: Routes = [
   },
   {
     path: 'listar',
-    component: ListarCirurgiaComponent
+    component: ListarCirurgiaComponent,
+    resolve: { cirurgias: listarCirurgiaResolver }
   },
   {
     path: 'inserir',
     component: InserirCirurgiaComponent
+    
   },
   {
     path: 'editar/:id',
-    component: EditarCirurgiaComponent
+    component: EditarCirurgiaComponent,
+    resolve: { cirurgia: formCirurgiaResolver }
   },
   {
     path: 'excluir/:id',
-    component: ExcluirCirurgiaComponent
+    component: ExcluirCirurgiaComponent,
+    resolve: { cirurgia: visualizarCirurgiaResolver }
   }
 ];
 
