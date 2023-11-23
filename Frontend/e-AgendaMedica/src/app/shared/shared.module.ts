@@ -8,13 +8,18 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { CardHoverDirective } from './directives/card-hover.directive';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogExcluirComponent } from './componentes/dialog-excluir/dialog-excluir.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
 @NgModule({
-  declarations: [CardHoverDirective],
+  declarations: [CardHoverDirective, DialogExcluirComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -24,7 +29,16 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     RouterModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   exports: [
     MatCardModule,
@@ -35,7 +49,14 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     RouterModule,
     CardHoverDirective,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule, 
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatOptionModule,
+    MatSelectModule, 
   ],
 })
 export class SharedModule { }

@@ -10,7 +10,7 @@
       <div class="row d-flex gy-2 justify-content-between" >
         <div class="col-lg-4 col-sm-6">
           <button
-            routerLink="/pacientes/inserir"  
+            routerLink="/medicos/inserir"  
             color="primary"
             mat-raised-button>
             <mat-icon>add</mat-icon>
@@ -28,8 +28,8 @@
       </div>
       
       <div class="row">
-        <div class="col-md-8 col-lg-4" *ngFor="let medico of medicos">
-          <app-card [medico]="medico"></app-card>
+        <div class="col-md-8 col-lg-4" *ngFor="let medico of medicos$ | async">
+          <app-card (onEnviarMedico)="excluir($event)" [medico]="medico"></app-card>
         </div>
       </div>
 

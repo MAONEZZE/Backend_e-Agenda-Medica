@@ -14,6 +14,7 @@ import { CoreModule } from './core/core.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { ShellModule } from './core/shell/shell.module';
 import { loadingInterceptor } from './core/loading/interceptor-loading';
+import { provideEnvironmentNgxMask } from 'ngx-mask';
 
 const locale = 'pt-BR'
 
@@ -43,6 +44,9 @@ registerLocaleData(localePt, locale)
     {
       provide: LOCALE_ID, useValue: locale
     },
+
+    provideEnvironmentNgxMask(),
+
     provideHttpClient(withInterceptors([loadingInterceptor]))
   ],
   bootstrap: [AppComponent]

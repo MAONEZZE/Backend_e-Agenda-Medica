@@ -5,6 +5,8 @@ import { ListarCirurgiaVM } from '../models/listar-cirurgia.view-model';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
 
 @Component({
   selector: 'app-listar-cirurgia',
@@ -12,22 +14,38 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./listar-cirurgia.component.scss']
 })
 export class ListarCirurgiaComponent implements OnInit{
-  cirurgias: ListarCirurgiaVM[] = [];
+  cirurgias$!: Observable<ListarCirurgiaVM[]>;
 
-  constructor(private toastrService: ToastrService, private route: ActivatedRoute){}
+  constructor(private cirurgiaService: CirurgiaService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
 
   ngOnInit(): void {
-    this.route.data.pipe(map((dados) => dados['cirurgias'])).subscribe({
-      next: (pacientes) => this.processarSucesso(pacientes),
-      error: (err: Error) => this.processarFalha(err)
+    this.cirurgias$ = this.route.data.pipe(map((dados) => dados['cirurgias']));
+  }
+
+  excluir(cirurgia: ListarCirurgiaVM){
+    let result = this.dialog.open(DialogExcluirComponent, {
+      data: { 
+        registro: cirurgia.titulo
+      }
+    });
+
+    result.afterClosed().subscribe(res => {
+      if(res == true){
+        this.cirurgiaService.excluir(cirurgia.id).subscribe({
+          next: () => this.processarSucessoExclusao(),
+          error: (err) => this.processarFalhaExclusao(err)
+          
+        })
+      }
     });
   }
 
-  processarSucesso(cirurgias: ListarCirurgiaVM[]){
-    this.cirurgias = cirurgias;
+  processarSucessoExclusao(): void {
+    this.toastrService.success(`Cirurgia excluida com sucesso`, 'Exclusão')
+    this.cirurgias$ = this.cirurgiaService.selecionarTodos();
   }
 
-  processarFalha(error: Error){
-    this.toastrService.error(error.message, 'Error')
+  processarFalhaExclusao(err: Error): void {
+    this.toastrService.error(err.message, 'Error')
   }
 }

@@ -7,14 +7,17 @@
         <hr />
       </div>
 
-      <div class="d-grid d-md-flex gap-1">
+      <div class="d-grid d-md-flex gap-1 ">
+
         <button
-          routerLink="/pacientes/inserir"  
+          routerLink="/consultas/inserir"  
           color="primary"
           mat-raised-button>
           <mat-icon>add</mat-icon>
           Nova Consulta
         </button>
+
+
 
         <button 
           color="primary"
@@ -27,27 +30,28 @@
           color="primary"
           mat-raised-button>
           <mat-icon>event_available</mat-icon>
-          Consultas para Hoje
+          Hoje
         </button>
 
         <button
           color="primary"
           mat-raised-button>
           <mat-icon>event</mat-icon>
-          Consultas futuras
+          Futuras
         </button>
 
         <button
           color="primary"
           mat-raised-button>
           <mat-icon>today</mat-icon>
-          Consultas passadas
+          Passadas
         </button>
+
       </div>
 
       <div class="row g-3 ">
-        <div class="col-md-8 col-lg-4" *ngFor="let consulta of consultas">
-          <app-card [consulta]="consulta"></app-card>
+        <div class="col-md-8 col-lg-4" *ngFor="let consulta of consultas$ | async">
+          <app-card (onEnviarConsulta)="excluir($event)" [consulta]="consulta"></app-card>
         </div>
       </div>
     </div>

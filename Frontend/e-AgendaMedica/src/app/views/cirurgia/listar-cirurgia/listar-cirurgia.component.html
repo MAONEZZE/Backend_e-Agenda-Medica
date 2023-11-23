@@ -7,9 +7,9 @@
         <hr />
       </div>
 
-      <div class="d-grid d-md-flex gap-1 ">
+      <div class="d-grid d-md-flex gap-1">
         <button
-          routerLink="/pacientes/inserir"  
+          routerLink="/cirurgias/inserir"  
           color="primary"
           mat-raised-button>
           <mat-icon>add</mat-icon>
@@ -48,8 +48,8 @@
       </div>
 
       <div class="row g-3 ">
-        <div class="col-md-8 col-lg-4" *ngFor="let cirurgia of cirurgias">
-          <app-card [cirurgia]="cirurgia"></app-card>
+        <div class="col-md-8 col-lg-4" *ngFor="let cirurgia of cirurgias$ | async">
+          <app-card (onEnviarCirurgia)="excluir($event)" [cirurgia]="cirurgia"></app-card>
         </div>
       </div>
     </div>

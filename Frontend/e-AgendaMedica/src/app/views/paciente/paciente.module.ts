@@ -8,7 +8,6 @@ import { EditarPacienteComponent } from './editar-paciente/editar-paciente.compo
 import { ExcluirPacienteComponent } from './excluir-paciente/excluir-paciente.component';
 import { InserirPacienteComponent } from './inserir-paciente/inserir-paciente.component';
 import { ListarPacienteComponent } from './listar-paciente/listar-paciente.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { PacienteService } from './services/paciente.service';
 
 
@@ -23,7 +22,6 @@ import { PacienteService } from './services/paciente.service';
   imports: [
     CommonModule,
     PacienteRoutingModule,
-    ReactiveFormsModule,
     SharedModule
   ],
   providers: [PacienteService]

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormMedicoVM } from '../models/form-medico.view-model';
 import { MedicoService } from '../services/medico.service';
+import { FloatLabelType } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-inserir-medico',
@@ -13,6 +14,7 @@ import { MedicoService } from '../services/medico.service';
 export class InserirMedicoComponent  implements OnInit{
   form!: FormGroup;
   pacienteVM!: FormMedicoVM;
+  floatLabelControl = new FormControl('auto' as FloatLabelType);
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -26,6 +28,10 @@ export class InserirMedicoComponent  implements OnInit{
       cpf: new FormControl('', [Validators.required]),
       crm: new FormControl('', [Validators.required]),
     });
+  }
+
+  getFloatLabelValue(): FloatLabelType {
+    return this.floatLabelControl.value || 'auto';
   }
 
   gravar() {
@@ -45,7 +51,7 @@ export class InserirMedicoComponent  implements OnInit{
 
   processarSucesso(res: FormMedicoVM) {
     this.toastrService.success(
-      `O Medico "${res.nome}" foi salva com sucesso!`,
+      `O Medico "${res.nome}" cadastrado com sucesso!`,
       'Sucesso'
     );
 

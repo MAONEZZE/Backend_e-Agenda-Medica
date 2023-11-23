@@ -8,6 +8,7 @@ import { MedicoService } from '../../medico/services/medico.service';
 import { CirurgiaService } from '../services/cirurgia.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { FloatLabelType } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-inserir-cirurgia',
@@ -20,6 +21,8 @@ export class InserirCirurgiaComponent implements OnInit{
   medicos!: ListarMedicoVM[];
   cirurgiaVM!: FormCirurgiaVM;
 
+  floatLabelControl = new FormControl('auto' as FloatLabelType);
+
   constructor(
     private formBuilder: FormBuilder, 
     private cirurgiaService: CirurgiaService,
@@ -30,7 +33,7 @@ export class InserirCirurgiaComponent implements OnInit{
   
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      titulo: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
       data: new FormControl(new Date(), [Validators.required]),
       horaInicio: new FormControl('08:00:00', [Validators.required]),
@@ -42,6 +45,10 @@ export class InserirCirurgiaComponent implements OnInit{
     this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes)
   }
 
+  getFloatLabelValue(): FloatLabelType {
+    return this.floatLabelControl.value || 'auto';
+  }
+
   gravar() {
     if (this.form?.invalid) {
       for (let erro of this.form.validate()) {
@@ -51,6 +58,12 @@ export class InserirCirurgiaComponent implements OnInit{
       return;
     }
 
+    const horaTermino = this.form.get('horaTermino')?.value;
+    const horaInicio = this.form.get('horaInicio')?.value;
+
+    this.form.get('horaInicio')?.setValue(`${horaInicio}:00`);
+    this.form.get('horaTermino')?.setValue(`${horaTermino}:00`);
+
     this.cirurgiaService.inserir(this.form?.value).subscribe({
       next: (res) => this.processarSucesso(res),
       error: (err) => this.processarFalha(err),
@@ -59,7 +72,7 @@ export class InserirCirurgiaComponent implements OnInit{
 
   processarSucesso(res: FormCirurgiaVM) {
     this.toastrService.success(
-      `A Cirurgia "${res.titulo}" foi salva com sucesso!`,
+      `A Cirurgia "${res.titulo}" cadastrado com sucesso!`,
       'Sucesso'
     );
 

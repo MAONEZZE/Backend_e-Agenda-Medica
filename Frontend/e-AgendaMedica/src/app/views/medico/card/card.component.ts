@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ListarMedicoVM } from '../models/listar-medico.view-model';
 
 @Component({
@@ -8,4 +8,9 @@ import { ListarMedicoVM } from '../models/listar-medico.view-model';
 })
 export class CardComponent {
   @Input() medico!: ListarMedicoVM;
+  @Output() onEnviarMedico: EventEmitter<ListarMedicoVM> = new EventEmitter();
+
+  excluir(medico: ListarMedicoVM){
+    this.onEnviarMedico.emit(medico);
+  }
 }

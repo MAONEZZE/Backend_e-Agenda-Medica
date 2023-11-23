@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MedicoService } from '../../medico/services/medico.service';
 import { PacienteService } from '../../paciente/services/paciente.service';
 import { ConsultaService } from '../services/consulta.service';
+import { FloatLabelType } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-inserir-consulta',
@@ -16,9 +17,13 @@ import { ConsultaService } from '../services/consulta.service';
 })
 export class InserirConsultaComponent {
   form!: FormGroup;
+
   pacientes!: ListarPacienteVM[];
   medicos!: ListarMedicoVM[];
+
   consultaVM!: FormConsultaVM;
+
+  floatLabelControl = new FormControl('auto' as FloatLabelType);
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -30,7 +35,7 @@ export class InserirConsultaComponent {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      titulo: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
       data: new FormControl(new Date(), [Validators.required]),
       horaInicio: new FormControl('08:00:00', [Validators.required]),
@@ -39,7 +44,11 @@ export class InserirConsultaComponent {
     });
 
     this.medicoService.selecionarTodos().subscribe(medicos => this.medicos = medicos);
-    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes)
+    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes);
+  }
+
+  getFloatLabelValue(): FloatLabelType {
+    return this.floatLabelControl.value || 'auto';
   }
 
   gravar() {
@@ -51,6 +60,12 @@ export class InserirConsultaComponent {
       return;
     }
 
+    const horaTermino = this.form.get('horaTermino')?.value;
+    const horaInicio = this.form.get('horaInicio')?.value;
+
+    this.form.get('horaInicio')?.setValue(`${horaInicio}:00`);
+    this.form.get('horaTermino')?.setValue(`${horaTermino}:00`);
+
     this.consultaService.inserir(this.form?.value).subscribe({
       next: (res) => this.processarSucesso(res),
       error: (err) => this.processarFalha(err),
@@ -59,11 +74,11 @@ export class InserirConsultaComponent {
 
   processarSucesso(res: FormConsultaVM) {
     this.toastrService.success(
-      `A Consulta "${res.titulo}" foi salva com sucesso!`,
+      `A Consulta "${res.titulo}" cadastrado com sucesso!`,
       'Sucesso'
     );
 
-    this.router.navigate(['/cirurgias/listar']);
+    this.router.navigate(['/consultas/listar']);
   }
 
   processarFalha(erro: Error) {

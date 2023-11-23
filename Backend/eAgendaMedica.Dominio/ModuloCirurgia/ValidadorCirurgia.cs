@@ -7,6 +7,11 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
     {
         public ValidadorCirurgia()
         {
+            RuleFor(x => x.Titulo)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(5);
+
             RuleFor(x => x.Data)
                 .NotNull()
                 .NotEmpty();

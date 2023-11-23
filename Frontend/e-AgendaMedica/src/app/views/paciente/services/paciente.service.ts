@@ -20,7 +20,7 @@ export class PacienteService {
       msgErro = 'Ocorreu um erro ao processar a requisição.'
     }
     else{
-      msgErro = error.error?.erros[0]
+      msgErro = error.error.erros;
     }
     return throwError(() => new Error(msgErro));
   }

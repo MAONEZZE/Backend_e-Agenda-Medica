@@ -9,6 +9,11 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 
         public ValidadorConsulta()
         {
+            RuleFor(x => x.Titulo)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(5);
+
             RuleFor(x => x.Data)
                 .NotNull()
                 .NotEmpty();
