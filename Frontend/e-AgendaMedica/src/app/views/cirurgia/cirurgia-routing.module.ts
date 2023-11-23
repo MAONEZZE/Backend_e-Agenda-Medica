@@ -42,11 +42,11 @@ const routes: Routes = [
     component: EditarCirurgiaComponent,
     resolve: { cirurgia: formCirurgiaResolver }
   },
-  {
-    path: 'excluir/:id',
-    component: ExcluirCirurgiaComponent,
-    resolve: { cirurgia: visualizarCirurgiaResolver }
-  }
+  // {
+  //   path: 'excluir/:id',
+  //   component: ExcluirCirurgiaComponent,
+  //   resolve: { cirurgia: visualizarCirurgiaResolver }
+  // }
 ];
 
 @NgModule({

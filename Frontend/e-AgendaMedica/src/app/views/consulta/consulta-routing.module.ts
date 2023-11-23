@@ -41,11 +41,11 @@ const routes: Routes = [
     component: EditarConsultaComponent,
     resolve: { consulta: formConsultaResolver }
   },
-  {
-    path: 'excluir/:id',
-    component: ExcluirConsultaComponent,
-    resolve: { consulta: visualizarConsultaResolver }
-  }
+  // {
+  //   path: 'excluir/:id',
+  //   component: ExcluirConsultaComponent,
+  //   resolve: { consulta: visualizarConsultaResolver }
+  // }
 ];
 
 @NgModule({

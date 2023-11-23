@@ -41,11 +41,11 @@ const routes: Routes = [
     component: EditarMedicoComponent,
     resolve: { medico: formMedicoResolver }
   },
-  {
-    path: 'excluir/:id',
-    component: ExcluirMedicoComponent,
-    resolve: { medico: visualizarMedicoResolver }
-  }
+  // {
+  //   path: 'excluir/:id',
+  //   component: ExcluirMedicoComponent,
+  //   resolve: { medico: visualizarMedicoResolver }
+  // }
 ];
 
 @NgModule({
