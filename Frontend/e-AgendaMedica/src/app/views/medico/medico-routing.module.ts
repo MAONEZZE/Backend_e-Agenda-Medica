@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angula
 import { ListarMedicoComponent } from './listar-medico/listar-medico.component';
 import { InserirMedicoComponent } from './inserir-medico/inserir-medico.component';
 import { EditarMedicoComponent } from './editar-medico/editar-medico.component';
-import { ExcluirMedicoComponent } from './excluir-medico/excluir-medico.component';
 import { MedicoService } from './services/medico.service';
 import { FormMedicoVM } from './models/form-medico.view-model';
 import { ListarMedicoVM } from './models/listar-medico.view-model';

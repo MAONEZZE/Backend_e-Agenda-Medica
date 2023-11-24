@@ -17,41 +17,46 @@
           Nova Consulta
         </button>
 
-
-
         <button 
           color="primary"
-          mat-raised-button>
+          mat-raised-button
+          (click)="selecionarTodas()">
           <mat-icon>format_align_justify</mat-icon>
           Todas
         </button>
 
         <button
           color="primary"
-          mat-raised-button>
+          mat-raised-button
+          (click)="selecionarPassadas()">
+          <mat-icon>today</mat-icon>
+          Passadas
+        </button>
+
+        <button
+          color="primary"
+          mat-raised-button
+          (click)="selecionarParaHoje()">
           <mat-icon>event_available</mat-icon>
           Hoje
         </button>
 
         <button
           color="primary"
-          mat-raised-button>
+          mat-raised-button
+          (click)="selecionarFuturas()">
           <mat-icon>event</mat-icon>
           Futuras
         </button>
-
-        <button
-          color="primary"
-          mat-raised-button>
-          <mat-icon>today</mat-icon>
-          Passadas
-        </button>
-
       </div>
 
       <div class="row g-3 ">
         <div class="col-md-8 col-lg-4" *ngFor="let consulta of consultas$ | async">
-          <app-card (onEnviarConsulta)="excluir($event)" [consulta]="consulta"></app-card>
+          <app-card 
+            (onEnviarConsultaVisualizacao)="visualizar($event)"
+            (onEnviarConsulta)="excluir($event)" 
+            [consulta]="consulta">
+          </app-card>
         </div>
       </div>
     </div>

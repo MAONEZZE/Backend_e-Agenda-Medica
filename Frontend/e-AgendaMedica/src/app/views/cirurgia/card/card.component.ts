@@ -9,8 +9,13 @@ import { ListarCirurgiaVM } from '../models/listar-cirurgia.view-model';
 export class CardComponent {
   @Input() cirurgia!: ListarCirurgiaVM;
   @Output() onEnviarCirurgia: EventEmitter<ListarCirurgiaVM> = new EventEmitter();
+  @Output() onEnviarCirurgiaVisualizacao: EventEmitter<ListarCirurgiaVM> = new EventEmitter();
 
   excluir(cirurgia: ListarCirurgiaVM){
     this.onEnviarCirurgia.emit(cirurgia);
+  }
+
+  visualizar(cirurgia: ListarCirurgiaVM){
+    this.onEnviarCirurgiaVisualizacao.emit(cirurgia);
   }
 }

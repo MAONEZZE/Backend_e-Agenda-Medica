@@ -45,7 +45,8 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 
             if (!disponivel)
             {
-                ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 20 minutos descansando, após uma consulta"));
+                ctx.AddFailure(new ValidationFailure("Tempo de Descanço", $"É necessario que o medico {medico.Nome} fique no mínimo 20 minutos descansando, após uma consulta e 4 horas após uma cirurgia"));
+                return;
             }
         }
     }

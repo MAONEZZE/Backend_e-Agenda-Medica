@@ -17,6 +17,8 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
 
         public async Task<Result<Cirurgia>> EditarAsync(Cirurgia registro)
         {
+            registro.Data = registro.Data.Date;
+
             var resultado = Validar(registro);
 
             if (resultado.IsFailed)
@@ -58,6 +60,8 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
 
         public async Task<Result<Cirurgia>> InserirAsync(Cirurgia registro)
         {
+            registro.Data = registro.Data.Date;
+
             Result resultado = Validar(registro);
 
             if (resultado.IsFailed)

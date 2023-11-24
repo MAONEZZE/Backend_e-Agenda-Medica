@@ -9,8 +9,13 @@ import { ListarConsultaVM } from '../models/listar-consulta.view-model';
 export class CardComponent {
   @Input() consulta!: ListarConsultaVM;
   @Output() onEnviarConsulta: EventEmitter<ListarConsultaVM> = new EventEmitter();
+  @Output() onEnviarConsultaVisualizacao: EventEmitter<ListarConsultaVM> = new EventEmitter();
 
   excluir(consulta: ListarConsultaVM){
     this.onEnviarConsulta.emit(consulta);
+  }
+
+  visualizar(consulta: ListarConsultaVM){
+    this.onEnviarConsultaVisualizacao.emit(consulta)
   }
 }

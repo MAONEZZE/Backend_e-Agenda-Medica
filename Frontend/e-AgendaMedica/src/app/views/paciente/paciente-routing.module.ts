@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angula
 import { ListarPacienteComponent } from './listar-paciente/listar-paciente.component';
 import { InserirPacienteComponent } from './inserir-paciente/inserir-paciente.component';
 import { EditarPacienteComponent } from './editar-paciente/editar-paciente.component';
-import { ExcluirPacienteComponent } from './excluir-paciente/excluir-paciente.component';
 import { ListarPacienteVM } from './models/listar-paciente.view-model';
 import { PacienteService } from './services/paciente.service';
 import { FormPacienteVM } from './models/form-paciente.view-model';

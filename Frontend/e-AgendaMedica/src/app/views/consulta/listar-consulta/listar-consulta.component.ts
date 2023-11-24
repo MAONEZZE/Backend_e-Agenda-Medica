@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { ConsultaService } from '../services/consulta.service';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
+import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
 
 @Component({
   selector: 'app-listar-consulta',
@@ -21,6 +22,16 @@ export class ListarConsultaComponent {
     this.consultas$ = this.route.data.pipe(map((dados) => dados['consultas']));
   }
 
+  visualizar(consulta: ListarConsultaVM){
+    this.consultaService.selecionarConsultaCompletaPorId(consulta.id).subscribe((consultaRes) => {
+      this.dialog.open(DialogVisualizacaoComponent, {
+        data: { 
+          registro: consultaRes
+        }
+      });
+    })
+  }
+
   excluir(consulta: ListarConsultaVM){
     let result = this.dialog.open(DialogExcluirComponent, {
       data: { 
@@ -33,14 +44,29 @@ export class ListarConsultaComponent {
         this.consultaService.excluir(consulta.id).subscribe({
           next: () => this.processarSucessoExclusao(),
           error: (err) => this.processarFalhaExclusao(err)
-          
         })
       }
     });
   }
 
+  selecionarTodas(){
+    this.consultas$ = this.consultaService.selecionarTodos();
+  }
+
+  selecionarParaHoje(){
+    this.consultas$ = this.consultaService.selecionarTodosConsultasParaHoje();
+  }
+
+  selecionarFuturas(){
+    this.consultas$ = this.consultaService.selecionarConsultasFuturas();
+  }
+
+  selecionarPassadas(){
+    this.consultas$ = this.consultaService.selecionarConsultasPassadas();
+  }
+
   processarSucessoExclusao(): void {
-    this.toastrService.success(`Medico excluido com sucesso`, 'Exclusão')
+    this.toastrService.success(`Consulta excluida com sucesso`, 'Exclusão')
     this.consultas$ = this.consultaService.selecionarTodos();
   }
 

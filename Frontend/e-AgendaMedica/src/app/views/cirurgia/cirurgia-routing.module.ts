@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angula
 import { ListarCirurgiaComponent } from './listar-cirurgia/listar-cirurgia.component';
 import { InserirCirurgiaComponent } from './inserir-cirurgia/inserir-cirurgia.component';
 import { EditarCirurgiaComponent } from './editar-cirurgia/editar-cirurgia.component';
-import { ExcluirCirurgiaComponent } from './excluir-cirurgia/excluir-cirurgia.component';
 import { CirurgiaService } from './services/cirurgia.service';
 import { VisualizarPacienteVM } from '../paciente/models/visualizar-paciente.view-model';
 import { FormCirurgiaVM } from './models/form-cirurgia.view-model';

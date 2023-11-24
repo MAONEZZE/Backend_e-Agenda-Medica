@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, ResolveFn, RouterModule, Routes } from '@angula
 import { ListarConsultaComponent } from './listar-consulta/listar-consulta.component';
 import { InserirConsultaComponent } from './inserir-consulta/inserir-consulta.component';
 import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
-import { ExcluirConsultaComponent } from './excluir-consulta/excluir-consulta.component';
 import { ConsultaService } from './services/consulta.service';
 import { ListarPacienteVM } from '../paciente/models/listar-paciente.view-model';
 import { FormConsultaVM } from './models/form-consulta.view-model';

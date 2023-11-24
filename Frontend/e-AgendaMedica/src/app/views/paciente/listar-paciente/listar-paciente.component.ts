@@ -6,6 +6,8 @@ import { Observable, map } from 'rxjs';
 import { ListarPacienteVM } from '../models/listar-paciente.view-model';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
+import { VisualizarPacienteVM } from '../models/visualizar-paciente.view-model';
 
 @Component({
   selector: 'app-listar-paciente',
@@ -21,6 +23,16 @@ export class ListarPacienteComponent implements OnInit{
     this.pacientes$ = this.route.data.pipe(map((dados) => dados['pacientes']));
   }
 
+  visualizar(paciente: ListarPacienteVM){
+    this.pacienteService.selecionarPacienteCompletoPorId(paciente.id).subscribe((pacienteRes) => {
+      this.dialog.open(DialogVisualizacaoComponent, {
+        data: { 
+          registro: pacienteRes
+        }
+      });
+    })
+  }
+
   excluir(paciente: ListarPacienteVM){
     let result = this.dialog.open(DialogExcluirComponent, {
       data: { 
@@ -30,7 +42,6 @@ export class ListarPacienteComponent implements OnInit{
 
     result.afterClosed().subscribe(res => {
       if(res == true){
-        console.log('entrou excluir no listarts')
         this.pacienteService.excluir(paciente.id).subscribe({
           next: () => this.processarSucessoExclusao(),
           error: (err) => this.processarFalhaExclusao(err)

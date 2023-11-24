@@ -26,6 +26,7 @@ namespace eAgendaMedica.Dominio.Compartilhado
 
                 Guid idAtividadeExistente;
 
+
                 if (item is Consulta)
                 {
                     Consulta consulta = (Consulta)item;
@@ -48,6 +49,8 @@ namespace eAgendaMedica.Dominio.Compartilhado
                     dataHoraFinalExistente = cirurgia.Data.Add(cirurgia.HoraTermino);
                     dataHoraInicioExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
                 }
+
+                //TODO - refazer a logica a partir daqui | tem que saber o tipo do qeu esta inserindo
 
                 var atividadeNovaDataHoraHoraTermino = atividadeNova.Data.Add(atividadeNova.HoraTermino);
                 var atividadeNovaDataHoraHoraInicio = atividadeNova.Data.Add(atividadeNova.HoraInicio);
@@ -80,6 +83,10 @@ namespace eAgendaMedica.Dominio.Compartilhado
                     }
 
                     //verifica se tem tempo de recuperação suficiente
+
+
+
+
                     if (Math.Abs((atividadeNovaDataHoraHoraInicio - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
                     {
                         disponivel = false;

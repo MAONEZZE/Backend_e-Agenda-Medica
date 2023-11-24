@@ -38,8 +38,8 @@ export class InserirConsultaComponent {
       titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
       data: new FormControl(new Date(), [Validators.required]),
-      horaInicio: new FormControl('08:00:00', [Validators.required]),
-      horaTermino: new FormControl('09:00:00', [Validators.required]),
+      horaInicio: new FormControl('00:00', [Validators.required]),
+      horaTermino: new FormControl('00:00', [Validators.required]),
       id_medico: new FormControl('', [Validators.required]),
     });
 
@@ -74,7 +74,7 @@ export class InserirConsultaComponent {
 
   processarSucesso(res: FormConsultaVM) {
     this.toastrService.success(
-      `A Consulta "${res.titulo}" cadastrado com sucesso!`,
+      `A Consulta "${res.titulo}" cadastrada com sucesso!`,
       'Sucesso'
     );
 

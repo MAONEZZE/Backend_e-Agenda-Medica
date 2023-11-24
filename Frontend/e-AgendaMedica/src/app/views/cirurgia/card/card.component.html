@@ -14,7 +14,9 @@
     <div>
       <button 
         mat-icon-button 
-        color="accent">
+        color="accent"
+        matTooltip="visualizar cirurgia"
+        (click)="visualizar(cirurgia)">
 
         <mat-icon>visibility</mat-icon>
       </button>
@@ -24,6 +26,7 @@
       <button
         mat-icon-button 
         color="primary"
+        matTooltip="editar cirurgia"
         routerLink='/cirurgias/editar/{{cirurgia.id}}'>
   
         <mat-icon>edit</mat-icon>
@@ -32,6 +35,7 @@
       <button
         mat-icon-button 
         color="primary"
+        matTooltip="excluir cirurgia"
         (click)="excluir(cirurgia)">
 
         <mat-icon>delete</mat-icon>

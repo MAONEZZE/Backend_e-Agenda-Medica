@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
+import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
 
 @Component({
   selector: 'app-listar-cirurgia',
@@ -22,7 +23,18 @@ export class ListarCirurgiaComponent implements OnInit{
     this.cirurgias$ = this.route.data.pipe(map((dados) => dados['cirurgias']));
   }
 
+  visualizar(cirurgia: ListarCirurgiaVM){
+    this.cirurgiaService.selecionarCirurgiaCompletaPorId(cirurgia.id).subscribe((cirurgiaRes) => {
+      this.dialog.open(DialogVisualizacaoComponent, {
+        data: { 
+          registro: cirurgiaRes
+        }
+      });
+    })
+  }
+
   excluir(cirurgia: ListarCirurgiaVM){
+    console.log(cirurgia)
     let result = this.dialog.open(DialogExcluirComponent, {
       data: { 
         registro: cirurgia.titulo
@@ -31,6 +43,7 @@ export class ListarCirurgiaComponent implements OnInit{
 
     result.afterClosed().subscribe(res => {
       if(res == true){
+        console.log(res)
         this.cirurgiaService.excluir(cirurgia.id).subscribe({
           next: () => this.processarSucessoExclusao(),
           error: (err) => this.processarFalhaExclusao(err)
@@ -38,6 +51,22 @@ export class ListarCirurgiaComponent implements OnInit{
         })
       }
     });
+  }
+
+  selecionarTodas(){
+    this.cirurgias$ = this.cirurgiaService.selecionarTodos();
+  }
+
+  selecionarParaHoje(){
+    this.cirurgias$ = this.cirurgiaService.selecionarTodosCirurgiasParaHoje();
+  }
+
+  selecionarFuturas(){
+    this.cirurgias$ = this.cirurgiaService.selecionarCirurgiasFuturas();
+  }
+
+  selecionarPassadas(){
+    this.cirurgias$ = this.cirurgiaService.selecionarCirurgiasPassadas();
   }
 
   processarSucessoExclusao(): void {

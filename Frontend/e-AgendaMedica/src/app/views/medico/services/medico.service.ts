@@ -14,13 +14,16 @@ export class MedicoService {
     let msgErro = '';
 
     if(error.status == 401){
-      msgErro = 'O usuário não está autorizado. Faça o o login e tente novamente.'
+      msgErro = 'O usuário não está autorizado. Faça o o login e tente novamente.';
     }
     else if(error.status == 0){
-      msgErro = 'Ocorreu um erro ao processar a requisição.'
+      msgErro = 'Ocorreu um erro ao processar a requisição.';
+    }
+    else if(error.status == 500){
+      msgErro = 'Ocorreu um erro no servidor.';
     }
     else{
-      msgErro = error.error?.erros[0]
+      msgErro = error.error?.erros;
     }
     return throwError(() => new Error(msgErro));
   }

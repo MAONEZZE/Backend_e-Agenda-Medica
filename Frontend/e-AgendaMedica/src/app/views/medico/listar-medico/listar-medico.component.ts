@@ -8,6 +8,7 @@ import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
 import { MedicoService } from '../services/medico.service';
+import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
 
 @Component({
   selector: 'app-listar-medico',
@@ -27,6 +28,16 @@ export class ListarMedicoComponent {
   
   getFloatLabelValue(): FloatLabelType {
     return this.floatLabelControl.value || 'auto';
+  }
+
+  visualizar(medico: ListarMedicoVM){
+    this.medicoService.selecionarMedicoCompletoPorId(medico.id).subscribe((medicoRes) => {
+      this.dialog.open(DialogVisualizacaoComponent, {
+        data: { 
+          registro: medicoRes
+        }
+      });
+    })
   }
 
   excluir(medico: ListarMedicoVM){
@@ -56,7 +67,11 @@ export class ListarMedicoComponent {
     this.toastrService.error(err.message, 'Error')
   }
 
+  buscarMaisTrabalhadores(){
+    console.log("trabalho mais")
+  }
+
   buscarPorCrm(){
-    
+    console.log("crmmmmmm")
   }
 }

@@ -5,9 +5,9 @@ import { ConsultaRoutingModule } from './consulta-routing.module';
 import { ListarConsultaComponent } from './listar-consulta/listar-consulta.component';
 import { InserirConsultaComponent } from './inserir-consulta/inserir-consulta.component';
 import { EditarConsultaComponent } from './editar-consulta/editar-consulta.component';
-import { ExcluirConsultaComponent } from './excluir-consulta/excluir-consulta.component';
 import { CardComponent } from './card/card.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DialogVisualizacaoComponent } from './dialog/dialog-visualizacao/dialog-visualizacao.component';
 
 
 @NgModule({
@@ -15,8 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ListarConsultaComponent,
     InserirConsultaComponent,
     EditarConsultaComponent,
-    ExcluirConsultaComponent,
-    CardComponent
+    CardComponent,
+    DialogVisualizacaoComponent,
   ],
   imports: [
     CommonModule,

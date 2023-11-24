@@ -8,7 +8,7 @@
       <mat-card-content>
         <mat-divider></mat-divider>
           <div class="espacamento-inputs">
-             {{form.value|json}} 
+             <!-- {{form.value|json}}  -->
             <div>
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-hint>Titulo</mat-hint>
@@ -78,7 +78,7 @@
             <mat-icon class="me-2">download</mat-icon>
             Gravar
           </button>
-          <button mat-stroked-button type="button" color="primary" routerLink="/pacientes/listar" class="px-3">
+          <button mat-stroked-button type="button" color="primary" routerLink="/cirurgias/listar" class="px-3">
             <mat-icon class="me-2">keyboard_return</mat-icon>
             Voltar
           </button>
@@ -86,19 +86,3 @@
       </form>
   </mat-card>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

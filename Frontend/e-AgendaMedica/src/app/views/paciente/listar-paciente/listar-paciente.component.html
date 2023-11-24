@@ -19,7 +19,11 @@
 
       <div class="row g-3 ">
         <div class="col-md-8 col-lg-4" *ngFor="let paciente of pacientes$ | async">
-          <app-card (onEnviarPaciente)="excluir($event)" [paciente]="paciente"></app-card>
+          <app-card 
+            (onEnviarPaciente)="excluir($event)" 
+            (onEnviarPacienteVisualizacao)="visualizar($event)"
+            [paciente]="paciente">
+          </app-card>
         </div>
       </div>
     </div>

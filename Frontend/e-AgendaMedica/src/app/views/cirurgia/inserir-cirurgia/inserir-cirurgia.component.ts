@@ -36,13 +36,13 @@ export class InserirCirurgiaComponent implements OnInit{
       titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
       data: new FormControl(new Date(), [Validators.required]),
-      horaInicio: new FormControl('08:00:00', [Validators.required]),
-      horaTermino: new FormControl('09:00:00', [Validators.required]),
+      horaInicio: new FormControl('00:00', [Validators.required]),
+      horaTermino: new FormControl('00:00', [Validators.required]),
       id_medicos: new FormControl([], [Validators.required]),
     });
 
     this.medicoService.selecionarTodos().subscribe(medicos => this.medicos = medicos);
-    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes)
+    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes);
   }
 
   getFloatLabelValue(): FloatLabelType {
@@ -50,6 +50,7 @@ export class InserirCirurgiaComponent implements OnInit{
   }
 
   gravar() {
+    console.log(this.form.value)
     if (this.form?.invalid) {
       for (let erro of this.form.validate()) {
         this.toastrService.warning(erro);
@@ -72,7 +73,7 @@ export class InserirCirurgiaComponent implements OnInit{
 
   processarSucesso(res: FormCirurgiaVM) {
     this.toastrService.success(
-      `A Cirurgia "${res.titulo}" cadastrado com sucesso!`,
+      `A Cirurgia "${res.titulo}" cadastrada com sucesso!`,
       'Sucesso'
     );
 

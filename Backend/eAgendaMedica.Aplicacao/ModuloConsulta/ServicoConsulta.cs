@@ -16,6 +16,8 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> EditarAsync(Consulta registro)
         {
+            registro.Data = registro.Data.Date;
+
             var resultado = Validar(registro);
 
             if (resultado.IsFailed)
@@ -57,6 +59,8 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> InserirAsync(Consulta registro)
         {
+            registro.Data = registro.Data.Date;
+
             Result resultado = Validar(registro);
 
             if (resultado.IsFailed)

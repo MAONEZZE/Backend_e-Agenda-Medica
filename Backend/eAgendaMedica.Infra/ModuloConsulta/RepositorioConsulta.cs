@@ -28,7 +28,7 @@ namespace eAgendaMedica.Infra.ModuloConsulta
 
         public override async Task<Consulta> SelecionarPorIdAsync(Guid id)
         {
-            return await base.dbset.Include(x => x.Medico).Include(x => x.PacienteAtributo).FirstOrDefaultAsync();
+            return await base.dbset.Where(x => x.Id == id).Include(x => x.Medico).Include(x => x.PacienteAtributo).FirstOrDefaultAsync();
         }
     }
 }

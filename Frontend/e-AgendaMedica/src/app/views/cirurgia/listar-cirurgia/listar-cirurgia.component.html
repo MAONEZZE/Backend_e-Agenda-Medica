@@ -18,38 +18,44 @@
 
         <button 
           color="primary"
-          mat-raised-button>
+          mat-raised-button
+          (click)="selecionarTodas()">
           <mat-icon>format_align_justify</mat-icon>
           Todas
         </button>
 
         <button
           color="primary"
-          mat-raised-button>
-          <mat-icon>event_available</mat-icon>
-          Cirurgias para Hoje
-        </button>
-
-        <button
-          color="primary"
-          mat-raised-button>
-          <mat-icon>event</mat-icon>
-          Cirurgias futuras
-        </button>
-
-        <button
-          color="primary"
-          mat-raised-button>
+          mat-raised-button
+          (click)="selecionarPassadas()">
           <mat-icon>today</mat-icon>
-          Cirurgias passadas
+          Passadas
         </button>
 
-        
+        <button
+          color="primary"
+          mat-raised-button
+          (click)="selecionarParaHoje()">
+          <mat-icon>event_available</mat-icon>
+          Hoje
+        </button>
+
+        <button
+          color="primary"
+          mat-raised-button
+          (click)="selecionarFuturas()">
+          <mat-icon>event</mat-icon>
+          Futuras
+        </button>
       </div>
 
       <div class="row g-3 ">
         <div class="col-md-8 col-lg-4" *ngFor="let cirurgia of cirurgias$ | async">
-          <app-card (onEnviarCirurgia)="excluir($event)" [cirurgia]="cirurgia"></app-card>
+          <app-card 
+            (onEnviarCirurgiaVisualizacao)="visualizar($event)"
+            (onEnviarCirurgia)="excluir($event)" 
+            [cirurgia]="cirurgia">
+          </app-card>
         </div>
       </div>
     </div>

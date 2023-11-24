@@ -3,10 +3,10 @@ import { ListarPacienteVM } from "../../paciente/models/listar-paciente.view-mod
 
 export type VisualizarCirurgiaVM = {
   id: string;
-  Titulo: string;
-  PacienteAtributo: ListarPacienteVM;
-  Data: Date;
-  HoraInicio: string;
-  HoraTermino: string;
-  Medicos: ListarMedicoVM[];
+  titulo: string;
+  pacienteAtributo: ListarPacienteVM;
+  data: Date;
+  horaInicio: string;
+  horaTermino: string;
+  medicos: ListarMedicoVM[];
 }

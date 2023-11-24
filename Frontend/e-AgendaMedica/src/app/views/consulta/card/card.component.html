@@ -14,7 +14,9 @@
     <div>
       <button 
         mat-icon-button 
-        color="accent">
+        color="accent"
+        matTooltip="visualizar consulta"
+        (click)="visualizar(consulta)">
 
         <mat-icon>visibility</mat-icon>
       </button>
@@ -24,6 +26,7 @@
       <button
         mat-icon-button 
         color="primary"
+        matTooltip="editar consulta"
         routerLink='/consultas/editar/{{consulta.id}}'>
   
         <mat-icon>edit</mat-icon>
@@ -32,6 +35,7 @@
       <button
         mat-icon-button 
         color="primary"
+        matTooltip="excluir consulta"
         (click)="excluir(consulta)">
 
         <mat-icon>delete</mat-icon>

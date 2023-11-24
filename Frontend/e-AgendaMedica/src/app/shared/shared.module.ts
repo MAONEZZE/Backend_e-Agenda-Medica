@@ -57,6 +57,7 @@ import {MatSelectModule} from '@angular/material/select';
     ReactiveFormsModule,
     MatOptionModule,
     MatSelectModule, 
+    MatDialogModule,
   ],
 })
 export class SharedModule { }

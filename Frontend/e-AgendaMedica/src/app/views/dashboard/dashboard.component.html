@@ -1,4 +1,4 @@
-<section>
+<div class="container">
   <mat-card class="borda-estilizada">
     <mat-card-header class="centralizar">
       <mat-card-title class="fs-2 mt-2">e-Agenda Medica</mat-card-title>
@@ -6,9 +6,10 @@
 
     <mat-card-content class="mt-3">
       <mat-divider></mat-divider>
-      <div class="centralizar">
-        <div class="col-6">
-          <p class="mt-3 fs-6">
+
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <p class="mt-3 texto fs-5 lh-base">
             O <span class="cor-texto fw-semibold">e-Agenda</span> é uma plataforma projetada 
             para otimizar a organização 
             da sua rotina diária, oferecendo ferramentas para facilitar 
@@ -21,6 +22,9 @@
             produtiva e conveniente.
           </p>
         </div>
+        <div class="col-lg-6 col-sm-12 mt-3 centralizar">
+          <img src="../../../assets/img_dashboard.svg" class="w-75">
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
@@ -29,29 +33,29 @@
     <h2 class="cor-texto">O que você deseja Gerenciar?</h2>
   </div>
 
-  <div class="row gy-4 d-flex justify-content-center">
-    <div class="col-3 col-sm-6 col-lg-3">
-      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/medicos/listar">
-        Medicos
+  <div class="row gy-4 centralizar">
+    <div class="col-3 col-sm-6 col-lg-3 centralizar" matTooltip="Medicos">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash" mat-button href="/medicos/listar">
+        <mat-icon color="primary" class="icone-btn">medical_services</mat-icon>
       </a>
     </div>
 
-    <div class="col-3 col-sm-6 col-lg-3">
-      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/cirurgias/listar">
-        Cirurgias
+    <div class="col-3 col-sm-6 col-lg-3 centralizar" matTooltip="Cirurgias">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash" mat-button href="/cirurgias/listar">
+        <mat-icon color="primary" class="icone-btn">vaccines</mat-icon>
       </a>
     </div>
 
-    <div class="col-3 col-sm-6 col-lg-3">
-      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/consultas/listar">
-        Consultas
+    <div class="col-3 col-sm-6 col-lg-3" matTooltip="Consultas">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash" mat-button href="/consultas/listar">
+        <mat-icon color="primary" class="icone-btn">fact_check</mat-icon>
       </a>
     </div>
 
-    <div class="col-3 col-sm-6 col-lg-3">
-      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash fs-4" mat-button href="/pacientes/listar">
-        Pacientes
+    <div class="col-3 col-sm-6 col-lg-3 centralizar" matTooltip="Pacientes">
+      <a role="button" appCardHover class="w-100 borda-estilizada botao-dash" mat-button href="/pacientes/listar">
+        <mat-icon color="primary" class="icone-btn">personal_injury</mat-icon>
       </a>
     </div>
   </div>
-</section>
+</div>
