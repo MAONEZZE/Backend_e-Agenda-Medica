@@ -235,5 +235,21 @@ namespace eAgendaMedica.TestesUnitarios
             disponivel.Should().Be(false);
         }
 
+        [TestMethod]
+        public void Deve_inserir_novaConsulta_30min_antes_da_cirurgia()
+        {
+            //Arrange
+            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente);
+            medico.AdicionarCirurgia(cirurgia1);
+
+            //Action
+            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(01, 00, 00), new TimeSpan(1, 00, 00), paciente, medico);
+
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
+
+            //Assert
+            disponivel.Should().Be(true);
+        }
+
     }
 }

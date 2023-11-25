@@ -4,11 +4,10 @@ import { FloatLabelType } from '@angular/material/form-field';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ListarMedicoVM } from '../../medico/models/listar-medico.view-model';
-import { MedicoService } from '../../medico/services/medico.service';
 import { ListarPacienteVM } from '../../paciente/models/listar-paciente.view-model';
-import { PacienteService } from '../../paciente/services/paciente.service';
 import { FormConsultaVM } from '../models/form-consulta.view-model';
 import { ConsultaService } from '../services/consulta.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-consulta',
@@ -18,8 +17,8 @@ import { ConsultaService } from '../services/consulta.service';
 export class EditarConsultaComponent {
   form!: FormGroup;
 
-  pacientes!: ListarPacienteVM[];
-  medicos!: ListarMedicoVM[];
+  pacientes!: Observable<ListarPacienteVM[]>;
+  medicos!: Observable<ListarMedicoVM[]>;
 
   consultaVM!: FormConsultaVM;
 
@@ -30,26 +29,24 @@ export class EditarConsultaComponent {
     private consultaService: ConsultaService,
     private toastrService: ToastrService,
     private router: Router,
-    private pacienteService: PacienteService, 
-    private medicoService: MedicoService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const consulta = this.route.snapshot.data['consulta'];
+    const consulta = this.route.data.pipe(map(x => x['consulta']));
+
+    this.medicos = this.route.data.pipe(map(x => x['medicos']));
+    this.pacientes = this.route.data.pipe(map(x => x['pacientes']));
 
     this.form = this.formBuilder.group({
       titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
-      data: new FormControl(consulta.data, [Validators.required]),
+      data: new FormControl(null, [Validators.required]),
       horaInicio: new FormControl('00:00', [Validators.required]),
       horaTermino: new FormControl('00:00', [Validators.required]),
-      id_medico: new FormControl('', [Validators.required]),
+      id_Medico: new FormControl(null, [Validators.required]),
     });
 
-    this.medicoService.selecionarTodos().subscribe(medicos => this.medicos = medicos);
-    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes);
-
-    this.form.patchValue(consulta);
+    consulta.subscribe(x => this.form.patchValue(x))
   }
 
   getFloatLabelValue(): FloatLabelType {

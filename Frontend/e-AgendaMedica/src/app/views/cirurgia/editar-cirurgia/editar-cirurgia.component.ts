@@ -9,6 +9,7 @@ import { ListarPacienteVM } from '../../paciente/models/listar-paciente.view-mod
 import { PacienteService } from '../../paciente/services/paciente.service';
 import { FormCirurgiaVM } from '../models/form-cirurgia.view-model';
 import { CirurgiaService } from '../services/cirurgia.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-cirurgia',
@@ -17,8 +18,8 @@ import { CirurgiaService } from '../services/cirurgia.service';
 })
 export class EditarCirurgiaComponent implements OnInit{
   form!: FormGroup;
-  pacientes!: ListarPacienteVM[];
-  medicos!: ListarMedicoVM[];
+  pacientes!: Observable<ListarPacienteVM[]>;
+  medicos!: Observable<ListarMedicoVM[]>;
   cirurgiaVM!: FormCirurgiaVM;
 
   datePicker!: Date;
@@ -30,26 +31,25 @@ export class EditarCirurgiaComponent implements OnInit{
     private cirurgiaService: CirurgiaService,
     private toastrService: ToastrService,
     private router: Router,
-    private pacienteService: PacienteService, 
-    private medicoService: MedicoService,
     private route: ActivatedRoute) { }
     
   ngOnInit(): void {
-    const cirurgia = this.route.snapshot.data['cirurgia'];
+    const cirurgia = this.route.data.pipe(map(x => x['cirurgia']));
+
+    this.medicos = this.route.data.pipe(map(x => x['medicos']));
+    this.pacientes = this.route.data.pipe(map(x => x['pacientes']));
 
     this.form = this.formBuilder.group({
       titulo: new FormControl('', [Validators.required, Validators.minLength(5)]),
       paciente_id: new FormControl('', [Validators.required]),
-      data: new FormControl(cirurgia.data, [Validators.required]),
+      data: new FormControl(null, [Validators.required]),
       horaInicio: new FormControl('00:00', [Validators.required]),
       horaTermino: new FormControl('00:00', [Validators.required]),
-      id_medicos: new FormControl([], [Validators.required]),
+      id_Medicos: new FormControl(null, [Validators.required]),
     });
 
-    this.medicoService.selecionarTodos().subscribe(medicos => this.medicos = medicos);
-    this.pacienteService.selecionarTodos().subscribe(pacientes => this.pacientes = pacientes);
+    cirurgia.subscribe(x => this.form.patchValue(x))
 
-    this.form.patchValue(cirurgia);
   }
 
   getFloatLabelValue(): FloatLabelType {

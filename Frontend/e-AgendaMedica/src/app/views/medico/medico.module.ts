@@ -9,6 +9,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CardComponent } from './card/card.component';
 import { DialogVisualizacaoComponent } from './dialog/dialog-visualizacao/dialog-visualizacao.component';
 import { DialogDatasComponent } from './dialog/dialog-datas/dialog-datas.component';
+import { DialogService } from './services/dialog.service';
+import { MedicoService } from './services/medico.service';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { DialogDatasComponent } from './dialog/dialog-datas/dialog-datas.compone
     CommonModule,
     MedicoRoutingModule,
     SharedModule,
-  ]
+  ],
+  providers: [DialogService, MedicoService]
 })
 export class MedicoModule { }

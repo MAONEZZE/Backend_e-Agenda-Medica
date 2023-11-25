@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormMedicoVM } from '../models/form-medico.view-model';
 import { MedicoService } from '../services/medico.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-medico',
@@ -24,13 +25,15 @@ export class EditarMedicoComponent {
     private route: ActivatedRoute){}
 
   ngOnInit(): void {
+    const medico = this.route.data.pipe(map(x => x['medico']));
+
     this.form = this.formBuilder.group({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       cpf: new FormControl('', [Validators.required]),
       crm: new FormControl('', [Validators.required]),
     });
 
-    const medico = this.route.snapshot.data['medico'];
+    this.form.patchValue(medico);
   }
 
   getFloatLabelValue(): FloatLabelType {

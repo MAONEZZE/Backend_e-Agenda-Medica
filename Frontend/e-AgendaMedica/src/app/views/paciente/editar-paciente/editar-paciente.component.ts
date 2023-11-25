@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FormPacienteVM } from '../models/form-paciente.view-model';
 import { PacienteService } from '../services/paciente.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-editar-paciente',
@@ -25,14 +26,14 @@ export class EditarPacienteComponent {
     private route: ActivatedRoute){}
 
   ngOnInit(): void {
-    const paciente = this.route.snapshot.data['paciente'];
+    const paciente = this.route.data.pipe(map(x => x['paciente']));
     
     this.form = this.formBuilder.group({
       nome: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       telefone: new FormControl('', [Validators.required]),
       cpf: new FormControl('', [Validators.required]),
-      dataNascimento: new FormControl(paciente.data, [Validators.required]),
+      dataNascimento: new FormControl(null, [Validators.required]),
     });
 
     this.form.patchValue(paciente);

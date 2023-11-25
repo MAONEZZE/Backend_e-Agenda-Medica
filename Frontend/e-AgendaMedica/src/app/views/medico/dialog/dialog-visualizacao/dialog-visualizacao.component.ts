@@ -24,7 +24,8 @@ export class DialogVisualizacaoComponent {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.width = '300px';
+    dialogConfig.maxHeight = '294x';
 
-    this.dialogRef.updateSize(dialogConfig.width);
+    this.dialogRef.updateSize(dialogConfig.width, dialogConfig.maxHeight);
   } 
 }

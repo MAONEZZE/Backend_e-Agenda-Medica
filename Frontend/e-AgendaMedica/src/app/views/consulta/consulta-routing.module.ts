@@ -7,6 +7,8 @@ import { ConsultaService } from './services/consulta.service';
 import { ListarPacienteVM } from '../paciente/models/listar-paciente.view-model';
 import { FormConsultaVM } from './models/form-consulta.view-model';
 import { VisualizarConsultaVM } from './models/visualizar-consulta.view-model';
+import { listarMedicoResolver } from '../medico/medico-routing.module';
+import { listarPacienteResolver } from '../paciente/paciente-routing.module';
 
 const listarConsultaResolver: ResolveFn<ListarPacienteVM[]> = () => {
   return inject(ConsultaService).selecionarTodos();
@@ -38,7 +40,9 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: EditarConsultaComponent,
-    resolve: { consulta: formConsultaResolver }
+    resolve: { consulta: formConsultaResolver,
+      medicos: listarMedicoResolver, 
+      pacientes: listarPacienteResolver  }
   },
   // {
   //   path: 'excluir/:id',

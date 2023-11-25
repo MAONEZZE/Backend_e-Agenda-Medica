@@ -4,8 +4,9 @@ import { Observable, map } from 'rxjs';
 import { ListarCirurgiaVM } from '../models/listar-cirurgia.view-model';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Overlay } from '@angular/cdk/overlay';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
 import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
 
@@ -17,20 +18,23 @@ import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialo
 export class ListarCirurgiaComponent implements OnInit{
   cirurgias$!: Observable<ListarCirurgiaVM[]>;
 
-  constructor(private cirurgiaService: CirurgiaService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
+  constructor(private overlay: Overlay, private cirurgiaService: CirurgiaService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
 
   ngOnInit(): void {
     this.cirurgias$ = this.route.data.pipe(map((dados) => dados['cirurgias']));
   }
 
   visualizar(cirurgia: ListarCirurgiaVM){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.block();
+
     this.cirurgiaService.selecionarCirurgiaCompletaPorId(cirurgia.id).subscribe((cirurgiaRes) => {
-      this.dialog.open(DialogVisualizacaoComponent, {
-        data: { 
-          registro: cirurgiaRes
-        }
-      });
-    })
+
+      dialogConfig.data = { registro: cirurgiaRes }
+
+      this.dialog.open(DialogVisualizacaoComponent, dialogConfig);
+    });
   }
 
   excluir(cirurgia: ListarCirurgiaVM){

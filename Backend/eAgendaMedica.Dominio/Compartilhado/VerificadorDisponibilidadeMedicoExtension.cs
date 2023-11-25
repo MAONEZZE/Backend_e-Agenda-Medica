@@ -84,9 +84,6 @@ namespace eAgendaMedica.Dominio.Compartilhado
 
                     //verifica se tem tempo de recuperação suficiente
 
-
-
-
                     if (Math.Abs((atividadeNovaDataHoraHoraInicio - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
                     {
                         disponivel = false;

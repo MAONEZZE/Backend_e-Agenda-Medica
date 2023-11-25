@@ -9,7 +9,6 @@ import { InserirPacienteComponent } from './inserir-paciente/inserir-paciente.co
 import { ListarPacienteComponent } from './listar-paciente/listar-paciente.component';
 import { PacienteService } from './services/paciente.service';
 import { DialogVisualizacaoComponent } from './dialog/dialog-visualizacao/dialog-visualizacao.component';
-import { DialogVisualizarService } from './services/dialog-visualizar.service';
 
 
 @NgModule({
@@ -25,6 +24,6 @@ import { DialogVisualizarService } from './services/dialog-visualizar.service';
     PacienteRoutingModule,
     SharedModule
   ],
-  providers: [PacienteService, DialogVisualizarService]
+  providers: [PacienteService]
 })
 export class PacienteModule { }

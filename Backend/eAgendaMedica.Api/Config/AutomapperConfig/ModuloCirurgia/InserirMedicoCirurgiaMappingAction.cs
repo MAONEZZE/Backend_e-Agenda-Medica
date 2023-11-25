@@ -16,6 +16,8 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia
 
         public void Process(FormCirurgiaViewModel cirurgiaVM, Cirurgia cirurgia, ResolutionContext ctx)
         {
+            cirurgia.Medicos.Clear();
+
             var listaMed = repMedico.SelecionarMuitosAsync(cirurgiaVM.Id_Medicos).Result;
 
             cirurgia.Medicos.AddRange(listaMed);

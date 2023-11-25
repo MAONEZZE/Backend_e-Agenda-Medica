@@ -11,7 +11,7 @@
     <h3>Hora Início: {{ data.registro.horaInicio }}</h3>
     <h3>Hora Término: {{ data.registro.horaTermino }}</h3>
 
-    <div *ngIf="data.registro.pacienteAtributo == undefined || data.registro.pacienteAtributo == null">
+    <div *ngIf="data.registro.pacienteAtributo != undefined || data.registro.pacienteAtributo != null">
       <mat-divider class="mb-3"></mat-divider>
       <span class="fs-6">Paciente:</span>
 

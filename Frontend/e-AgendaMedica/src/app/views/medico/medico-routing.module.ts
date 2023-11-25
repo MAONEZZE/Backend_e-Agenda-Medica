@@ -8,7 +8,7 @@ import { FormMedicoVM } from './models/form-medico.view-model';
 import { ListarMedicoVM } from './models/listar-medico.view-model';
 import { VisualizarMedicoVM } from './models/visualizar-medico.view-model';
 
-const listarMedicoResolver: ResolveFn<ListarMedicoVM[]> = () => {
+export const listarMedicoResolver: ResolveFn<ListarMedicoVM[]> = () => {
   return inject(MedicoService).selecionarTodos();
 };
 

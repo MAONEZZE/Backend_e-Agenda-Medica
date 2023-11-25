@@ -8,7 +8,7 @@ import { PacienteService } from './services/paciente.service';
 import { FormPacienteVM } from './models/form-paciente.view-model';
 import { VisualizarPacienteVM } from './models/visualizar-paciente.view-model';
 
-const listarPacienteResolver: ResolveFn<ListarPacienteVM[]> = () => {
+export const listarPacienteResolver: ResolveFn<ListarPacienteVM[]> = () => {
   return inject(PacienteService).selecionarTodos();
 };
 

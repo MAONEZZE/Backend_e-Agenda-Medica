@@ -18,14 +18,20 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
         public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
         {
-            var listaMedicos = await base.SelecionarTodosAsync();
+            var listaMedciosRank = new List<Medico>();
+            var listaMedicos = await SelecionarTodosAsync();
 
             foreach(var medico in listaMedicos)
             {
                 medico.HorasTrabalhadasPeriodoTempo(dataInicio, dataFinal);
+
+                if (medico.HorasTotaisTrabalhadasPriodoTempo != TimeSpan.Zero)
+                {
+                    listaMedciosRank.Add(medico);
+                }
             }
 
-            return listaMedicos.OrderByDescending(x => x.HorasTotaisTrabalhadasPriodoTempo).ToList();
+            return listaMedciosRank.OrderByDescending(x => x.HorasTotaisTrabalhadasPriodoTempo).Take(10).ToList();
         }
 
         public override async Task<Medico> SelecionarPorIdAsync(Guid id)

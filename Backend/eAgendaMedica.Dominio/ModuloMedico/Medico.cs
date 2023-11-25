@@ -138,17 +138,17 @@ namespace eAgendaMedica.Dominio.ModuloMedico
 
             foreach (var item in Consultas)
             {
-                if(item.Data <= dataFinal && item.Data >= dataInicio)
+                if(item.Data <= dataFinal.Date && item.Data >= dataInicio.Date)
                 {
-                    horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;
+                    horasTrabalhadas += item.HoraTermino.Hours - item.HoraInicio.Hours;
                 }
             }
 
             foreach (var item in Cirurgias)
             {
-                if (item.Data <= dataFinal && item.Data >= dataInicio)
+                if (item.Data <= dataFinal.Date && item.Data >= dataInicio.Date)
                 {
-                    horasTrabalhadas += item.HoraTermino.Ticks - item.HoraInicio.Ticks;
+                    horasTrabalhadas += item.HoraTermino.Hours - item.HoraInicio.Hours;
                 }
             }
 

@@ -7,6 +7,8 @@ import { CirurgiaService } from './services/cirurgia.service';
 import { VisualizarPacienteVM } from '../paciente/models/visualizar-paciente.view-model';
 import { FormCirurgiaVM } from './models/form-cirurgia.view-model';
 import { ListarCirurgiaVM } from './models/listar-cirurgia.view-model';
+import { listarMedicoResolver } from '../medico/medico-routing.module';
+import { listarPacienteResolver } from '../paciente/paciente-routing.module';
 
 const listarCirurgiaResolver: ResolveFn<ListarCirurgiaVM[]> = () => {
   return inject(CirurgiaService).selecionarTodos();
@@ -39,7 +41,9 @@ const routes: Routes = [
   {
     path: 'editar/:id',
     component: EditarCirurgiaComponent,
-    resolve: { cirurgia: formCirurgiaResolver }
+    resolve: { cirurgia: formCirurgiaResolver, 
+      medicos: listarMedicoResolver, 
+      pacientes: listarPacienteResolver }
   },
   // {
   //   path: 'excluir/:id',

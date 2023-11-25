@@ -1,7 +1,7 @@
 <section class="container">
   <mat-card class="w-50 card-estilo">
     <mat-card-header class="d-flex justify-content-center">
-      <h1 class="fw-bold text-primary">Inserir Nova Consulta</h1>
+      <h1 class="fw-bold text-primary">Editar Consulta</h1>
     </mat-card-header>
 
     <form [formGroup]="form" (ngSubmit)="gravar()" class="espaco-forms">
@@ -21,7 +21,7 @@
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-label>Pacientes</mat-label>
                 <mat-select formControlName="paciente_id">
-                  <mat-option *ngFor="let paciente of pacientes" [value]="paciente.id">
+                  <mat-option *ngFor="let paciente of pacientes | async" [value]="paciente.id">
                     {{ paciente.nome }}
                   </mat-option>
                 </mat-select>
@@ -60,8 +60,8 @@
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-label>Medicos</mat-label>
                 
-                <mat-select formControlName="id_medico">
-                  <mat-option *ngFor="let medico of medicos" [value]="medico.id">
+                <mat-select formControlName="id_Medico">
+                  <mat-option *ngFor="let medico of medicos | async" [value]="medico.id">
                     {{ medico.nome }}
                   </mat-option>
                 </mat-select>

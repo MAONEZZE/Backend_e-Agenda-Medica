@@ -3,7 +3,8 @@ import { ListarConsultaVM } from '../models/listar-consulta.view-model';
 import { Observable, map, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
+import { Overlay } from '@angular/cdk/overlay';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConsultaService } from '../services/consulta.service';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
 import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
@@ -16,19 +17,22 @@ import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialo
 export class ListarConsultaComponent {
   consultas$!: Observable<ListarConsultaVM[]>;
 
-  constructor(private consultaService: ConsultaService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
+  constructor(private overlay: Overlay, private consultaService: ConsultaService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
 
   ngOnInit(): void {
     this.consultas$ = this.route.data.pipe(map((dados) => dados['consultas']));
   }
 
   visualizar(consulta: ListarConsultaVM){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.block();
+    
     this.consultaService.selecionarConsultaCompletaPorId(consulta.id).subscribe((consultaRes) => {
-      this.dialog.open(DialogVisualizacaoComponent, {
-        data: { 
-          registro: consultaRes
-        }
-      });
+
+      dialogConfig.data = { registro: consultaRes }
+
+      this.dialog.open(DialogVisualizacaoComponent, dialogConfig);
     })
   }
 

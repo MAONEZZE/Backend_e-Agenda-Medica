@@ -84,9 +84,9 @@ export class MedicoService {
     );
   }
 
-  public selecionarMedicosMaisTrabalharam(){
+  public selecionarMedicosMaisTrabalharam(data: Date, data2: Date){
     return this.http
-    .get<any>(`${this.url}/medicos-mais-trabalhadores`)
+    .get<any>(`${this.url}/medicos-mais-trabalhadores?dataInicio=${data}&dataFinal=${data2}`)
     .pipe(
       map((res) => res.dados),
       catchError((error: HttpErrorResponse) => this.processarErroHttp(error))

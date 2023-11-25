@@ -3,7 +3,7 @@ export type VisualizarMedicoVM = {
   nome: string;
   cpf: string;
   crm: string;
-  horasTotaisTrabalhadas: Number;
+  horasTotaisTrabalhadas: string;
   titulosConsultas: string[];
   titulosCirurgias: string[];
 }

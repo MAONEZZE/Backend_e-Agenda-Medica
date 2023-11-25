@@ -3,9 +3,10 @@ import { ToastrService } from 'ngx-toastr';
 import { PacienteService } from '../services/paciente.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { Overlay } from '@angular/cdk/overlay';
 import { ListarPacienteVM } from '../models/listar-paciente.view-model';
 import { DialogExcluirComponent } from 'src/app/shared/componentes/dialog-excluir/dialog-excluir.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogVisualizacaoComponent } from '../dialog/dialog-visualizacao/dialog-visualizacao.component';
 import { VisualizarPacienteVM } from '../models/visualizar-paciente.view-model';
 
@@ -17,19 +18,22 @@ import { VisualizarPacienteVM } from '../models/visualizar-paciente.view-model';
 export class ListarPacienteComponent implements OnInit{
   pacientes$!: Observable<ListarPacienteVM[]>;
 
-  constructor(private pacienteService: PacienteService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
+  constructor(private overlay: Overlay, private pacienteService: PacienteService, private toastrService: ToastrService, private route: ActivatedRoute, private dialog: MatDialog){}
 
   ngOnInit(): void {
     this.pacientes$ = this.route.data.pipe(map((dados) => dados['pacientes']));
   }
 
   visualizar(paciente: ListarPacienteVM){
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.scrollStrategy = this.overlay.scrollStrategies.block();
+    
     this.pacienteService.selecionarPacienteCompletoPorId(paciente.id).subscribe((pacienteRes) => {
-      this.dialog.open(DialogVisualizacaoComponent, {
-        data: { 
-          registro: pacienteRes
-        }
-      });
+      dialogConfig.data = { registro: pacienteRes }
+
+      this.dialog.open(DialogVisualizacaoComponent, dialogConfig);
+
     })
   }
 
