@@ -14,6 +14,8 @@ import { ListarMedicoVM } from '../../models/listar-medico.view-model';
 export class DialogDatasComponent {
   medicos!: ListarMedicoVM[];
 
+  dataMaxima: Date = new Date();
+
   dataI!: Date;
   dataT!: Date;
 
@@ -26,6 +28,7 @@ export class DialogDatasComponent {
 
   ngOnInit(): void {
     this.dialogService.onEnviarlista.asObservable().subscribe(x => this.medicos = x);
+
     this.abrirDialog();
   }
 
@@ -48,9 +51,6 @@ export class DialogDatasComponent {
   enviarDatas(){
     let dataInicio = new Date(this.dataI).toISOString();
     let dataTermino = new Date(this.dataT).toISOString();
-
-    console.log(dataInicio)
-    console.log(dataTermino)
 
     this.dialogService.onEnviarData.emit({data1: dataInicio, data2: dataTermino});
   }
