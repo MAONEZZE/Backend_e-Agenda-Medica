@@ -1,5 +1,3 @@
-
-
 using eAgendaMedica.Dominio.Compartilhado;
 using FluentAssertions;
 
@@ -191,11 +189,11 @@ namespace eAgendaMedica.TestesUnitarios
             var consulta1 = new Consulta(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
             medico.AdicionarConsulta(consulta1);
 
-            var consulta2 = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente, medico);
+            var consulta2 = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(17, 00, 00), new TimeSpan(18, 00, 00), paciente, medico);
             medico.AdicionarConsulta(consulta2);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 14, 18), paciente, medico);
+            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 00, 00), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -243,12 +241,48 @@ namespace eAgendaMedica.TestesUnitarios
             medico.AdicionarCirurgia(cirurgia1);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(01, 00, 00), new TimeSpan(1, 00, 00), paciente, medico);
+            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(01, 00, 00), new TimeSpan(1, 30, 00), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
             //Assert
             disponivel.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Nao_Deve_Inserir_uma_consulta_com_horarioFinal_igual_CirurgiaHorarioInicio()
+        {
+            //Arrange
+            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, oitoHoras, paciente);
+            medico.AdicionarCirurgia(cirurgia1);
+
+            //Action
+            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
+
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
+
+            //Assert
+            disponivel.Should().Be(false);
+        }
+
+        [TestMethod]
+        public void Nao_Deve_Inserir_uma_consulta_no_meio_de_duas_cirurgias_com_horarioFinal_igual_CirurgiaHorarioInicio()
+        {
+            //Arrange
+
+            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, quatroHoras, paciente);
+            medico.AdicionarCirurgia(cirurgia1);
+
+            var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), TimeSpan.FromHours(12), TimeSpan.FromHours(13), paciente);
+            medico.AdicionarCirurgia(cirurgia2);
+
+            //Action
+            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), oitoHoras, TimeSpan.FromHours(12), paciente, medico);
+
+            var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
+
+            //Assert
+            disponivel.Should().Be(false);
         }
 
     }

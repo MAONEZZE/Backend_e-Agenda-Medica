@@ -14,23 +14,25 @@ export class CirurgiaService {
   private processarErroHttp(error: HttpErrorResponse){
     let msgErro = '';
 
-    if(error.status == 401){
-      msgErro = 'O usuário não está autorizado. Faça o o login e tente novamente.';
-    }
-    else if(error.status == 400){
-      msgErro = 'Falha na requisição do serviço, verifique se o formulario está correto';
-    }
-    else if(error.status == 404){
-      msgErro = 'Recurso não encontrado';
-    }
-    else if(error.status == 0){
-      msgErro = 'Ocorreu um erro ao processar a requisição.';
-    }
-    else if(error.status == 500){
-      msgErro = 'Ocorreu um erro no servidor.';
+    if(error.error.errors.length == 0){   
+      if(error.status == 401){
+        msgErro = 'O usuário não está autorizado. Faça o o login e tente novamente.';
+      }
+      else if(error.status == 400){
+        msgErro = 'Falha na requisição do serviço, verifique se o formulario está correto';
+      }
+      else if(error.status == 404){
+        msgErro = 'Recurso não encontrado';
+      }
+      else if(error.status == 0){
+        msgErro = 'Ocorreu um erro ao processar a requisição.';
+      }
+      else if(error.status == 500){
+        msgErro = 'Ocorreu um erro no servidor.';
+      }
     }
     else{
-      msgErro = error.error.Errors;
+      msgErro = error.error.errors[0];
     }
 
     return throwError(() => new Error(msgErro));

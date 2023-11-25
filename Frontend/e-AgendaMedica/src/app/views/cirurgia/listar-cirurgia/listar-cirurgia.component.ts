@@ -38,7 +38,6 @@ export class ListarCirurgiaComponent implements OnInit{
   }
 
   excluir(cirurgia: ListarCirurgiaVM){
-    console.log(cirurgia)
     let result = this.dialog.open(DialogExcluirComponent, {
       data: { 
         registro: cirurgia.titulo
@@ -47,7 +46,6 @@ export class ListarCirurgiaComponent implements OnInit{
 
     result.afterClosed().subscribe(res => {
       if(res == true){
-        console.log(res)
         this.cirurgiaService.excluir(cirurgia.id).subscribe({
           next: () => this.processarSucessoExclusao(),
           error: (err) => this.processarFalhaExclusao(err)

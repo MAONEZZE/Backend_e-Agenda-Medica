@@ -50,7 +50,6 @@ export class InserirCirurgiaComponent implements OnInit{
   }
 
   gravar() {
-    console.log(this.form.value)
     if (this.form?.invalid) {
       for (let erro of this.form.validate()) {
         this.toastrService.warning(erro);

@@ -13,85 +13,49 @@ namespace eAgendaMedica.Dominio.Compartilhado
     {
         public static bool VerificadorDisponibilidadeMedico<T>(this Medico medico, Atividade<T> atividadeNova)
         {
-            DateTime dataHoraFinal = DateTime.MinValue;
-            DateTime dataHoraInicio = DateTime.MaxValue;
-
-            bool disponivel = true;
+            bool disponivel = false;
 
             foreach (var item in medico.SelecionarAtividades())
             {
                 TimeSpan tempoRecuperacao;
-                DateTime dataHoraFinalExistente;
-                DateTime dataHoraInicioExistente;
+                
 
-                Guid idAtividadeExistente;
+                Guid idAtividadeExistente = Guid.Empty;
 
+                var atvNovaDataHoraTermino = atividadeNova.Data.Add(atividadeNova.HoraTermino);
+                var atvNovaDataHoraInicio = atividadeNova.Data.Add(atividadeNova.HoraInicio);
 
-                if (item is Consulta)
+                DateTime dataHoraInicioExistente = DefinirHoraInicioExistente(item, ref idAtividadeExistente);
+                DateTime dataHoraFinalExistente = DefinirHoraFinalExistente(item);
+
+                bool horariosIguais = dataHoraFinalExistente == atvNovaDataHoraTermino || dataHoraInicioExistente == atvNovaDataHoraInicio;
+                bool horarioCruzado = dataHoraFinalExistente == dataHoraInicioExistente || dataHoraInicioExistente == atvNovaDataHoraTermino;
+
+                if (idAtividadeExistente == atividadeNova.Id)
                 {
-                    Consulta consulta = (Consulta)item;
-
-                    idAtividadeExistente = consulta.Id;
-
-                    tempoRecuperacao = TimeSpan.FromMinutes(20);
-
-                    dataHoraFinalExistente = consulta.Data.Add(consulta.HoraTermino);
-                    dataHoraInicioExistente = consulta.Data.Add(consulta.HoraInicio);
+                    continue;
                 }
-                else
-                {
-                    Cirurgia cirurgia = (Cirurgia)item;
-
-                    idAtividadeExistente = cirurgia.Id;
-
-                    tempoRecuperacao = TimeSpan.FromHours(4);
-
-                    dataHoraFinalExistente = cirurgia.Data.Add(cirurgia.HoraTermino);
-                    dataHoraInicioExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
-                }
-
-                //TODO - refazer a logica a partir daqui | tem que saber o tipo do qeu esta inserindo
-
-                var atividadeNovaDataHoraHoraTermino = atividadeNova.Data.Add(atividadeNova.HoraTermino);
-                var atividadeNovaDataHoraHoraInicio = atividadeNova.Data.Add(atividadeNova.HoraInicio);
-
-                bool idDiferente = idAtividadeExistente != atividadeNova.Id;
-                bool horariosIguais = dataHoraFinalExistente == atividadeNovaDataHoraHoraTermino || dataHoraInicioExistente == atividadeNovaDataHoraHoraInicio;
-
-
-                if (horariosIguais && idDiferente == false)
-                {
-                    break;
-                }
-                else if (horariosIguais && idDiferente)
+                else if (horariosIguais)
                 {
                     disponivel = false;
-                    break;
+                }
+                else if (horarioCruzado)
+                {
+                    disponivel = false;
                 }
                 else
                 {
-                    if (dataHoraFinalExistente > dataHoraFinal && dataHoraFinalExistente <= atividadeNovaDataHoraHoraInicio)
-                    //verifica o maior horario final mais proximo do inicio dessa nova atividade
+                    if(atividadeNova is Cirurgia)
                     {
-                        dataHoraFinal = dataHoraFinalExistente;
+                        disponivel = AtividadeNovaCirurgia(item, atvNovaDataHoraTermino, atvNovaDataHoraInicio, dataHoraInicioExistente, dataHoraFinalExistente);
+                    }
+                    else
+                    {
+                        disponivel = AtividadeNovaConsulta(item, atvNovaDataHoraTermino, atvNovaDataHoraInicio, dataHoraInicioExistente, dataHoraFinalExistente);
                     }
 
-                    if (dataHoraInicioExistente < dataHoraInicio && dataHoraInicioExistente >= atividadeNovaDataHoraHoraTermino)
-                    //verifica o menor horario inicial mais proximo do final dessa nova atividade
+                    if (disponivel == false)
                     {
-                        dataHoraInicio = dataHoraInicioExistente;
-                    }
-
-                    //verifica se tem tempo de recuperação suficiente
-
-                    if (Math.Abs((atividadeNovaDataHoraHoraInicio - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
-                    {
-                        disponivel = false;
-                        break;
-                    }
-                    else if (Math.Abs((atividadeNovaDataHoraHoraTermino - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
-                    {
-                        disponivel = false;
                         break;
                     }
                 }
@@ -99,5 +63,115 @@ namespace eAgendaMedica.Dominio.Compartilhado
 
             return disponivel;
         }
+
+        private static bool AtividadeNovaConsulta(object item, DateTime atvNovaDataHoraTermino, DateTime atvNovaDataHoraInicio, DateTime dataHoraInicioExistente, DateTime dataHoraFinalExistente)
+        {
+            if (atvNovaDataHoraTermino < dataHoraInicioExistente && (dataHoraInicioExistente - atvNovaDataHoraTermino).TotalMinutes >= TimeSpan.FromMinutes(20).TotalMinutes)
+            {
+                return true;
+            }
+            else if (atvNovaDataHoraInicio > dataHoraFinalExistente && item is Cirurgia && (atvNovaDataHoraInicio - dataHoraFinalExistente).TotalMinutes >= TimeSpan.FromHours(4).TotalMinutes)
+            {
+                return true;
+            }
+            else if (atvNovaDataHoraInicio > dataHoraFinalExistente && item is Consulta && (atvNovaDataHoraInicio - dataHoraFinalExistente).TotalMinutes >= TimeSpan.FromMinutes(20).TotalMinutes)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        private static bool AtividadeNovaCirurgia(object item, DateTime atvNovaDataHoraTermino, DateTime atvNovaDataHoraInicio, DateTime dataHoraInicioExistente, DateTime dataHoraFinalExistente)
+        {
+            if (atvNovaDataHoraTermino < dataHoraInicioExistente && (dataHoraInicioExistente - atvNovaDataHoraTermino).TotalMinutes >= TimeSpan.FromHours(4).TotalMinutes)
+            {
+                return true;
+            }
+            else if (atvNovaDataHoraInicio > dataHoraFinalExistente && item is Cirurgia && (atvNovaDataHoraInicio - dataHoraFinalExistente).TotalMinutes >= TimeSpan.FromHours(4).TotalMinutes)
+            {
+                return true;
+            }
+            else if (atvNovaDataHoraInicio > dataHoraFinalExistente && item is Consulta && (atvNovaDataHoraInicio - dataHoraFinalExistente).TotalMinutes >= TimeSpan.FromMinutes(20).TotalMinutes)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private static DateTime DefinirHoraFinalExistente(object item)
+        {
+            DateTime dataHoraFinalExistente;
+
+            if (item is Consulta)
+            {
+                Consulta consulta = (Consulta)item;
+                dataHoraFinalExistente = consulta.Data.Add(consulta.HoraTermino);
+            }
+            else
+            {
+                Cirurgia cirurgia = (Cirurgia)item;
+                dataHoraFinalExistente = cirurgia.Data.Add(cirurgia.HoraTermino);
+            }
+
+            return dataHoraFinalExistente;
+        }
+
+        private static DateTime DefinirHoraInicioExistente(object item, ref Guid idAtividadeExistente)
+        {
+            DateTime dataHoraInicioExistente;
+
+            if (item is Consulta)
+            {
+                Consulta consulta = (Consulta)item;
+
+                idAtividadeExistente = consulta.Id;
+
+                dataHoraInicioExistente = consulta.Data.Add(consulta.HoraInicio);
+            }
+            else
+            {
+                Cirurgia cirurgia = (Cirurgia)item;
+
+                idAtividadeExistente = cirurgia.Id;
+
+                dataHoraInicioExistente = cirurgia.Data.Add(cirurgia.HoraInicio);
+            }
+
+            return dataHoraInicioExistente;
+        }
     }
 }
+
+
+
+
+
+
+
+//if (dataHoraFinalExistente >= dataHoraFinal)
+////verifica o maior horario final de uma atividade existente mais proximo do inicio dessa nova atividade
+//{
+//    dataHoraFinal = dataHoraFinalExistente;
+//}
+
+//if (dataHoraInicioExistente <= dataHoraInicio)
+////verifica o menor horario inicial de uma atividade existente mais proximo do final dessa nova atividade
+//{
+//    dataHoraInicio = dataHoraInicioExistente;
+//}
+
+////verifica se tem tempo de recuperação suficiente
+
+//if (Math.Abs((atividadeNovaDataHoraInicio - dataHoraFinal).Ticks) < tempoRecuperacao.Ticks)
+//{
+//    disponivel = false;
+//    break;
+//}
+//else if (Math.Abs((atividadeNovaDataHoraTermino - dataHoraInicio).Ticks) < tempoRecuperacao.Ticks)
+//{
+//    disponivel = false;
+//    break;
+//}
