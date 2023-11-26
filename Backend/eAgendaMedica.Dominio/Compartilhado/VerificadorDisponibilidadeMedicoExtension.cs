@@ -15,6 +15,11 @@ namespace eAgendaMedica.Dominio.Compartilhado
         {
             bool disponivel = false;
 
+            if(medico.Consultas.Count == 0 && medico.Cirurgias.Count == 0)
+            {
+                return true;
+            }
+
             foreach (var item in medico.SelecionarAtividades())
             {
                 TimeSpan tempoRecuperacao;
@@ -52,11 +57,6 @@ namespace eAgendaMedica.Dominio.Compartilhado
                     else
                     {
                         disponivel = AtividadeNovaConsulta(item, atvNovaDataHoraTermino, atvNovaDataHoraInicio, dataHoraInicioExistente, dataHoraFinalExistente);
-                    }
-
-                    if (disponivel == false)
-                    {
-                        break;
                     }
                 }
             }

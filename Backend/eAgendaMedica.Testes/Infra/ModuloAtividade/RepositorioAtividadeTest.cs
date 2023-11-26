@@ -2,6 +2,7 @@
 using eAgendaMedica.Infra.Compartilhado;
 using eAgendaMedica.Infra.ModuloCirurgia;
 using eAgendaMedica.Infra.ModuloConsulta;
+using eAgendaMedica.Infra.ModuloMedico;
 using eAgendaMedica.Infra.ModuloPaciente;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -13,6 +14,8 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
     {
         private RepositorioCirurgia repCirurgia;
         private RepositorioConsulta repConsulta;
+        private Medico medico;
+        private Paciente paciente;
 
         private eAgendaMedicaDbContext dbCtx;
         private IDbContextTransaction transaction;
@@ -28,7 +31,19 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             repCirurgia = new RepositorioCirurgia(dbCtx);
             repConsulta = new RepositorioConsulta(dbCtx);
 
-            transaction = dbCtx.Database.BeginTransaction();
+            var repPaciente = new RepositorioPaciente(dbCtx);
+            var repMedico = new RepositorioMedico(dbCtx);
+
+            transaction = dbCtx.Database.BeginTransaction();//permite que vc faça alterações no banco de dados
+
+            BuilderSetup.SetCreatePersistenceMethod<Cirurgia>(async cirurgia => await repCirurgia.InserirAsync(cirurgia));
+            BuilderSetup.SetCreatePersistenceMethod<Consulta>(async consulta => await repConsulta.InserirAsync(consulta));
+
+            BuilderSetup.SetCreatePersistenceMethod<Paciente>(async paciente => await repPaciente.InserirAsync(paciente));
+            BuilderSetup.SetCreatePersistenceMethod<Medico>(async medico => await repMedico.InserirAsync(medico));
+
+            paciente = Builder<Paciente>.CreateNew().Persist();
+            medico = Builder<Medico>.CreateNew().Persist();
         }
 
         [TestCleanup]
@@ -41,37 +56,42 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         }
 
         [TestMethod]
-        public void Deve_adicionar_uma_Cirurgia()
+        public async Task Deve_adicionar_uma_Cirurgia()
         {
-            var cirurgia = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
 
-            repCirurgia.SelecionarPorIdAsync(cirurgia.Id).Should().Be(cirurgia);
+            await dbCtx.SaveChangesAsync();
+
+            var cirurgia1 = await repCirurgia.SelecionarPorIdAsync(cirurgia.Id);
+
+            cirurgia1.Should().Be(cirurgia);
         }
 
         [TestMethod]
-        public void Deve_adicionar_uma_Consulta()
+        public async Task Deve_adicionar_uma_Consulta()
         {
-            var consulta = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
-            repConsulta.SelecionarPorIdAsync(consulta.Id).Should().Be(consulta);
+            var consulta1 = await repConsulta.SelecionarPorIdAsync(consulta.Id);
+
+            consulta1.Should().Be(consulta);
         }
 
         [TestMethod]
         public async Task Deve_editar_um_Cirurgia()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
-            var cirurgia2 = await repCirurgia.SelecionarPorIdAsync(consulta1.Id);
+            var cirurgia2 = await repCirurgia.SelecionarPorIdAsync(cirurgia1.Id);
 
             cirurgia2.Titulo = "bariatrica";
             cirurgia2.HoraInicio = new TimeSpan(02, 00, 00);
             cirurgia2.HoraTermino = new TimeSpan(04, 00, 00);
 
             repCirurgia.Editar(cirurgia2);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repCirurgia.SelecionarTodosAsync();
 
@@ -82,17 +102,17 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_editar_um_Consulta()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
-            var consulta2 = await repCirurgia.SelecionarPorIdAsync(consulta1.Id);
+            var consulta2 = await repConsulta.SelecionarPorIdAsync(consulta1.Id);
 
             consulta2.Titulo = "consulta de rotina";
             consulta2.HoraInicio = new TimeSpan(02, 00, 00);
             consulta2.HoraTermino = new TimeSpan(04, 00, 00);
 
-            repCirurgia.Editar(consulta2);
-            dbCtx.SaveChanges();
+            repConsulta.Editar(consulta2);
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repConsulta.SelecionarTodosAsync();
 
@@ -103,13 +123,13 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_excluir_uma_cirurgia()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var cirugiaSelecionado = await repCirurgia.SelecionarPorIdAsync(cirurgia1.Id);
 
             repCirurgia.Excluir(cirugiaSelecionado);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repCirurgia.SelecionarTodosAsync();
 
@@ -119,13 +139,13 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_excluir_uma_consulta()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var consultaSelecionado = await repConsulta.SelecionarPorIdAsync(consulta1.Id);
 
             repConsulta.Excluir(consultaSelecionado);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repConsulta.SelecionarTodosAsync();
 
@@ -135,8 +155,8 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_por_ID_uma_cirurgia()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var cirurgiaSelecionado = await repCirurgia.SelecionarPorIdAsync(cirurgia1.Id);
 
@@ -146,8 +166,8 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_por_ID_uma_consulta()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var consultaSelecionado = await repConsulta.SelecionarPorIdAsync(consulta1.Id);
 
@@ -157,14 +177,11 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_todos_os_cirurgias()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia2 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia3 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia4 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia2 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia3 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia4 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repCirurgia.SelecionarTodosAsync();
 
@@ -174,14 +191,11 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_todos_os_consultas()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta2 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta3 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta4 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta2 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta3 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta4 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repConsulta.SelecionarTodosAsync();
 
@@ -191,16 +205,14 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_cirurgias_para_hoje()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia2 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia3 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia2 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia3 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
 
             cirurgia1.Data = new DateTime(2023, 11, 26);
             cirurgia2.Data = new DateTime(2023, 11, 10);
             cirurgia3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repCirurgia.SelecionarCirurgiasParaHoje();
 
@@ -210,16 +222,14 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_consultas_para_hoje()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta2 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta3 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta2 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta3 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
 
             consulta1.Data = new DateTime(2023, 11, 26);
             consulta2.Data = new DateTime(2023, 11, 10);
             consulta3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repConsulta.SelecionarConsultasParaHoje();
 
@@ -229,16 +239,14 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_cirurgias_passadas()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia2 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia3 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia2 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia3 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
 
             cirurgia1.Data = new DateTime(2023, 11, 26);
             cirurgia2.Data = new DateTime(2023, 11, 10);
             cirurgia3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repCirurgia.SelecionarCirurgiasPassadas();
 
@@ -248,16 +256,15 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_consultas_passadas()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta2 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta3 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta2 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta3 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            
             consulta1.Data = new DateTime(2023, 11, 26);
             consulta2.Data = new DateTime(2023, 11, 10);
             consulta3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
+
 
             var lista = await repConsulta.SelecionarConsultasPassadas();
 
@@ -267,16 +274,15 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_cirurgias_futuras()
         {
-            var cirurgia1 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia2 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var cirurgia3 = Builder<Cirurgia>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-
+            var cirurgia1 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia2 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var cirurgia3 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
+            
             cirurgia1.Data = new DateTime(2023, 11, 26);
             cirurgia2.Data = new DateTime(2023, 11, 10);
             cirurgia3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
+
 
             var lista = await repCirurgia.SelecionarCirurgiasFuturas();
 
@@ -286,22 +292,19 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestMethod]
         public async Task Deve_selecionar_consultas_futuras()
         {
-            var consulta1 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta2 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
-            var consulta3 = Builder<Consulta>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            var consulta1 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta2 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
+            var consulta3 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
 
             consulta1.Data = new DateTime(2023, 11, 26);
             consulta2.Data = new DateTime(2023, 11, 10);
             consulta3.Data = new DateTime(2023, 12, 20);
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repConsulta.SelecionarConsultasFuturas();
 
             lista.Count.Should().Be(1);
         }
-
 
         public void Dispose()
         {

@@ -26,24 +26,26 @@ namespace eAgendaMedica.Dominio.ModuloCirurgia
             this.Medicos = new List<Medico>();
         }
 
-        public Cirurgia(Guid id, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo) : this()
+        public Cirurgia(Guid id, string titulo, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo) : this()
         {
             Id = id;
+            Titulo = titulo;
             Data = data;
             HoraInicio = horainicio;
             HoraTermino = horatermino;
             PacienteAtributo = pacienteatributo;
         }
 
-        public Cirurgia(DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo) : this()
+        public Cirurgia(string titulo, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo) : this()
         {
+            Titulo = titulo;
             Data = data;
             HoraInicio = horainicio;
             HoraTermino = horatermino;
             PacienteAtributo = pacienteatributo;
         }
 
-        public void AdicioanrMedico(Medico medico)
+        public void AdicionarMedicos(Medico medico)
         {
             this.Medicos.Add(medico);
         }

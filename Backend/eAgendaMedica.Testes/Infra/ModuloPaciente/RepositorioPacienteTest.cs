@@ -24,6 +24,8 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
             repPaciente = new RepositorioPaciente(dbCtx);
 
             transaction = dbCtx.Database.BeginTransaction();
+
+            BuilderSetup.SetCreatePersistenceMethod<Paciente>(async paciente => await repPaciente.InserirAsync(paciente));
         }
 
         [TestCleanup]
@@ -36,19 +38,21 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
         }
 
         [TestMethod]
-        public void Deve_adicionar_um_paciente()
+        public async Task Deve_adicionar_um_paciente()
         {
             var paciente = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
-            repPaciente.SelecionarPorIdAsync(paciente.Id).Should().Be(paciente);
+            var paciente1 = await repPaciente.SelecionarPorIdAsync(paciente.Id);
+
+            paciente1.Should().Be(paciente);
         }
 
         [TestMethod]
         public async Task Deve_editar_um_paciente()
         {
             var paciente1 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var paciente2 = await repPaciente.SelecionarPorIdAsync(paciente1.Id);
             paciente2.Nome = "Marcos";
@@ -58,7 +62,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
             paciente2.DataNascimento = new DateTime(2020, 07, 02);
 
             repPaciente.Editar(paciente2);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repPaciente.SelecionarTodosAsync();
 
@@ -70,12 +74,12 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
         public async Task Deve_excluir_um_paciente()
         {
             var paciente1 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var pacienteSelecionado = await repPaciente.SelecionarPorIdAsync(paciente1.Id);
 
             repPaciente.Excluir(pacienteSelecionado);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repPaciente.SelecionarTodosAsync();
 
@@ -86,7 +90,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
         public async Task Deve_selecionar_por_ID_um_paciente()
         {
             var paciente1 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var pacienteSelecionado = await repPaciente.SelecionarPorIdAsync(paciente1.Id);
 
@@ -97,13 +101,13 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
         public async Task Deve_selecionar_todos_os_pacientes()
         {
             var paciente1 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+
             var paciente2 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+
             var paciente3 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+
             var paciente4 = Builder<Paciente>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repPaciente.SelecionarTodosAsync();
 

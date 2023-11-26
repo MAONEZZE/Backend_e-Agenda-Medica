@@ -1,4 +1,6 @@
-﻿namespace eAgendaMedica.Testes.Dominio.ModuloAtividade
+﻿using Moq;
+
+namespace eAgendaMedica.Testes.Dominio.ModuloAtividade
 {
     [TestClass]
     public class AtividadesTest
@@ -24,13 +26,17 @@
             validadorCirurgia = new ValidadorCirurgia();
             validadorConsulta = new ValidadorConsulta();
 
-            consultaInicio_2_Termino_6 = new Consulta(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
-            cirurgiaInicio_2_Termino_6 = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente);
+            consultaInicio_2_Termino_6 = new Consulta("consulta1", new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
+            cirurgiaInicio_2_Termino_6 = new Cirurgia("cirurgia1", new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente);
         }
 
         [TestMethod]
         public void Deve_validar_Consulta()
         {
+            Medico medico1 = new Medico("marcos", "123.123.123-00", "12333-DF");
+
+            consultaInicio_2_Termino_6.AdicionarMedico(medico);
+
             ValidationResult resultado = validadorConsulta.Validate(consultaInicio_2_Termino_6);
 
             resultado.IsValid.Should().BeTrue();
@@ -39,6 +45,10 @@
         [TestMethod]
         public void Deve_validar_Cirurgia()
         {
+            Medico medico1 = new Medico("marcos", "123.123.123-00", "12333-DF");
+
+            cirurgiaInicio_2_Termino_6.AdicionarMedicos(medico1);
+
             ValidationResult resultado = validadorCirurgia.Validate(cirurgiaInicio_2_Termino_6);
 
             resultado.IsValid.Should().BeTrue();
@@ -70,7 +80,7 @@
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -85,7 +95,7 @@
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), duasHoras, oitoHoras, paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), duasHoras, oitoHoras, paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -100,7 +110,7 @@
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), oitoHoras, new TimeSpan(11, 14, 18), paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), oitoHoras, new TimeSpan(11, 14, 18), paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -115,7 +125,7 @@
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, oitoHoras, paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), seisHoras, oitoHoras, paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -130,11 +140,11 @@
             //Arrange
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
-            var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente);
+            var cirurgia2 = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente);
             medico.AdicionarCirurgia(cirurgia2);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia3", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -148,11 +158,11 @@
             //Arrange
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
-            var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente);
+            var cirurgia2 = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente);
             medico.AdicionarCirurgia(cirurgia2);
 
             //Action
-            var cirurgiaMarcada = new Cirurgia(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 14, 18), paciente);
+            var cirurgiaMarcada = new Cirurgia("cirurgia3", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 14, 18), paciente);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Cirurgia>(cirurgiaMarcada);
 
@@ -169,7 +179,7 @@
             medico.AdicionarConsulta(consultaInicio_2_Termino_6);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente, medico);
+            var consultaMarcada = new Consulta("consulta2", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -184,7 +194,7 @@
             medico.AdicionarConsulta(consultaInicio_2_Termino_6);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(6, 14, 18), new TimeSpan(11, 14, 18), paciente, medico);
+            var consultaMarcada = new Consulta("consulta2", new DateTime(2020, 07, 02), new TimeSpan(6, 14, 18), new TimeSpan(11, 14, 18), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -199,11 +209,11 @@
             //Arrange
             medico.AdicionarConsulta(consultaInicio_2_Termino_6);
 
-            var consulta2 = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente, medico);
+            var consulta2 = new Consulta("consulta2", new DateTime(2020, 07, 02), new TimeSpan(17, 14, 18), new TimeSpan(18, 14, 18), paciente, medico);
             medico.AdicionarConsulta(consulta2);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente, medico);
+            var consultaMarcada = new Consulta("consulta3", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(11, 14, 18), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -217,11 +227,11 @@
             //Arrange
             medico.AdicionarConsulta(consultaInicio_2_Termino_6);
 
-            var consulta2 = new Consulta(new DateTime(2020, 07, 02), new TimeSpan(17, 00, 00), new TimeSpan(18, 00, 00), paciente, medico);
+            var consulta2 = new Consulta("consulta2", new DateTime(2020, 07, 02), new TimeSpan(17, 00, 00), new TimeSpan(18, 00, 00), paciente, medico);
             medico.AdicionarConsulta(consulta2);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 00, 00), paciente, medico);
+            var consultaMarcada = new Consulta("consulta3", new DateTime(2020, 07, 02), dezHoras, new TimeSpan(17, 00, 00), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -236,7 +246,7 @@
             medico.AdicionarConsulta(consultaInicio_2_Termino_6);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
+            var consultaMarcada = new Consulta("consulta2", new DateTime(2020, 07, 02), duasHoras, seisHoras, paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -251,7 +261,7 @@
             medico.AdicionarCirurgia(cirurgiaInicio_2_Termino_6);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), oitoHoras, dezHoras, paciente, medico);
+            var consultaMarcada = new Consulta("consulta2", new DateTime(2020, 07, 02), oitoHoras, dezHoras, paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 
@@ -263,7 +273,7 @@
         public void Nao_Deve_Inserir_uma_consulta_com_horarioFinal_igual_CirurgiaHorarioInicio()
         {
             //Arrange
-            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, oitoHoras, paciente);
+            var cirurgia1 = new Cirurgia("cirurgia1", new DateTime(2020, 07, 02), seisHoras, oitoHoras, paciente);
             medico.AdicionarCirurgia(cirurgia1);
 
             //Action
@@ -277,14 +287,14 @@
         public void Nao_Deve_Inserir_uma_consulta_no_meio_de_duas_cirurgias_com_horarioFinal_igual_CirurgiaHorarioInicio()
         {
             //Arrange
-            var cirurgia1 = new Cirurgia(new DateTime(2020, 07, 02), seisHoras, quatroHoras, paciente);
+            var cirurgia1 = new Cirurgia("cirurgia1", new DateTime(2020, 07, 02), seisHoras, quatroHoras, paciente);
             medico.AdicionarCirurgia(cirurgia1);
 
-            var cirurgia2 = new Cirurgia(new DateTime(2020, 07, 02), TimeSpan.FromHours(12), TimeSpan.FromHours(13), paciente);
+            var cirurgia2 = new Cirurgia("cirurgia2", new DateTime(2020, 07, 02), TimeSpan.FromHours(12), TimeSpan.FromHours(13), paciente);
             medico.AdicionarCirurgia(cirurgia2);
 
             //Action
-            var consultaMarcada = new Consulta(new DateTime(2020, 07, 02), oitoHoras, TimeSpan.FromHours(12), paciente, medico);
+            var consultaMarcada = new Consulta("consulta1", new DateTime(2020, 07, 02), oitoHoras, TimeSpan.FromHours(12), paciente, medico);
 
             var disponivel = medico.VerificadorDisponibilidadeMedico<Consulta>(consultaMarcada);
 

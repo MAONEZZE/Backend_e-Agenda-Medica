@@ -17,23 +17,25 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 
         public Consulta() { }
 
-        public Consulta(Guid id, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico) 
+        public Consulta(Guid id, string titulo, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico) 
         {
-            this.Id = id;
-            this.Data = data;
-            this.HoraInicio = horainicio;
-            this.HoraTermino = horatermino;
-            this.PacienteAtributo = pacienteatributo;
-            this.Medico = medico;
+            Id = id;
+            Titulo = titulo;
+            Data = data;
+            HoraInicio = horainicio;
+            HoraTermino = horatermino;
+            PacienteAtributo = pacienteatributo;
+            Medico = medico;
         }
 
-        public Consulta(DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico)
+        public Consulta(string titulo, DateTime data, TimeSpan horainicio, TimeSpan horatermino, Paciente pacienteatributo, Medico medico)
         {
-            this.Data = data;
-            this.HoraInicio = horainicio;
-            this.HoraTermino = horatermino;
-            this.PacienteAtributo = pacienteatributo;
-            this.Medico = medico;
+            Titulo = titulo;
+            Data = data;
+            HoraInicio = horainicio;
+            HoraTermino = horatermino;
+            PacienteAtributo = pacienteatributo;
+            Medico = medico;
         }
 
         public void AdicionarMedico(Medico medico)

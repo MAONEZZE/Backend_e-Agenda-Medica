@@ -23,6 +23,8 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             repMedico = new RepositorioMedico(dbCtx);
 
             transaction = dbCtx.Database.BeginTransaction();
+
+            BuilderSetup.SetCreatePersistenceMethod<Medico>(async medico => await repMedico.InserirAsync(medico));
         }
 
         [TestCleanup]
@@ -35,19 +37,21 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         }
 
         [TestMethod]
-        public void Deve_adicionar_um_medico()
+        public async Task Deve_adicionar_um_medico()
         {
             var medico = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
-            repMedico.SelecionarPorIdAsync(medico.Id).Should().Be(medico);
+            var medico1 = await repMedico.SelecionarPorIdAsync(medico.Id);
+
+            medico1.Should().Be(medico);
         }
 
         [TestMethod]
         public async Task Deve_editar_um_medico()
         {
             var medico1 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var medico2 = await repMedico.SelecionarPorIdAsync(medico1.Id);
             medico2.Nome = "Marcos";
@@ -55,7 +59,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             medico2.Crm = "12344-SC";
 
             repMedico.Editar(medico2);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repMedico.SelecionarTodosAsync();
             lista.Count.Should().Be(1);
@@ -65,12 +69,12 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         public async Task Deve_excluir_um_medico()
         {
             var medico1 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var medicoSelecionado = await repMedico.SelecionarPorIdAsync(medico1.Id);
 
             repMedico.Excluir(medicoSelecionado);
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var lista = await repMedico.SelecionarTodosAsync();
 
@@ -81,7 +85,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         public async Task Deve_selecionar_por_ID_um_medico()
         {
             var medico1 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             var medicoSelecionado = await repMedico.SelecionarPorIdAsync(medico1.Id);
 
@@ -92,13 +96,13 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         public async Task Deve_selecionar_todos_os_medicos()
         {
             var medico1 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico2 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico3 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico4 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
 
             var lista = await repMedico.SelecionarTodosAsync();
@@ -111,13 +115,13 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         public async Task Deve_selecionar_os_medicos_a_partir_de_lista_de_Guid()
         {
             var medico1 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico2 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico3 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
             var medico4 = Builder<Medico>.CreateNew().Persist();
-            dbCtx.SaveChanges();
+            await dbCtx.SaveChangesAsync();
 
             List<Guid> listaIds = new List<Guid>();
 
