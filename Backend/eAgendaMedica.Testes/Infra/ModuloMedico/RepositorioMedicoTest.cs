@@ -88,6 +88,48 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             medicoSelecionado.Should().Be(medico1);
         }
 
+        [TestMethod]
+        public async Task Deve_selecionar_todos_os_medicos()
+        {
+            var medico1 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico2 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico3 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico4 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+
+
+            var lista = await repMedico.SelecionarTodosAsync();
+
+            lista.Count.Should().Be(4);
+
+        }
+
+        [TestMethod]
+        public async Task Deve_selecionar_os_medicos_a_partir_de_lista_de_Guid()
+        {
+            var medico1 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico2 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico3 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+            var medico4 = Builder<Medico>.CreateNew().Persist();
+            dbCtx.SaveChanges();
+
+            List<Guid> listaIds = new List<Guid>();
+
+            listaIds.Add(medico1.Id);
+            listaIds.Add(medico2.Id);
+            listaIds.Add(medico3.Id);
+            listaIds.Add(medico4.Id);
+
+            var lista = await repMedico.SelecionarMuitosAsync(listaIds);
+
+            lista.Count.Should().Be(4);
+        }
 
         public void Dispose()
         {

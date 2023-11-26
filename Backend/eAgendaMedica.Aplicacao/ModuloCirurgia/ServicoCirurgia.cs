@@ -105,7 +105,7 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
 
         public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas()
         {
-            var cirurgias = await repCirurgia.SelecionarCirurgiasFuturasComDataAlvo();
+            var cirurgias = await repCirurgia.SelecionarCirurgiasFuturas();
 
             Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
 
@@ -115,7 +115,7 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
 
         public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas()
         {
-            var cirurgias = await repCirurgia.SelecionarCirurgiasPassadasComDataAlvo();
+            var cirurgias = await repCirurgia.SelecionarCirurgiasPassadas();
 
             Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
 

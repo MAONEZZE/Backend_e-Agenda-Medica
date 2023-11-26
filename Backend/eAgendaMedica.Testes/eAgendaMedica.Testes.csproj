@@ -25,14 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infra\ModuloAtividade\" />
-    <Folder Include="Aplicacao\ModuloMedico\" />
-    <Folder Include="Aplicacao\ModuloAtividade\" />
-    <Folder Include="Aplicacao\ModuloPaciente\" />
-    <Folder Include="Aplicacao\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\eAgendaMedica.Aplicacao\eAgendaMedica.Aplicacao.csproj" />
     <ProjectReference Include="..\eAgendaMedica.Dominio\eAgendaMedica.Dominio.csproj" />
     <ProjectReference Include="..\eAgendaMedica.Infra\eAgendaMedica.Infra.csproj" />

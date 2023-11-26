@@ -105,7 +105,7 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
         public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas()
         {
             
-            var consultas = await repConsulta.SelecionarConsultasFuturasComDataAlvo();
+            var consultas = await repConsulta.SelecionarConsultasFuturas();
 
             Log.Logger.Information("Consultas futuras selecionadas com sucesso!");
 
@@ -116,7 +116,7 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
         public async Task<Result<List<Consulta>>> SelecionarConsultasPassadas()
         {
 
-            var consultas = await repConsulta.SelecionarConsultasPassadasComDataAlvo();
+            var consultas = await repConsulta.SelecionarConsultasPassadas();
 
             Log.Logger.Information("Consultas passadas selecionadas com sucesso!");
 
