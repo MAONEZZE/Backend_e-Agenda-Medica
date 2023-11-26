@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace eAgendaMedica.Infra.Compartilhado
 {
-    public class eAgendaDbContextFactory : IDesignTimeDbContextFactory<eAgendaMedicaDbContext>
+    public class eAgendaMedicaDbContextFactory : IDesignTimeDbContextFactory<eAgendaMedicaDbContext>
     {
         public eAgendaMedicaDbContext CreateDbContext(string[] args)
         {

@@ -29,6 +29,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgendaMedica.TestesIntegra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgendaMedica.Aplicacao", "eAgendaMedica.Aplicacao\eAgendaMedica.Aplicacao.csproj", "{5B7C65F0-BAA0-4576-9870-D3AC1BD50A23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes-2.0", "Testes-2.0", "{08C898AA-F7E2-4799-BEA4-8749C425C6F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.Testes", "eAgendaMedica.Testes\eAgendaMedica.Testes.csproj", "{C4358CDA-BA05-4601-9022-491ABC066E17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{5B7C65F0-BAA0-4576-9870-D3AC1BD50A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B7C65F0-BAA0-4576-9870-D3AC1BD50A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B7C65F0-BAA0-4576-9870-D3AC1BD50A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4358CDA-BA05-4601-9022-491ABC066E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4358CDA-BA05-4601-9022-491ABC066E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4358CDA-BA05-4601-9022-491ABC066E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4358CDA-BA05-4601-9022-491ABC066E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,8 @@ Global
 		{0868F5FB-0543-45CE-9FF5-282E15C64F0F} = {74CD5CDA-3DA9-4E7E-AE10-96538D3C8316}
 		{2A60D66E-2237-44D2-A4AB-0766A81026BF} = {2AEC1101-AD21-4576-89F3-5F67919B6AAA}
 		{5B7C65F0-BAA0-4576-9870-D3AC1BD50A23} = {0430B93A-88C7-44AB-82DD-90298617F586}
+		{08C898AA-F7E2-4799-BEA4-8749C425C6F5} = {31453207-B610-4305-82D6-9375337A3979}
+		{C4358CDA-BA05-4601-9022-491ABC066E17} = {08C898AA-F7E2-4799-BEA4-8749C425C6F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D379FCB3-7E03-4133-B722-0EE9C5CFF00E}
