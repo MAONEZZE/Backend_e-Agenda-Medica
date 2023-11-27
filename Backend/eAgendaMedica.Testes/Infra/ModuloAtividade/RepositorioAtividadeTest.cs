@@ -284,6 +284,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             await dbCtx.SaveChangesAsync();
 
 
+
             var lista = await repCirurgia.SelecionarCirurgiasFuturas();
 
             lista.Count.Should().Be(1);
