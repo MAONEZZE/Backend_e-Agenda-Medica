@@ -49,6 +49,8 @@ export class DialogDatasComponent {
   }
 
   enviarDatas(){
+    this.medicos = [];
+
     let dataInicio = new Date(this.dataI).toISOString();
     let dataTermino = new Date(this.dataT).toISOString();
 

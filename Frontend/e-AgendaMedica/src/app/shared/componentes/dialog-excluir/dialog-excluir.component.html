@@ -22,16 +22,21 @@
   <mat-card-footer>
     <div mat-dialog-actions class="d-flex justify-content-end gap-2">
       <button 
+        appCardHover
+        mat-raised-button
+        color="accent"
         [mat-dialog-close]="true" 
         cdkFocusInitial 
-        class="d-flex btn btn-primary px-2">
+        class="d-flex px-2">
         <mat-icon class="me-1">check</mat-icon>
         Sim
       </button>
 
       <button 
-      mat-dialog-close 
-      class="d-flex btn btn-outline-danger px-2">
+        mat-stroked-button
+        color="primary"
+        mat-dialog-close 
+        class="d-flex px-2">
         <mat-icon class="me-1">keyboard_return</mat-icon>
         Não
       </button>
