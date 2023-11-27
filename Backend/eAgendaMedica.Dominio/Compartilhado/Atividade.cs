@@ -11,9 +11,9 @@ namespace eAgendaMedica.Dominio.Compartilhado
         public DateTime Data { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraTermino { get; set; }
-        public Guid Paciente_id { get; set; }
 
         private Paciente paciente;
+        public Guid Paciente_id { get; set; }
         public Paciente PacienteAtributo
         {
             get

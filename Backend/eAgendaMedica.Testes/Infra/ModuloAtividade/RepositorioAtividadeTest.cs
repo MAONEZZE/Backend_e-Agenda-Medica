@@ -283,8 +283,6 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             cirurgia3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-
-
             var lista = await repCirurgia.SelecionarCirurgiasFuturas();
 
             lista.Count.Should().Be(1);

@@ -5,8 +5,9 @@ namespace eAgendaMedica.Dominio.Compartilhado
 {
     public abstract class EntidadeBase<T>
     {
-        [NotMapped]
         public Guid Id { get; set; }
+        public Usuario Usuario { get; set; }
+        public Guid UsuarioId { get; set; }
 
         public EntidadeBase()
         {

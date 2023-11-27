@@ -21,7 +21,15 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
                 .UsingEntity(x => x.ToTable("TBMedico_Cirurgia"));
 
             builder.HasOne(x => x.PacienteAtributo)
-                .WithMany(x => x.Cirurgias).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
+                .WithMany(x => x.Cirurgias).IsRequired()
+                .HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
+
+            //TODO - para remover o false do isrequired é preciso excluir os registros do banco de dados
+            //TODO - tem fazer um update-database ainda.  
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
