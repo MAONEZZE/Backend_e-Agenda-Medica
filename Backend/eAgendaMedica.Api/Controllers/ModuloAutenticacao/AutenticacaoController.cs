@@ -1,35 +1,68 @@
-﻿using eAgendaMedica.Aplicacao.ModuloAutenticacao;
+﻿using eAgendaMedica.Api.ViewModels.ModuloAutenticacao;
+using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Dominio.ModuloAutenticacao;
+using FluentResults;
+using System.Diagnostics;
 
 namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 {
-    [Route("api/registrar")]
+    [Route("api/autenticar")]
     [ApiController]
     public class AutenticacaoController : ControllerBase
     {
-        private ServicoAutenticacao service;
+        private readonly ServicoAutenticacao service;
+        private readonly IMapper map;
 
-        public AutenticacaoController(ServicoAutenticacao service)
+        public AutenticacaoController(ServicoAutenticacao service, IMapper map)
         {
 
             this.service = service;
-
+            this.map = map;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Registrar()
+        private IActionResult ProcessarResposta(Result<Usuario> resultado, AutenticadorBase usuarioVM = null)
         {
-            var user = new Usuario
+            if (resultado.IsFailed)
             {
-                Nome = "ruan sanchez",
-                Email = "ruan@gmail.com",
-                UserName = "ruan",
-                PasswordHash = "Ruan@123"
-            };
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = resultado.Errors.Select(result => result.Message)
+                });
+            }
 
-            await service.RegistrarAsync(user, user.PasswordHash);
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = usuarioVM
+            });
+        }
 
-            return Ok(user);
+
+        [HttpPost("registrar")]
+        public async Task<IActionResult> Registrar(RegistrarUsuarioViewModel usuarioVM)
+        {
+            var usuario = this.map.Map<Usuario>(usuarioVM);
+
+            var usuarioResult = await service.RegistrarAsync(usuario, usuarioVM.Senha);
+
+            return ProcessarResposta(usuarioResult, usuarioVM);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(AutenticarUsuarioViewModel usuarioVM)
+        {
+            var usuarioResult = await service.LoginAsync(usuarioVM.Login, usuarioVM.Senha);
+
+            return ProcessarResposta(usuarioResult, usuarioVM);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout(AutenticarUsuarioViewModel usuarioVM)
+        {
+            var usuarioResult = await service.LogoutAsync();
+
+            return Ok();
         }
     }
 }

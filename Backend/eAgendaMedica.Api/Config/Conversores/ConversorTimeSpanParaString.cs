@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace eAgendaMedica.Api.Config
+namespace eAgendaMedica.Api.Config.Conversores
 {
     public class ConversorTimeSpanParaString : JsonConverter<TimeSpan>
     {

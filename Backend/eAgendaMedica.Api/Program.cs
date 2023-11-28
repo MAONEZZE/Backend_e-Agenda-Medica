@@ -1,5 +1,6 @@
 using eAgendaMedica.Api.Config;
 using eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado;
+using eAgendaMedica.Api.Config.Excecoes;
 using eAgendaMedica.Api.Filters;
 using eAgendaMedica.Dominio.ModuloAutenticacao;
 using eAgendaMedica.Infra.Compartilhado;
@@ -28,9 +29,13 @@ namespace eAgendaMedica.Api
             builder.Services.ConfigurarSwaggerExtension();
             builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
 
-            builder.Services.AddIdentity<Usuario, IdentityRole<Guid>>()
+            builder.Services.AddIdentity<Usuario, IdentityRole<Guid>>(opt =>
+                {
+                    opt.User.RequireUniqueEmail = true;
+                })
                 .AddEntityFrameworkStores<eAgendaMedicaDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders()
+                .AddErrorDescriber<eAgendaErrorDescriber>();
             //=====================================
 
             //============= Mappers ===============

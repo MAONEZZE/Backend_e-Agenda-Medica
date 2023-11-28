@@ -1,4 +1,5 @@
-﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
+﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloAutenticacao;
+using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloPaciente;
@@ -15,6 +16,7 @@ namespace eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado
                 opt.AddProfile<ConsultaProfile>();
                 opt.AddProfile<MedicoProfile>();
                 opt.AddProfile<PacienteProfile>();
+                opt.AddProfile<UsuarioProfile>();
             });
         }
     }
