@@ -33,7 +33,7 @@ export class EditarMedicoComponent {
       crm: new FormControl('', [Validators.required]),
     });
 
-    this.form.patchValue(medico);
+    medico.subscribe(x => this.form.patchValue(x))
   }
 
   getFloatLabelValue(): FloatLabelType {

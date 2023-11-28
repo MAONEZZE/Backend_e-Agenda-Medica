@@ -36,7 +36,7 @@ export class EditarPacienteComponent {
       dataNascimento: new FormControl(null, [Validators.required]),
     });
 
-    this.form.patchValue(paciente);
+    paciente.subscribe(x => this.form.patchValue(x));
   }
 
   getFloatLabelValue(): FloatLabelType {
