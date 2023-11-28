@@ -405,7 +405,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("PacienteAtributo");
 
@@ -429,7 +430,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Medico");
 
@@ -443,7 +445,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
@@ -453,7 +456,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });

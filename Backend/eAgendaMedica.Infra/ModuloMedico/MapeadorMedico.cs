@@ -23,7 +23,7 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
             builder.HasOne(x => x.Usuario)
                 .WithMany()
-                .IsRequired(false)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }

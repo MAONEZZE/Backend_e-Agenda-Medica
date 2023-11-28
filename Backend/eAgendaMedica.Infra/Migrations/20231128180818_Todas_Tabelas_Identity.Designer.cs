@@ -12,8 +12,8 @@ using eAgendaMedica.Infra.Compartilhado;
 namespace eAgendaMedica.Infra.Migrations
 {
     [DbContext(typeof(eAgendaMedicaDbContext))]
-    [Migration("20231127185750_Configurando_Identity")]
-    partial class Configurando_Identity
+    [Migration("20231128180818_Todas_Tabelas_Identity")]
+    partial class Todas_Tabelas_Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -407,7 +407,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("PacienteAtributo");
 
@@ -431,7 +432,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Medico");
 
@@ -445,7 +447,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });
@@ -455,7 +458,8 @@ namespace eAgendaMedica.Infra.Migrations
                     b.HasOne("eAgendaMedica.Dominio.ModuloAutenticacao.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Usuario");
                 });

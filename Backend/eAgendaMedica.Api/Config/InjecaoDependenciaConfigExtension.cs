@@ -1,11 +1,13 @@
 ﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico;
+using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Aplicacao.ModuloCirurgia;
 using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Aplicacao.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloPaciente;
 using eAgendaMedica.Dominio.Compartilhado;
+using eAgendaMedica.Dominio.ModuloAutenticacao;
 using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloMedico;
@@ -15,6 +17,7 @@ using eAgendaMedica.Infra.ModuloCirurgia;
 using eAgendaMedica.Infra.ModuloConsulta;
 using eAgendaMedica.Infra.ModuloMedico;
 using eAgendaMedica.Infra.ModuloPaciente;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eAgendaMedica.Api.Config
@@ -25,31 +28,33 @@ namespace eAgendaMedica.Api.Config
         {
             string connectionString = config.GetConnectionString("SqlServer");
 
+            //Registrando esse contexto com a interface IContextoPersistencia
+            //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext
             services.AddDbContext<IContextoPersistencia, eAgendaMedicaDbContext>(optionsBuilder => 
             {
                 optionsBuilder.UseSqlServer(connectionString);
             });
 
-            services.AddTransient<InserirMedicoCirurgiaMappingAction>();
-            services.AddTransient<InserirPacienteCirurgiaMappingAction>();
-            services.AddTransient<InserirMedicoConsultaMappingAction>();
-            services.AddTransient<InserirPacienteConsultaMappingAction>();
-
-            //Registrando esse contexto com a interface IContextoPersistencia
-            //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext
-            services.AddTransient<ManipuladorExcecoes>();
-
             services.AddTransient<IRepositorioCirurgia, RepositorioCirurgia>();
+            services.AddTransient<InserirPacienteCirurgiaMappingAction>();
+            services.AddTransient<InserirMedicoCirurgiaMappingAction>();
             services.AddTransient<ServicoCirurgia>();
 
             services.AddTransient<IRepositorioConsulta, RepositorioConsulta>();
+            services.AddTransient<InserirPacienteConsultaMappingAction>();
+            services.AddTransient<InserirMedicoConsultaMappingAction>();
             services.AddTransient<ServicoConsulta>();
 
-            services.AddTransient<IRepositorioMedico, RepositorioMedico>();
+            services.AddTransient<IRepositorioMedico, RepositorioMedico>();  
             services.AddTransient<ServicoMedico>();
 
             services.AddTransient<IRepositorioPaciente, RepositorioPaciente>();
             services.AddTransient<ServicoPaciente>();
+
+            services.AddTransient<ServicoAutenticacao>();
+            services.AddTransient<UserManager<Usuario>>();
+
+            services.AddTransient<ManipuladorExcecoes>();
         }
     }
 }

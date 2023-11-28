@@ -1,6 +1,9 @@
 using eAgendaMedica.Api.Config;
 using eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado;
 using eAgendaMedica.Api.Filters;
+using eAgendaMedica.Dominio.ModuloAutenticacao;
+using eAgendaMedica.Infra.Compartilhado;
+using Microsoft.AspNetCore.Identity;
 
 namespace eAgendaMedica.Api
 {
@@ -14,7 +17,7 @@ namespace eAgendaMedica.Api
 
             builder.Services.Configure<ApiBehaviorOptions>(config =>
             {
-                config.SuppressModelStateInvalidFilter = false;
+                config.SuppressModelStateInvalidFilter = false;//serve para mascarar o erro
             });
 
             //============== Logs =================
@@ -24,6 +27,10 @@ namespace eAgendaMedica.Api
             //============ Extension ==============
             builder.Services.ConfigurarSwaggerExtension();
             builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
+
+            builder.Services.AddIdentity<Usuario, IdentityRole<Guid>>()
+                .AddEntityFrameworkStores<eAgendaMedicaDbContext>()
+                .AddDefaultTokenProviders();
             //=====================================
 
             //============= Mappers ===============

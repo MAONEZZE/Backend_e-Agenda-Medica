@@ -24,7 +24,7 @@ namespace eAgendaMedica.Infra.ModuloConsulta
 
             builder.HasOne(x => x.Usuario)
                 .WithMany()
-                .IsRequired(false)
+                .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
