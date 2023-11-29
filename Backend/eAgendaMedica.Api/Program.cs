@@ -1,10 +1,12 @@
 using eAgendaMedica.Api.Config;
 using eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado;
-using eAgendaMedica.Api.Config.Excecoes;
 using eAgendaMedica.Api.Filters;
 using eAgendaMedica.Dominio.ModuloAutenticacao;
 using eAgendaMedica.Infra.Compartilhado;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace eAgendaMedica.Api
 {
@@ -42,6 +44,12 @@ namespace eAgendaMedica.Api
             builder.Services.ConfigurarAutoMapper();
             //=====================================
 
+            //======= Autenticação Config ========= 
+            byte[] key = Encoding.ASCII.GetBytes("SegredoeAgendaMedica");
+
+            builder.Services.ConfigurarValidacaoToken(key); //configuração do middleware que ira validar o token, a partir de qualquer request
+            //=====================================
+
             //== Controllers, Filtros e Exceções ==
             builder.Services.AddControllers(config =>
             {
@@ -53,15 +61,19 @@ namespace eAgendaMedica.Api
             app.UseMiddleware<ManipuladorExcecoes>();
             //=====================================
 
+            
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
             app.UseHttpsRedirection();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

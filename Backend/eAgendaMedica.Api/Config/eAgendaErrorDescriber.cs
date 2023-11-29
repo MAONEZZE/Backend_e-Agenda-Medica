@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace eAgendaMedica.Api.Config.Excecoes
+namespace eAgendaMedica.Api.Config
 {
     public class eAgendaErrorDescriber : IdentityErrorDescriber
     {

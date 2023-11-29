@@ -1,7 +1,6 @@
 ﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico;
-using eAgendaMedica.Api.Config.Excecoes;
 using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Aplicacao.ModuloCirurgia;
 using eAgendaMedica.Aplicacao.ModuloConsulta;

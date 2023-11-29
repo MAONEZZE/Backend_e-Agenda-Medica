@@ -1,12 +1,13 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloCirurgia;
-using eAgendaMedica.Api.ViewModels.ModuloConsulta;
+﻿using eAgendaMedica.Api.ViewModels.ModuloConsulta;
 using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloConsulta;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eAgendaMedica.Api.Controllers.ModuloConsulta
 {
-    [Route("api/consulta")]
     [ApiController]
+    [Route("api/consulta")]
+    [Authorize]
     public class ConsultaController : ControladorApiBase<ListarConsultaViewModel, FormConsultaViewModel, VisualizarConsultaViewModel, Consulta>
     {
         private readonly ServicoConsulta service;

@@ -1,7 +1,7 @@
 ﻿using Serilog;
 using System.Text.Json;
 
-namespace eAgendaMedica.Api.Config.Excecoes
+namespace eAgendaMedica.Api.Config
 {
     public class ManipuladorExcecoes : IMiddleware
     {

@@ -1,14 +1,13 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloCirurgia;
-using eAgendaMedica.Api.ViewModels.ModuloConsulta;
 using eAgendaMedica.Aplicacao.ModuloCirurgia;
-using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloCirurgia;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
 {
-    [Route("api/cirurgia")]
     [ApiController]
+    [Route("api/cirurgia")]
+    [Authorize]
     public class CirurgiaController : ControladorApiBase<ListarCirurgiaViewModel, FormCirurgiaViewModel, VisualizarCirurgiaViewModel, Cirurgia>
     {
         private readonly ServicoCirurgia service;

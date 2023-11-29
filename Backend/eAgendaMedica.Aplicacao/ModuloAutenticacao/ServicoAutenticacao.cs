@@ -24,7 +24,7 @@ namespace eAgendaMedica.Aplicacao.ModuloAutenticacao
 
             var usuarioEncontrado = await userManager.FindByEmailAsync(usuario.Email);
 
-            if (usuarioEncontrado != )
+            if (usuarioEncontrado != null)
             {
                 return Result.Fail($"e-mail {usuarioEncontrado.Email} já cadastrado");
             }
