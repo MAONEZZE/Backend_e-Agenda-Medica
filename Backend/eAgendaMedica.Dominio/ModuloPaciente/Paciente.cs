@@ -1,4 +1,5 @@
-﻿using eAgendaMedica.Dominio.ModuloCirurgia;
+﻿
+using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
 
 namespace eAgendaMedica.Dominio.ModuloPaciente

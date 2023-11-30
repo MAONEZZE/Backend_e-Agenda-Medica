@@ -16,12 +16,17 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
             builder.Property(x => x.HoraTermino).HasColumnType("bigint").IsRequired();
 
             builder.HasMany(x => x.Medicos)//Muitas cirurgias tem muitos medicos
-                .WithMany(x => x.Cirurgias)//Muitos medicos tem muitas cirurgias, isso faz com que
-                                           //a lista Cirurgias sejam preenchidas com as cirurgias relacionadas ao medico
+                .WithMany(x => x.Cirurgias)//Muitos medicos tem muitas cirurgias
                 .UsingEntity(x => x.ToTable("TBMedico_Cirurgia"));
 
             builder.HasOne(x => x.PacienteAtributo)
-                .WithMany(x => x.Cirurgias).IsRequired().HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
+                .WithMany(x => x.Cirurgias).IsRequired()
+                .HasForeignKey(x => x.Paciente_id).OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .IsRequired()//quando houver registros no bd tem que deixar .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

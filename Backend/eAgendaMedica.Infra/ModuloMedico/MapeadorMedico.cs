@@ -20,6 +20,11 @@ namespace eAgendaMedica.Infra.ModuloMedico
 
             builder.Property(m => m.Cpf).HasColumnType("varchar(50)").IsRequired();
             builder.Property(m => m.Crm).HasColumnType("varchar(50)").IsRequired();
+
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
