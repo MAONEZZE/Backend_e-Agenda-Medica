@@ -6,8 +6,10 @@ namespace eAgendaMedica.Api.Config
 {
     public static class TokenConfigExtension
     {
-        public static void ConfigurarValidacaoToken(this IServiceCollection services, byte[] key)
+        public static void ConfigurarValidacaoToken(this IServiceCollection services)
         {
+            byte[] key = Encoding.ASCII.GetBytes("SegredoeAgendaMedica");
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

@@ -1,6 +1,5 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloPaciente;
 using eAgendaMedica.Dominio.ModuloPaciente;
-using System.Globalization;
 
 namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloPaciente
 {

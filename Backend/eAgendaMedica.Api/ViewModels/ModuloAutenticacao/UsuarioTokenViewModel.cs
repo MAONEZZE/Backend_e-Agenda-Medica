@@ -1,6 +1,4 @@
-﻿using eAgendaMedica.Dominio.ModuloAutenticacao;
-
-namespace eAgendaMedica.Api.ViewModels.ModuloAutenticacao
+﻿namespace eAgendaMedica.Api.ViewModels.ModuloAutenticacao
 {
     public class UsuarioTokenViewModel
     {

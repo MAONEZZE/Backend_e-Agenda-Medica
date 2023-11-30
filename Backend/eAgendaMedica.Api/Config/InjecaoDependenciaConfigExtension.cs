@@ -1,13 +1,10 @@
 ﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
 using eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta;
-using eAgendaMedica.Api.Config.AutomapperConfig.ModuloMedico;
-using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Aplicacao.ModuloCirurgia;
 using eAgendaMedica.Aplicacao.ModuloConsulta;
 using eAgendaMedica.Aplicacao.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloPaciente;
 using eAgendaMedica.Dominio.Compartilhado;
-using eAgendaMedica.Dominio.ModuloAutenticacao;
 using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloMedico;
@@ -17,7 +14,6 @@ using eAgendaMedica.Infra.ModuloCirurgia;
 using eAgendaMedica.Infra.ModuloConsulta;
 using eAgendaMedica.Infra.ModuloMedico;
 using eAgendaMedica.Infra.ModuloPaciente;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace eAgendaMedica.Api.Config
@@ -50,9 +46,6 @@ namespace eAgendaMedica.Api.Config
 
             services.AddTransient<IRepositorioPaciente, RepositorioPaciente>();
             services.AddTransient<ServicoPaciente>();
-
-            services.AddTransient<ServicoAutenticacao>();
-            services.AddTransient<UserManager<Usuario>>();
 
             services.AddTransient<ManipuladorExcecoes>();
         }

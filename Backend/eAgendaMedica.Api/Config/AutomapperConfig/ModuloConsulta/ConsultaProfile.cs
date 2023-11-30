@@ -1,10 +1,5 @@
-﻿using eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia;
-using eAgendaMedica.Api.ViewModels.ModuloCirurgia;
-using eAgendaMedica.Api.ViewModels.ModuloConsulta;
-using eAgendaMedica.Dominio.ModuloCirurgia;
+﻿using eAgendaMedica.Api.ViewModels.ModuloConsulta;
 using eAgendaMedica.Dominio.ModuloConsulta;
-using eAgendaMedica.Dominio.ModuloPaciente;
-using System.Globalization;
 
 namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloConsulta
 {
