@@ -1,11 +1,8 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloAutenticacao;
+﻿using eAgendaMedica.Api.Config.TokenConfig;
+using eAgendaMedica.Api.ViewModels.ModuloAutenticacao;
 using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Dominio.ModuloAutenticacao;
 using FluentResults;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 {
@@ -54,7 +51,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
                 return BadRequest(usuarioResult.Errors);
             }
 
-            var token = GerarJwt(usuario, DateTime.Now.AddDays(5));
+            var token = usuario.GerarJwt(DateTime.Now.AddDays(5));
 
             return Ok(token);
         }
@@ -71,7 +68,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 
             var usuario = usuarioResult.Value;
 
-            var token = GerarJwt(usuario, DateTime.Now.AddDays(5));
+            var token = usuario.GerarJwt(DateTime.Now.AddDays(5));
 
             return Ok(token);
         }
@@ -79,7 +76,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
         [HttpPost("logout")]
         public async Task<IActionResult> Logout(AutenticarUsuarioViewModel usuarioVM)
         {
-            var usuarioResult = await service.LogoutAsync();
+            await service.LogoutAsync();
 
             return Ok();
         }

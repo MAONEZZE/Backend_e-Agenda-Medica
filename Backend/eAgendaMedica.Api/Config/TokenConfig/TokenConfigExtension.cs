@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace eAgendaMedica.Api.Config
+namespace eAgendaMedica.Api.Config.TokenConfig
 {
     public static class TokenConfigExtension
     {

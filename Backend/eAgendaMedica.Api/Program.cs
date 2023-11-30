@@ -1,6 +1,7 @@
 using eAgendaMedica.Api.Config;
 using eAgendaMedica.Api.Config.AutomapperConfig.Compartilhado;
 using eAgendaMedica.Api.Config.IdentityConfig;
+using eAgendaMedica.Api.Config.TokenConfig;
 using eAgendaMedica.Api.Filters;
 
 namespace eAgendaMedica.Api

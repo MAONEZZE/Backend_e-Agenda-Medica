@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace eAgendaMedica.Api.Config
+namespace eAgendaMedica.Api.Config.TokenConfig
 {
     public static class UsuarioJwtExtension
     {
