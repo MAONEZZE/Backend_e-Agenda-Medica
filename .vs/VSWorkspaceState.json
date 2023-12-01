@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Backend"
+    "\\Backend",
+    "\\Backend\\eAgendaMedica.Api",
+    "\\Backend\\eAgendaMedica.Api\\Controllers",
+    "\\Backend\\eAgendaMedica.Api\\Controllers\\ModuloAutenticacao"
   ],
-  "SelectedNode": "\\Backend\\eAgendaMedica.sln",
+  "SelectedNode": "\\Backend\\eAgendaMedica.Api\\Controllers\\ModuloAutenticacao\\AutenticacaoController.cs",
   "PreviewInSolutionExplorer": false
 }

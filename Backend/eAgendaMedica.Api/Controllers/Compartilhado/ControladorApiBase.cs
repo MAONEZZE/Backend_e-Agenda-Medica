@@ -1,5 +1,6 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
 using FluentResults;
+using System.Security.Claims;
 
 namespace eAgendaMedica.Api.Controllers.Compartilhado
 {
@@ -16,6 +17,11 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         {
             this._map = map;
             this._service = service;
+        }
+
+        private Guid ObterUsuarioId()
+        {
+            return Guid.Parse(Request.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
 
         protected IActionResult ProcessarResposta(Result<TEntity> resultado, TForm registroVM = null)
@@ -117,6 +123,8 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         public virtual async Task<IActionResult> Inserir(TForm registroVM)
         {
             TEntity registro = this._map.Map<TEntity>(registroVM);
+
+            registro.UsuarioId = ObterUsuarioId();
 
             var resultado = await _service.InserirAsync(registro);
 

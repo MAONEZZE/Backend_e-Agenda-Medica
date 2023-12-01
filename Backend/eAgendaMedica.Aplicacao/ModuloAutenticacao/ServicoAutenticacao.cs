@@ -11,6 +11,7 @@ namespace eAgendaMedica.Aplicacao.ModuloAutenticacao
         public ServicoAutenticacao(UserManager<Usuario> userManager, SignInManager<Usuario> sign)
         {
             this.userManager = userManager;
+            this.sign = sign;
         }
 
         public async Task<Result<Usuario>> RegistrarAsync(Usuario usuario, string senha)

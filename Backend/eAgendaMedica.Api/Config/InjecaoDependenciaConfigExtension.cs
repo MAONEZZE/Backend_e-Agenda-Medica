@@ -47,6 +47,7 @@ namespace eAgendaMedica.Api.Config
             services.AddTransient<IRepositorioPaciente, RepositorioPaciente>();
             services.AddTransient<ServicoPaciente>();
 
+            services.AddTransient<ITenantProvider, ApiTenantProvider>();
             services.AddTransient<ManipuladorExcecoes>();
         }
     }

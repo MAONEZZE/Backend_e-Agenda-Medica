@@ -1,6 +1,6 @@
 ﻿namespace eAgendaMedica.Api.ViewModels.ModuloAutenticacao
 {
-    public class RegistrarUsuarioViewModel : AutenticadorBase
+    public class RegistrarUsuarioViewModel 
     {
         public string Nome { get; set; }
         public string Email { get; set; }

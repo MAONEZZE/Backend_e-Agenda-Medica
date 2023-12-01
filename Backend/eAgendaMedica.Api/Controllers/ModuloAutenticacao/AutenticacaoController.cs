@@ -20,26 +20,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
             this.map = map;
         }
 
-        private IActionResult ProcessarResposta(Result<Usuario> resultado, AutenticadorBase usuarioVM = null)
-        {
-            if (resultado.IsFailed)
-            {
-                return BadRequest(new
-                {
-                    Sucesso = false,
-                    Errors = resultado.Errors.Select(result => result.Message)
-                });
-            }
-
-            return Ok(new
-            {
-                Sucesso = true,
-                Dados = usuarioVM
-            });
-        }
-
-
         [HttpPost("registrar")]
+        [ProducesResponseType(typeof(string[]), 400)]
+        [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Registrar(RegistrarUsuarioViewModel usuarioVM)
         {
             var usuario = this.map.Map<Usuario>(usuarioVM);
@@ -48,7 +31,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 
             if (usuarioResult.IsFailed)
             {
-                return BadRequest(usuarioResult.Errors);
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = usuarioResult.Errors.Select(result => result.Message)
+                });
             }
 
             var token = usuario.GerarJwt(DateTime.Now.AddDays(5));
@@ -57,13 +44,19 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(string[]), 400)]
+        [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Login(AutenticarUsuarioViewModel usuarioVM)
         {
             var usuarioResult = await service.LoginAsync(usuarioVM.Login, usuarioVM.Senha);
 
             if (usuarioResult.IsFailed)
             {
-                return BadRequest(usuarioResult.Errors);
+                return BadRequest(new
+                {
+                    Sucesso = false,
+                    Errors = usuarioResult.Errors.Select(result => result.Message)
+                });
             }
 
             var usuario = usuarioResult.Value;
@@ -74,6 +67,8 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
         }
 
         [HttpPost("logout")]
+        [ProducesResponseType(typeof(string[]), 400)]
+        [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Logout(AutenticarUsuarioViewModel usuarioVM)
         {
             await service.LogoutAsync();
