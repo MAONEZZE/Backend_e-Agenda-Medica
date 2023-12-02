@@ -1,8 +1,11 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+<mat-sidenav-container class="sidenav-container"
+  *ngIf="(usuarioEstaLogado$ | async) == true">
+
+  <mat-sidenav 
+    #drawer class="sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="fs-3 menu-texto">Menu</mat-toolbar>
 
     <mat-divider></mat-divider>
@@ -56,7 +59,7 @@
             color="accent"
             style="position: fixed; top: 10%; left: 80%; width: 30px; z-index: 1000px;"/>
       
-      <a class="fs-4" mat-button href="/dashboard">
+      <a class="fs-4" mat-button href="/">
         <mat-icon class="fs-5">home</mat-icon>
         e-Agenda Medica
       </a>
@@ -65,5 +68,22 @@
     <main class="p-4">
       <ng-content></ng-content>
     </main>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-sidenav-container 
+  *ngIf="(usuarioEstaLogado$ | async) == false">
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <a class="fs-4" mat-button disabled>
+        <mat-icon class="fs-5">home</mat-icon>
+        e-Agenda Medica
+      </a>
+    </mat-toolbar>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+
+

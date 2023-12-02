@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -15,10 +15,17 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { ShellModule } from './core/shell/shell.module';
 import { loadingInterceptor } from './core/loading/interceptor-loading';
 import { provideEnvironmentNgxMask } from 'ngx-mask';
+import { LoadingService } from './core/loading/loading.service';
+import { AuthService } from './core/auth/services/auth.service';
+import { httpTokenInterceptor } from './core/auth/services/http-token.interceptor';
 
 const locale = 'pt-BR'
 
 registerLocaleData(localePt, locale)
+
+function logarUsuarioSalvoFactory(authService: AuthService){
+  return () => authService.logarUsuarioSalvo();
+}
 
 @NgModule({
   declarations: [
@@ -42,12 +49,18 @@ registerLocaleData(localePt, locale)
   ],
   providers: [
     {
+      provide: APP_INITIALIZER,
+      useFactory: logarUsuarioSalvoFactory,
+      deps: [AuthService],
+      multi: true
+    },
+    {
       provide: LOCALE_ID, useValue: locale
     },
 
     provideEnvironmentNgxMask(),
 
-    provideHttpClient(withInterceptors([loadingInterceptor]))
+    provideHttpClient(withInterceptors([httpTokenInterceptor, loadingInterceptor])), LoadingService
   ],
   bootstrap: [AppComponent]
 })
