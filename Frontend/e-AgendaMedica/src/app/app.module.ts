@@ -18,6 +18,8 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import { LoadingService } from './core/loading/loading.service';
 import { AuthService } from './core/auth/services/auth.service';
 import { httpTokenInterceptor } from './core/auth/services/http-token.interceptor';
+import { LoginModule } from './views/login/login.module';
+import { RegistrarModule } from './views/registrar/registrar.module';
 
 const locale = 'pt-BR'
 
@@ -40,6 +42,8 @@ function logarUsuarioSalvoFactory(authService: AuthService){
     ShellModule,
     DashboardModule,
     NgbModule,
+    LoginModule,
+    RegistrarModule,
 
     ToastrModule.forRoot({
       timeOut:5000,

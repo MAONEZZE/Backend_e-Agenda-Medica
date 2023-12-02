@@ -40,7 +40,7 @@ export class ShellComponent implements OnInit{
     this.estaCarregando$ = this.loading.estaCarregado();
   }
 
-  sair(){
+  logout(){
     this.authService.logout().subscribe({
       next: () => this.processarSucesso(),
       error: (err: Error) => this.processarFalha(err)

@@ -3,5 +3,4 @@ export type RegistrarUserViewModel = {
   email: string;
   login: string;
   senha: string;
-  confirmarSenha: string;
 }
