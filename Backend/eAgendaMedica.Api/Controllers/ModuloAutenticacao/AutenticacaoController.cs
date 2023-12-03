@@ -1,5 +1,6 @@
 ﻿using eAgendaMedica.Api.Config.TokenConfig;
 using eAgendaMedica.Api.ViewModels.ModuloAutenticacao;
+using eAgendaMedica.Api.ViewModels.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloAutenticacao;
 using eAgendaMedica.Dominio.ModuloAutenticacao;
 using FluentResults;
@@ -21,6 +22,7 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
         }
 
         [HttpPost("registrar")]
+        [ProducesResponseType(typeof(TokenViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Registrar(RegistrarUsuarioViewModel usuarioVM)
@@ -40,10 +42,15 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 
             var token = usuario.GerarJwt(DateTime.Now.AddDays(5));
 
-            return Ok(token);
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = token
+            });
         }
 
         [HttpPost("login")]
+        [ProducesResponseType(typeof(TokenViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Login(AutenticarUsuarioViewModel usuarioVM)
@@ -63,7 +70,11 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
 
             var token = usuario.GerarJwt(DateTime.Now.AddDays(5));
 
-            return Ok(token);
+            return Ok(new
+            {
+                Sucesso = true,
+                Dados = token
+            });
         }
 
         [HttpPost("logout")]

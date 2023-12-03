@@ -57,7 +57,7 @@ export class LoginComponent {
   }
 
   processarSucesso(login: any){
-    this.toastService.success(`Seja Bem Vindo, ${login.usuarioToken.nome}`, 'Sucesso');
+    this.toastService.success(`Seja Bem Vindo, ${login.usuario.nome}`, 'Sucesso');
     this.router.navigate(['/dashboard']);
   }
 

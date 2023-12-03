@@ -11,7 +11,7 @@ import { Token } from "@angular/compiler";
 @Injectable()
 
 export class AuthService{
-  private endpoint: string = 'https://e-agenda-web-api.onrender.com/api/autenticar/'
+  private endpoint: string = 'https://localhost:7124/api/autenticar/'
 
   private endpointRegistrar: string = this.endpoint + 'registrar';
   private endpointLogin: string = this.endpoint + 'login';

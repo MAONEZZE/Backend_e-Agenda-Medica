@@ -14,7 +14,7 @@ namespace eAgendaMedica.Api.Config.TokenConfig
         {
             string token = CriarChaveToken(usuario, dataExpiracao);
 
-            var usuarioTkVM = new UsuarioTokenViewModel(usuario.Id, usuario.Nome, usuario.Email, usuario.UserName);
+            var usuarioTkVM = new UsuarioTokenViewModel(usuario.Id, usuario.UserName, usuario.Nome, usuario.Email);
 
             var tokenVM = new TokenViewModel
             {

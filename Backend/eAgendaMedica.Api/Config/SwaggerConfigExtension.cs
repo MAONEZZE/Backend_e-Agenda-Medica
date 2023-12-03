@@ -11,7 +11,7 @@ namespace eAgendaMedica.Api.Config
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v2", new OpenApiInfo { Title = "eAgendaMedica.WebApi", Version = "v2" });
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "eAgendaMedica.WebApi", Version = "v1" });
 
                 x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
