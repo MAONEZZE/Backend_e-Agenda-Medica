@@ -4,8 +4,8 @@ namespace eAgendaMedica.Dominio.ModuloConsulta
 {
     public interface IRepositorioConsulta : IRepositorioBase<Consulta>
     {
-        public Task<List<Consulta>> SelecionarConsultasPassadas();
-        public Task<List<Consulta>> SelecionarConsultasFuturas();
-        public Task<List<Consulta>> SelecionarConsultasParaHoje();
+        public Task<List<Consulta>> SelecionarConsultasPassadas(Guid usuarioId);
+        public Task<List<Consulta>> SelecionarConsultasFuturas(Guid usuarioId);
+        public Task<List<Consulta>> SelecionarConsultasParaHoje(Guid usuarioId);
     }
 }

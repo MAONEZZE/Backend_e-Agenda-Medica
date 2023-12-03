@@ -61,7 +61,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             repMedico.Editar(medico2);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repMedico.SelecionarTodosAsync();
+            var lista = await repMedico.SelecionarTodosAsync(new Guid());
             lista.Count.Should().Be(1);
         }
 
@@ -76,7 +76,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             repMedico.Excluir(medicoSelecionado);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repMedico.SelecionarTodosAsync();
+            var lista = await repMedico.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(0);
         }
@@ -105,7 +105,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
             await dbCtx.SaveChangesAsync();
 
 
-            var lista = await repMedico.SelecionarTodosAsync();
+            var lista = await repMedico.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(4);
 

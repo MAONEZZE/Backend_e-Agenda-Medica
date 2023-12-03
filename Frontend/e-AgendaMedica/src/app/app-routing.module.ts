@@ -16,19 +16,23 @@ const routes: Routes = [
   },
   {
     path: 'cirurgias',
-    loadChildren: () => import("./views/cirurgia/cirurgia.module").then(modulo => modulo.CirurgiaModule)
+    loadChildren: () => import("./views/cirurgia/cirurgia.module").then(modulo => modulo.CirurgiaModule),
+    canActivate: [authGuard]
   },
   {
     path: 'consultas',
-    loadChildren: () => import("./views/consulta/consulta.module").then(modulo => modulo.ConsultaModule)
+    loadChildren: () => import("./views/consulta/consulta.module").then(modulo => modulo.ConsultaModule),
+    canActivate: [authGuard]
   },
   {
     path: 'medicos',
-    loadChildren: () => import("./views/medico/medico.module").then(modulo => modulo.MedicoModule)
+    loadChildren: () => import("./views/medico/medico.module").then(modulo => modulo.MedicoModule),
+    canActivate: [authGuard]
   },
   {
     path: 'pacientes',
-    loadChildren: () => import("./views/paciente/paciente.module").then(modulo => modulo.PacienteModule)
+    loadChildren: () => import("./views/paciente/paciente.module").then(modulo => modulo.PacienteModule),
+    canActivate: [authGuard]
   }
 ];
 

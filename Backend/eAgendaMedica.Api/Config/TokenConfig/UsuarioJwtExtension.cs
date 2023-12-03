@@ -19,8 +19,8 @@ namespace eAgendaMedica.Api.Config.TokenConfig
             var tokenVM = new TokenViewModel
             {
                 Chave = token,
-                DataExpiração = dataExpiracao,
-                Usuario = usuarioTkVM
+                DataExpiracao = dataExpiracao,
+                UsuarioToken = usuarioTkVM
             };
 
             return tokenVM;

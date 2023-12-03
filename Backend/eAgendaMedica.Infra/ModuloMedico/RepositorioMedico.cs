@@ -1,7 +1,6 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
 using eAgendaMedica.Dominio.ModuloMedico;
 using eAgendaMedica.Infra.Compartilhado;
-using Microsoft.EntityFrameworkCore;
 
 namespace eAgendaMedica.Infra.ModuloMedico
 {
@@ -11,15 +10,15 @@ namespace eAgendaMedica.Infra.ModuloMedico
         {
         }
 
-        public override async Task<List<Medico>> SelecionarTodosAsync()
+        public override async Task<List<Medico>> SelecionarTodosAsync(Guid usuarioId)
         {
-            return await base.dbset.Include(x => x.Consultas).Include(x => x.Cirurgias).ToListAsync();
+            return await base.dbset.Include(x => x.Consultas).Include(x => x.Cirurgias).Where(x => x.UsuarioId == usuarioId).ToListAsync();
         }
 
-        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
+        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal, Guid usuarioId)
         {
             var listaMedciosRank = new List<Medico>();
-            var listaMedicos = await SelecionarTodosAsync();
+            var listaMedicos = await SelecionarTodosAsync(usuarioId);
 
             foreach(var medico in listaMedicos)
             {
@@ -39,9 +38,9 @@ namespace eAgendaMedica.Infra.ModuloMedico
             return await base.dbset.Where(x => x.Id == id).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
-        public async Task<Medico> SelecionarPorCRM(string crm)
+        public async Task<Medico> SelecionarPorCRM(string crm, Guid usuarioId)
         {
-            return await base.dbset.Where(x => x.Crm == crm).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
+            return await base.dbset.Where(x => x.Crm == crm).Where(x => x.UsuarioId == usuarioId).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
         public async Task<List<Medico>> SelecionarMuitosAsync(List<Guid> idMedicosSelecionados)

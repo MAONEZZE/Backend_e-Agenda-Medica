@@ -23,7 +23,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
         public async Task<IActionResult> SelecionarCirurgiasHoje()
         {
-            var resultado = await service.SelecionarCirurgiasParaHoje();
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarCirurgiasParaHoje(id);
 
             if (resultado.IsFailed)
             {
@@ -47,7 +49,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
         public async Task<IActionResult> SelecionarCirurgiasFuturas()
         {
-            var resultado = await service.SelecionarCirurgiasFuturas();
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarCirurgiasFuturas(id);
 
             if (resultado.IsFailed)
             {
@@ -71,7 +75,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloCirurgia
         [ProducesResponseType(typeof(ListarCirurgiaViewModel), 200)]
         public async Task<IActionResult> SelecionarConsultasPassadas()
         {
-            var resultado = await service.SelecionarCirurgiasPassadas();
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarCirurgiasPassadas(id);
 
             if (resultado.IsFailed)
             {

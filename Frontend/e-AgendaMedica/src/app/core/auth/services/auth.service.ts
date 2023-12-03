@@ -42,7 +42,7 @@ export class AuthService{
       msgErro = 'Ocorreu um erro ao processar a requisição.'
     }
     else{
-      msgErro = error.error?.erros[0]
+      msgErro = error.error.errors[0];
     }
     
     return throwError(() => new Error(msgErro))

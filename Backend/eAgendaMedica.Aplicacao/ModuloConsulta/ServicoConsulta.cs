@@ -93,19 +93,19 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             return Result.Ok(consulta);
         }
 
-        public async Task<Result<List<Consulta>>> SelecionarConsultasParaHoje()
+        public async Task<Result<List<Consulta>>> SelecionarConsultasParaHoje(Guid usuarioId)
         {
-            var consultas = await repConsulta.SelecionarConsultasParaHoje();
+            var consultas = await repConsulta.SelecionarConsultasParaHoje(usuarioId);
 
             Log.Logger.Information("Consultas de hoje selecionadas com sucesso!");
 
             return Result.Ok(consultas);
         }
 
-        public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas()
+        public async Task<Result<List<Consulta>>> SelecionarConsultasFuturas(Guid usuarioId)
         {
             
-            var consultas = await repConsulta.SelecionarConsultasFuturas();
+            var consultas = await repConsulta.SelecionarConsultasFuturas(usuarioId);
 
             Log.Logger.Information("Consultas futuras selecionadas com sucesso!");
 
@@ -113,10 +113,10 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             
         }
 
-        public async Task<Result<List<Consulta>>> SelecionarConsultasPassadas()
+        public async Task<Result<List<Consulta>>> SelecionarConsultasPassadas(Guid usuarioId)
         {
 
-            var consultas = await repConsulta.SelecionarConsultasPassadas();
+            var consultas = await repConsulta.SelecionarConsultasPassadas(usuarioId);
 
             Log.Logger.Information("Consultas passadas selecionadas com sucesso!");
 
@@ -124,9 +124,9 @@ namespace eAgendaMedica.Aplicacao.ModuloConsulta
             
         }
 
-        public async Task<Result<List<Consulta>>> SelecionarTodosAsync()
+        public async Task<Result<List<Consulta>>> SelecionarTodosAsync(Guid usuarioId)
         {
-            var consultas = await repConsulta.SelecionarTodosAsync();
+            var consultas = await repConsulta.SelecionarTodosAsync(usuarioId);
 
             Log.Logger.Information("Consultas selecionadas com sucesso!");
 

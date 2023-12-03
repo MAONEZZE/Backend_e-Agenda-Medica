@@ -35,12 +35,6 @@ export class RegistrarComponent {
     return this.floatLabelControl.value || 'auto';
   }
 
-  campoEstaInvalido(campo: string): boolean{
-    const estaInvalido: boolean = !this.form.get(campo)!.pristine && this.form.get(campo)!.invalid;
-
-    return estaInvalido;
-  }
-
   registrar(){
     if(this.form.invalid){
       for(let item of this.form.validate()){

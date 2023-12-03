@@ -78,9 +78,10 @@ namespace eAgendaMedica.Api.Controllers.ModuloAutenticacao
         }
 
         [HttpPost("logout")]
+        [ProducesResponseType(200)]
         [ProducesResponseType(typeof(string[]), 400)]
         [ProducesResponseType(typeof(string[]), 500)]
-        public async Task<IActionResult> Logout(AutenticarUsuarioViewModel usuarioVM)
+        public async Task<IActionResult> Logout()
         {
             await service.LogoutAsync();
 

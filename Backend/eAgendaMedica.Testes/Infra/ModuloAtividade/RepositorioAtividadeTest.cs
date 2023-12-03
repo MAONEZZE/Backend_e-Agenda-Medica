@@ -93,7 +93,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             repCirurgia.Editar(cirurgia2);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarTodosAsync();
+            var lista = await repCirurgia.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(1);
             lista[0].Should().Be(cirurgia2);
@@ -114,7 +114,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             repConsulta.Editar(consulta2);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repConsulta.SelecionarTodosAsync();
+            var lista = await repConsulta.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(1);
             lista[0].Should().Be(consulta2);
@@ -131,7 +131,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             repCirurgia.Excluir(cirugiaSelecionado);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarTodosAsync();
+            var lista = await repCirurgia.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(0);
         }
@@ -147,7 +147,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             repConsulta.Excluir(consultaSelecionado);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repConsulta.SelecionarTodosAsync();
+            var lista = await repConsulta.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(0);
         }
@@ -183,7 +183,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             var cirurgia4 = Builder<Cirurgia>.CreateNew().With(x => x.Medicos = new List<Medico>() { this.medico }).With(x => x.PacienteAtributo = this.paciente).Persist();
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarTodosAsync();
+            var lista = await repCirurgia.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(4);
         }
@@ -197,7 +197,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             var consulta4 = Builder<Consulta>.CreateNew().With(x => x.Medico = this.medico).With(x => x.PacienteAtributo = this.paciente).Persist();
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repConsulta.SelecionarTodosAsync();
+            var lista = await repConsulta.SelecionarTodosAsync(new Guid());
 
             lista.Count.Should().Be(4);
         }
@@ -214,7 +214,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             cirurgia3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarCirurgiasParaHoje();
+            var lista = await repCirurgia.SelecionarCirurgiasParaHoje(new Guid());
 
             lista.Count.Should().Be(1);
         }
@@ -231,7 +231,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             consulta3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repConsulta.SelecionarConsultasParaHoje();
+            var lista = await repConsulta.SelecionarConsultasParaHoje(new Guid());
 
             lista.Count.Should().Be(1);
         }
@@ -248,7 +248,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             cirurgia3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarCirurgiasPassadas();
+            var lista = await repCirurgia.SelecionarCirurgiasPassadas(new Guid());
 
             lista.Count.Should().Be(1);
         }
@@ -266,7 +266,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             await dbCtx.SaveChangesAsync();
 
 
-            var lista = await repConsulta.SelecionarConsultasPassadas();
+            var lista = await repConsulta.SelecionarConsultasPassadas(new Guid());
 
             lista.Count.Should().Be(1);
         }
@@ -283,7 +283,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             cirurgia3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repCirurgia.SelecionarCirurgiasFuturas();
+            var lista = await repCirurgia.SelecionarCirurgiasFuturas(new Guid());
 
             lista.Count.Should().Be(1);
         }
@@ -300,7 +300,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             consulta3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repConsulta.SelecionarConsultasFuturas();
+            var lista = await repConsulta.SelecionarConsultasFuturas(new Guid());
 
             lista.Count.Should().Be(1);
         }

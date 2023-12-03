@@ -24,7 +24,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarMedicosQueMaisTrabalham(DateTime dataInicio, DateTime dataFinal)
         {
-            var resultado = await service.SelecionarMedicosQueMaisTrabalharam(dataInicio, dataFinal);
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarMedicosQueMaisTrabalharam(dataInicio, dataFinal, id);
 
             if (resultado.IsFailed)
             {
@@ -49,7 +51,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarMedicoPorCrm(string crm)
         {
-            var resultado = await service.SelecionarMedicoPorCrm(crm);
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarMedicoPorCrm(crm, id);
 
             if (resultado.IsFailed)
             {
@@ -97,7 +101,9 @@ namespace eAgendaMedica.Api.Controllers.ModuloMedico
         [ProducesResponseType(typeof(FormMedicoViewModel), 200)]
         public async Task<IActionResult> EditaPorCrm(string crm, FormMedicoViewModel medicoVM)
         {
-            var resultado = await service.SelecionarMedicoPorCrm(crm);
+            var id = base.ObterUsuarioId();
+
+            var resultado = await service.SelecionarMedicoPorCrm(crm, id);
 
             if (resultado.IsFailed)
             {

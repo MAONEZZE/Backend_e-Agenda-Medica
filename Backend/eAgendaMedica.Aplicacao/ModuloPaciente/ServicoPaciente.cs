@@ -89,9 +89,9 @@ namespace eAgendaMedica.Aplicacao.ModuloPaciente
             return Result.Ok(paciente);
         }
 
-        public async Task<Result<List<Paciente>>> SelecionarTodosAsync()
+        public async Task<Result<List<Paciente>>> SelecionarTodosAsync(Guid usuarioId)
         {
-            var pacientes = await repPaciente.SelecionarTodosAsync();
+            var pacientes = await repPaciente.SelecionarTodosAsync(usuarioId);
 
             Log.Logger.Information("Pacientes selecionados com sucesso!");
 

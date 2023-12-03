@@ -89,27 +89,27 @@ namespace eAgendaMedica.Aplicacao.ModuloMedico
             return Result.Ok(medico);
         }
 
-        public async Task<Result<List<Medico>>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
+        public async Task<Result<List<Medico>>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal, Guid usuarioId)
         {
-            var medicos = await repMedico.SelecionarMedicosQueMaisTrabalharam(dataInicio, dataFinal);
+            var medicos = await repMedico.SelecionarMedicosQueMaisTrabalharam(dataInicio, dataFinal, usuarioId);
 
             Log.Logger.Information("Medicos que mais trabalharam selecionados com sucesso!");
 
             return Result.Ok(medicos);
         }
 
-        public async Task<Result<Medico>> SelecionarMedicoPorCrm(string crm)
+        public async Task<Result<Medico>> SelecionarMedicoPorCrm(string crm, Guid usuarioId)
         {
-            var medico = await repMedico.SelecionarPorCRM(crm);
+            var medico = await repMedico.SelecionarPorCRM(crm, usuarioId);
 
             Log.Logger.Information("Medico selecionado com sucesso!");
 
             return Result.Ok(medico);
         }
 
-        public async Task<Result<List<Medico>>> SelecionarTodosAsync()
+        public async Task<Result<List<Medico>>> SelecionarTodosAsync(Guid usuarioId)
         {
-            var medicos = await repMedico.SelecionarTodosAsync();
+            var medicos = await repMedico.SelecionarTodosAsync(usuarioId);
 
             Log.Logger.Information("Medicos selecionados com sucesso!");
 

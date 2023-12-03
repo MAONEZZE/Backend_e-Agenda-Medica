@@ -7,7 +7,7 @@
         public Task<Result<T>> EditarAsync(T registro);
         public Task<Result> ExcluirPorIdAsync(Guid id);
         public Task<Result> ExcluirPorRegistroAsync(T registro);
-        public Task<Result<List<T>>> SelecionarTodosAsync();
+        public Task<Result<List<T>>> SelecionarTodosAsync(Guid usuarioId);
         public Task<Result<T>> SelecionarPorIdAsync(Guid id);
     }
 }

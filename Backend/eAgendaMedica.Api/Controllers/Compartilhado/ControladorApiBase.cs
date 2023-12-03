@@ -19,7 +19,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
             this._service = service;
         }
 
-        private Guid ObterUsuarioId()
+        protected Guid ObterUsuarioId()
         {
             return Guid.Parse(Request.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
         }
@@ -46,7 +46,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [ProducesResponseType(typeof(string[]), 500)]
         public virtual async Task<IActionResult> SelecionarTodos()
         {
-            var resultado = await _service.SelecionarTodosAsync();
+            var resultado = await _service.SelecionarTodosAsync(ObterUsuarioId());
 
             if (resultado.IsFailed)
             {

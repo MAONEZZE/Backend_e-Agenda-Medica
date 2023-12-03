@@ -1,6 +1,4 @@
-<mat-sidenav-container class="sidenav-container"
-  *ngIf="(usuarioEstaLogado$ | async) == true">
-
+<mat-sidenav-container class="sidenav-container">
   <mat-sidenav 
     #drawer class="sidenav" fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -80,26 +78,6 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<mat-sidenav-container 
-  *ngIf="(usuarioEstaLogado$ | async) == false">
 
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-
-        <a class="fs-4" mat-button disabled>
-          <mat-icon class="fs-5">home</mat-icon>
-          e-Agenda Medica
-        </a>
-
-
-    </mat-toolbar>
-    
-    <main class="p-4 d-flex justify-content-center altura">
-      <ng-content></ng-content>
-    </main>
-
-  </mat-sidenav-content>
-
-</mat-sidenav-container>
 
 

@@ -33,12 +33,6 @@ export class LoginComponent {
     return this.floatLabelControl.value || 'auto';
   }
   
-  campoEstaInvalido(campo: string): boolean{
-    const estaInvalido: boolean = !this.form.get(campo)!.pristine && this.form.get(campo)!.invalid;
-
-    return estaInvalido;
-  }
-
   login(){
     
     if(this.form.invalid){
@@ -57,7 +51,7 @@ export class LoginComponent {
   }
 
   processarSucesso(login: any){
-    this.toastService.success(`Seja Bem Vindo, ${login.usuario.nome}`, 'Sucesso');
+    this.toastService.success(`Seja Bem Vindo, ${login.usuarioToken.nome}`, 'Sucesso');
     this.router.navigate(['/dashboard']);
   }
 

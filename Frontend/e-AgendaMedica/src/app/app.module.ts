@@ -20,6 +20,10 @@ import { AuthService } from './core/auth/services/auth.service';
 import { httpTokenInterceptor } from './core/auth/services/http-token.interceptor';
 import { LoginModule } from './views/login/login.module';
 import { RegistrarModule } from './views/registrar/registrar.module';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
 
 const locale = 'pt-BR'
 
@@ -37,11 +41,18 @@ function logarUsuarioSalvoFactory(authService: AuthService){
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    NgbModule,
     
     CoreModule,
     ShellModule,
+
+    MatIconModule,
+    MatToolbarModule, 
+    MatSidenavModule,
+    MatButtonModule,
+
     DashboardModule,
-    NgbModule,
+
     LoginModule,
     RegistrarModule,
 
@@ -62,9 +73,8 @@ function logarUsuarioSalvoFactory(authService: AuthService){
       provide: LOCALE_ID, useValue: locale
     },
 
-    provideEnvironmentNgxMask(),
-
-    provideHttpClient(withInterceptors([httpTokenInterceptor, loadingInterceptor])), LoadingService
+    provideHttpClient(withInterceptors([httpTokenInterceptor, loadingInterceptor])),
+    LoadingService
   ],
   bootstrap: [AppComponent]
 })

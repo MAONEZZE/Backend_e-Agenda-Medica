@@ -13,7 +13,7 @@ export class LocalStorageService {
 
   public obterDadosLocaisSalvos(): TokenViewModel | undefined {
     const jsonString = localStorage.getItem(this.chaveLocalStorage);
-
+    
     if(!jsonString){
       return undefined;
     }
