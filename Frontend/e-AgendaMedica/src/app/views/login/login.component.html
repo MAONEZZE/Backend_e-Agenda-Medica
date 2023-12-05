@@ -18,7 +18,7 @@
 
               <mat-hint>Login</mat-hint>
               <mat-label>Digite o seu nome de usuario</mat-label>
-              <input type="text" matInput formControlName="login">
+              <input data-cy="txtLogin" type="text" matInput formControlName="login">
             </mat-form-field>
           </div>
 
@@ -30,7 +30,7 @@
 
               <mat-hint>Senha</mat-hint>
               <mat-label>Digite a sua senha</mat-label>
-              <input type="password" matInput formControlName="senha">
+              <input data-cy="txtSenha" type="password" matInput formControlName="senha">
             </mat-form-field>
           </div>
 
@@ -43,7 +43,7 @@
           </div>
 
           <div class="card-footer g-grid d-flex gap-1 mt-4">
-            <button mat-raised-button color="primary" class="btn btn-sm px-3" type="submit" [disabled]="desabilitado">
+            <button data-cy="btnEntrar" mat-raised-button color="primary" class="btn btn-sm px-3" type="submit" [disabled]="desabilitado">
               <span 
               *ngIf="(estaCarregando$ | async)" 
               class="spinner-border spinner-border-sm" 
