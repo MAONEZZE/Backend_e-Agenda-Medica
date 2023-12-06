@@ -9,8 +9,8 @@ declare namespace Cypress{
 function logar(login: string, senha: string){
   cy.visit('/');
 
-  cy.get('[data-cy=txtLogin]').type(login, { force: true });
-  cy.get('[data-cy=txtSenha]').type(senha, { force: true });
+  cy.get('[data-cy=login]').type(login, { force: true });
+  cy.get('[data-cy=senha]').type(senha, { force: true });
 
   cy.get('[data-cy=btnEntrar]').click();
   cy.url().should('contain', 'dashboard');

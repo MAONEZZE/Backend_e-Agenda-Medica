@@ -20,7 +20,7 @@
             <div>
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-label>Pacientes</mat-label>
-                <mat-select formControlName="paciente_id">
+                <mat-select data-cy="selectPaciente" formControlName="paciente_id">
                   <mat-option *ngFor="let paciente of pacientes" [value]="paciente.id">
                     {{ paciente.nome }}
                   </mat-option>
@@ -60,7 +60,7 @@
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-label>Medicos</mat-label>
                 
-                <mat-select formControlName="id_medico">
+                <mat-select data-cy="selectMedico" formControlName="id_medico">
                   <mat-option *ngFor="let medico of medicos" [value]="medico.id">
                     {{ medico.nome }}
                   </mat-option>

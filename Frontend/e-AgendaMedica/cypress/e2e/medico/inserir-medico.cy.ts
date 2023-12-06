@@ -1,4 +1,5 @@
 import '../../support/commands';
+import { MedicoSetup } from './medico-test.setup';
 
 describe('Processo de cadastro de medico', () => {
   beforeEach(() => {
@@ -10,10 +11,14 @@ describe('Processo de cadastro de medico', () => {
     cy.get('[data-cy=btnAdd]').click();
 
     cy.url().should('contain', '/medicos/inserir');
+  });
 
-    cy.get('[data-cy=nome]').type('medTeste', { force: true });
-    cy.get('[data-cy=cpf]').type('123.333.222-55', { force: true });
-    cy.get('[data-cy=crm]').type('65446-MG', { force: true });
+  it('Deve entrar na pagina corretamente', () => {
+    const form = MedicoSetup.obterMedicoForm();
+
+    form.nome().type('medTeste', { force: true });
+    form.cpf().type('123.333.222-55', { force: true });
+    form.crm().type('65446-MG', { force: true });
 
     cy.get('[data-cy=btnGravar]').click();
 
