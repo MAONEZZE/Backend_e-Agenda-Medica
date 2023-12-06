@@ -46,6 +46,16 @@ namespace eAgendaMedica.Infra.Compartilhado
 
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
+            #region Para que serve o HasQueryFilter()?
+            /* 
+             * Esse metodo serve como um filtro global, o qual está filtrando pelo id do usuario,
+             * ou seja, só irá acessar os dados relacionados ao respectivo usuario, assim 
+             * não precisa dos filtros em cada consulta que fizer por meio dos repositorios.
+             * 
+             * ex: Where(x => x.UsuarioId == usuarioId) --> não precisa
+             */
+            #endregion
+
             modelBuilder.Entity<Medico>().HasQueryFilter(x => x.UsuarioId == usuario_id);
             modelBuilder.Entity<Paciente>().HasQueryFilter(x => x.UsuarioId == usuario_id);
             modelBuilder.Entity<Cirurgia>().HasQueryFilter(x => x.UsuarioId == usuario_id);
