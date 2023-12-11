@@ -14,11 +14,11 @@ namespace eAgendaMedica.Infra.Compartilhado
 
             var config = builder.Build();
 
-            string connectionString = config.GetConnectionString("SqlServer");
+            string connectionString = config.GetConnectionString("PostgreSql");
 
             var optionsBuilder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>();
 
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseNpgsql(connectionString);
 
             var dbcontext = new eAgendaMedicaDbContext(optionsBuilder.Options);
 

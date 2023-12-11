@@ -1,13 +1,10 @@
-﻿using eAgendaMedica.Infra.Compartilhado;
-using eAgendaMedica.Infra.ModuloMedico;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore.Storage;
 using eAgendaMedica.Infra.ModuloPaciente;
 
 namespace eAgendaMedica.Testes.Infra.ModuloPaciente
 {
     [TestClass]
-    public class RepositorioPacienteTest : IDisposable
+    public class RepositorioPacienteTest : SetupBase, IDisposable
     {
         private RepositorioPaciente repPaciente;
         private eAgendaMedicaDbContext dbCtx;
@@ -16,10 +13,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
         [TestInitialize]
         public void Setup()
         {
-            var builder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>()
-                .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eAgendaMedicaTeste;Integrated Security=True;");
-
-            dbCtx = new eAgendaMedicaDbContext(builder.Options);
+            dbCtx = new eAgendaMedicaDbContext(base.BuilderDbCtx.Options);
 
             repPaciente = new RepositorioPaciente(dbCtx);
 
@@ -64,7 +58,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
             repPaciente.Editar(paciente2);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repPaciente.SelecionarTodosAsync(new Guid());
+            var lista = await repPaciente.SelecionarTodosAsync();
 
             lista.Count.Should().Be(1);
             lista[0].Should().Be(paciente2);
@@ -81,7 +75,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
             repPaciente.Excluir(pacienteSelecionado);
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repPaciente.SelecionarTodosAsync(new Guid());
+            var lista = await repPaciente.SelecionarTodosAsync();
 
             lista.Count.Should().Be(0);
         }
@@ -109,7 +103,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloPaciente
             var paciente4 = Builder<Paciente>.CreateNew().Persist();
             await dbCtx.SaveChangesAsync();
 
-            var lista = await repPaciente.SelecionarTodosAsync(new Guid());
+            var lista = await repPaciente.SelecionarTodosAsync();
 
             lista.Count.Should().Be(4);
         }

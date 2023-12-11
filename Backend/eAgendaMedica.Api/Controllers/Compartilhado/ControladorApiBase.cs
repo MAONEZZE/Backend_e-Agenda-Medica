@@ -46,7 +46,7 @@ namespace eAgendaMedica.Api.Controllers.Compartilhado
         [ProducesResponseType(typeof(string[]), 500)]
         public virtual async Task<IActionResult> SelecionarTodos()
         {
-            var resultado = await _service.SelecionarTodosAsync(ObterUsuarioId());
+            var resultado = await _service.SelecionarTodosAsync();
 
             if (resultado.IsFailed)
             {

@@ -10,15 +10,15 @@ namespace eAgendaMedica.Infra.ModuloMedico
         {
         }
 
-        public override async Task<List<Medico>> SelecionarTodosAsync(Guid usuarioId)
+        public override async Task<List<Medico>> SelecionarTodosAsync()
         {
-            return await base.dbset.Include(x => x.Consultas).Include(x => x.Cirurgias).Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await base.dbset.Include(x => x.Consultas).Include(x => x.Cirurgias).ToListAsync();
         }
 
-        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal, Guid usuarioId)
+        public async Task<List<Medico>> SelecionarMedicosQueMaisTrabalharam(DateTime dataInicio, DateTime dataFinal)
         {
             var listaMedciosRank = new List<Medico>();
-            var listaMedicos = await SelecionarTodosAsync(usuarioId);
+            var listaMedicos = await SelecionarTodosAsync();
 
             foreach(var medico in listaMedicos)
             {
@@ -38,9 +38,9 @@ namespace eAgendaMedica.Infra.ModuloMedico
             return await base.dbset.Where(x => x.Id == id).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
-        public async Task<Medico> SelecionarPorCRM(string crm, Guid usuarioId)
+        public async Task<Medico> SelecionarPorCRM(string crm)
         {
-            return await base.dbset.Where(x => x.Crm == crm).Where(x => x.UsuarioId == usuarioId).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
+            return await base.dbset.Where(x => x.Crm == crm).Include(x => x.Consultas).Include(x => x.Cirurgias).FirstOrDefaultAsync();
         }
 
         public async Task<List<Medico>> SelecionarMuitosAsync(List<Guid> idMedicosSelecionados)

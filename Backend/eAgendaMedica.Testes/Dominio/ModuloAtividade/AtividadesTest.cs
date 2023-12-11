@@ -1,6 +1,4 @@
-﻿using Moq;
-
-namespace eAgendaMedica.Testes.Dominio.ModuloAtividade
+﻿namespace eAgendaMedica.Testes.Dominio.ModuloAtividade
 {
     [TestClass]
     public class AtividadesTest

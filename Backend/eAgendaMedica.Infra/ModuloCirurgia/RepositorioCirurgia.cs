@@ -11,19 +11,19 @@ namespace eAgendaMedica.Infra.ModuloCirurgia
         {
         }
 
-        public async Task<List<Cirurgia>> SelecionarCirurgiasFuturas(Guid usuarioId)
+        public async Task<List<Cirurgia>> SelecionarCirurgiasFuturas()
         {
-            return await base.dbset.Where(x => x.Data > DateTime.Today).Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await base.dbset.Where(x => x.Data > DateTime.Today).ToListAsync();
         }
 
-        public async Task<List<Cirurgia>> SelecionarCirurgiasParaHoje(Guid usuarioId)
+        public async Task<List<Cirurgia>> SelecionarCirurgiasParaHoje()
         {
-            return await base.dbset.Where(x => x.Data == DateTime.Today).Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await base.dbset.Where(x => x.Data == DateTime.Today).ToListAsync();
         }
 
-        public async Task<List<Cirurgia>> SelecionarCirurgiasPassadas(Guid usuarioId)
+        public async Task<List<Cirurgia>> SelecionarCirurgiasPassadas()
         {
-            return await base.dbset.Where(x => x.Data < DateTime.Today).Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await base.dbset.Where(x => x.Data < DateTime.Today).ToListAsync();
         }
 
         public override async Task<Cirurgia> SelecionarPorIdAsync(Guid id)

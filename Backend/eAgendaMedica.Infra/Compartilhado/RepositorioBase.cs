@@ -37,9 +37,9 @@ namespace eAgendaMedica.Infra.Compartilhado
             return await this.dbset.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public virtual async Task<List<TEntity>> SelecionarTodosAsync(Guid usuarioId)
+        public virtual async Task<List<TEntity>> SelecionarTodosAsync()
         {
-            return await dbset.Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await dbset.ToListAsync();
         }
     }
 }

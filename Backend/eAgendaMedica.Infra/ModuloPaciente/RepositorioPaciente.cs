@@ -15,9 +15,9 @@ namespace eAgendaMedica.Infra.ModuloPaciente
             return await base.dbset.Where(x => x.Id == id).Include(x => x.Cirurgias).Include(x => x.Consultas).FirstOrDefaultAsync();
         }
 
-        public override async Task<List<Paciente>> SelecionarTodosAsync(Guid usuarioId)
+        public override async Task<List<Paciente>> SelecionarTodosAsync()
         {
-            return await base.dbset.Include(x => x.Cirurgias).Include(x => x.Consultas).Where(x => x.UsuarioId == usuarioId).ToListAsync();
+            return await base.dbset.Include(x => x.Cirurgias).Include(x => x.Consultas).ToListAsync();
         }
     }
 }

@@ -94,18 +94,18 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             return Result.Ok(cirurgia);
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasParaHoje(Guid usuarioId)
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasParaHoje()
         {
-            var cirurgias = await repCirurgia.SelecionarCirurgiasParaHoje(usuarioId);
+            var cirurgias = await repCirurgia.SelecionarCirurgiasParaHoje();
 
             Log.Logger.Information("Cirurgias de hoje selecionadas com sucesso!");
 
             return Result.Ok(cirurgias);
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas(Guid usuarioId)
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasFuturas()
         {
-            var cirurgias = await repCirurgia.SelecionarCirurgiasFuturas(usuarioId);
+            var cirurgias = await repCirurgia.SelecionarCirurgiasFuturas();
 
             Log.Logger.Information("Cirurgias futuras selecionadas com sucesso!");
 
@@ -113,9 +113,9 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas(Guid usuarioId)
+        public async Task<Result<List<Cirurgia>>> SelecionarCirurgiasPassadas()
         {
-            var cirurgias = await repCirurgia.SelecionarCirurgiasPassadas(usuarioId);
+            var cirurgias = await repCirurgia.SelecionarCirurgiasPassadas();
 
             Log.Logger.Information("Cirurgias passadas selecionadas com sucesso!");
 
@@ -123,9 +123,9 @@ namespace eAgendaMedica.Aplicacao.ModuloCirurgia
             
         }
 
-        public async Task<Result<List<Cirurgia>>> SelecionarTodosAsync(Guid usuarioId)
+        public async Task<Result<List<Cirurgia>>> SelecionarTodosAsync()
         {
-            var cirurgias = await repCirurgia.SelecionarTodosAsync(usuarioId);
+            var cirurgias = await repCirurgia.SelecionarTodosAsync();
 
             Log.Logger.Information("Cirurgias selecionadas com sucesso!");
 
