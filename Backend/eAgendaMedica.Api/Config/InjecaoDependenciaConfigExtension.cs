@@ -22,13 +22,13 @@ namespace eAgendaMedica.Api.Config
     {
         public static void ConfigurarInjecaoDependencia(this IServiceCollection services, IConfiguration config)
         {
-            string connectionString = config.GetConnectionString("SqlServer");
+            string connectionString = config.GetConnectionString("PostgreSql");
 
             //Registrando esse contexto com a interface IContextoPersistencia
             //Em outros lugares do código, pode injetar IContextoPersistencia e obter uma instância de eAgendaMedicaDbContext
             services.AddDbContext<IContextoPersistencia, eAgendaMedicaDbContext>(optionsBuilder => 
             {
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseNpgsql(connectionString);
             });
 
             services.AddTransient<IRepositorioCirurgia, RepositorioCirurgia>();
