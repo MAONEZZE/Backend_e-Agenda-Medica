@@ -1,12 +1,13 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloMedico;
-using eAgendaMedica.Api.ViewModels.ModuloPaciente;
+﻿using eAgendaMedica.Api.ViewModels.ModuloPaciente;
 using eAgendaMedica.Aplicacao.ModuloPaciente;
 using eAgendaMedica.Dominio.ModuloPaciente;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eAgendaMedica.Api.Controllers.ModuloPaciente
 {
-    [Route("api/paciente")]
     [ApiController]
+    [Route("api/paciente")]
+    [Authorize]
     public class PacienteController : ControladorApiBase<ListarPacienteViewModel, FormPacienteViewModel, VisualizarPacienteViewModel, Paciente>
     {
         public PacienteController(ServicoPaciente service, IMapper map) : base(service, map)

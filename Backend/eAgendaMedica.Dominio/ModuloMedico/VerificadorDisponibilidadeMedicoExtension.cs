@@ -1,13 +1,12 @@
 ﻿using eAgendaMedica.Dominio.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloConsulta;
-using eAgendaMedica.Dominio.ModuloMedico;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eAgendaMedica.Dominio.Compartilhado
+namespace eAgendaMedica.Dominio.ModuloMedico
 {
     public static class VerificadorDisponibilidadeMedicoExtension
     {
@@ -15,7 +14,7 @@ namespace eAgendaMedica.Dominio.Compartilhado
         {
             bool disponivel = false;
 
-            if(medico.Consultas.Count == 0 && medico.Cirurgias.Count == 0)
+            if (medico.Consultas.Count == 0 && medico.Cirurgias.Count == 0)
             {
                 return true;
             }
@@ -23,7 +22,7 @@ namespace eAgendaMedica.Dominio.Compartilhado
             foreach (var item in medico.SelecionarAtividades())
             {
                 TimeSpan tempoRecuperacao;
-                
+
 
                 Guid idAtividadeExistente = Guid.Empty;
 
@@ -50,7 +49,7 @@ namespace eAgendaMedica.Dominio.Compartilhado
                 }
                 else
                 {
-                    if(atividadeNova is Cirurgia)
+                    if (atividadeNova is Cirurgia)
                     {
                         disponivel = AtividadeNovaCirurgia(item, atvNovaDataHoraTermino, atvNovaDataHoraInicio, dataHoraInicioExistente, dataHoraFinalExistente);
                     }

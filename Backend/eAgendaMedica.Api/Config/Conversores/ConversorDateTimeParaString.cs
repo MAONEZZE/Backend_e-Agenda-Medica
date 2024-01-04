@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
 
-namespace eAgendaMedica.Api.Config
+namespace eAgendaMedica.Api.Config.Conversores
 {
     public class ConversorDateTimeParaString : JsonConverter<DateTime>
     {

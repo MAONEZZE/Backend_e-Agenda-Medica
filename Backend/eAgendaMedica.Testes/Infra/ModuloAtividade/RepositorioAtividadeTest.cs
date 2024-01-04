@@ -1,16 +1,13 @@
-﻿using eAgendaMedica.Dominio.ModuloConsulta;
-using eAgendaMedica.Infra.Compartilhado;
-using eAgendaMedica.Infra.ModuloCirurgia;
+﻿using eAgendaMedica.Infra.ModuloCirurgia;
 using eAgendaMedica.Infra.ModuloConsulta;
 using eAgendaMedica.Infra.ModuloMedico;
 using eAgendaMedica.Infra.ModuloPaciente;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace eAgendaMedica.Testes.Infra.ModuloAtividade
 {
     [TestClass]
-    public class RepositorioAtividadeTest : IDisposable
+    public class RepositorioAtividadeTest : SetupBase, IDisposable
     {
         private RepositorioCirurgia repCirurgia;
         private RepositorioConsulta repConsulta;
@@ -23,10 +20,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
         [TestInitialize]
         public void Setup()
         {
-            var builder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>()
-                .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eAgendaMedicaTeste;Integrated Security=True;");
-
-            dbCtx = new eAgendaMedicaDbContext(builder.Options);
+            dbCtx = new eAgendaMedicaDbContext(base.BuilderDbCtx.Options);
 
             repCirurgia = new RepositorioCirurgia(dbCtx);
             repConsulta = new RepositorioConsulta(dbCtx);
@@ -282,7 +276,6 @@ namespace eAgendaMedica.Testes.Infra.ModuloAtividade
             cirurgia2.Data = new DateTime(2023, 11, 10);
             cirurgia3.Data = new DateTime(2023, 12, 20);
             await dbCtx.SaveChangesAsync();
-
 
             var lista = await repCirurgia.SelecionarCirurgiasFuturas();
 

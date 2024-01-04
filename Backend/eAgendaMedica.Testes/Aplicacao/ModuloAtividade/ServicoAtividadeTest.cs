@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eAgendaMedica.Testes.Aplicacao.ModuloAtividade
+﻿namespace eAgendaMedica.Testes.Aplicacao.ModuloAtividade
 {
     [TestClass]
     public class ServicoAtividadeTest

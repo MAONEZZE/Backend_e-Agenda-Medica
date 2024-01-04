@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
+  constructor(){
+    console.log('asdasdasdasd dash')
+  }
 }

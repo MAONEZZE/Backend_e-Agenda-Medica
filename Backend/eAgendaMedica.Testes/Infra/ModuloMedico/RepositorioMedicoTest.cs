@@ -1,12 +1,10 @@
-﻿using eAgendaMedica.Infra.Compartilhado;
-using eAgendaMedica.Infra.ModuloMedico;
-using Microsoft.EntityFrameworkCore;
+﻿using eAgendaMedica.Infra.ModuloMedico;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace eAgendaMedica.Testes.Infra.ModuloMedico
 {
     [TestClass]
-    public class RepositorioMedicoTest : IDisposable
+    public class RepositorioMedicoTest : SetupBase, IDisposable
     {
         private RepositorioMedico repMedico;
         private eAgendaMedicaDbContext dbCtx;
@@ -15,10 +13,7 @@ namespace eAgendaMedica.Testes.Infra.ModuloMedico
         [TestInitialize]
         public void Setup()
         {
-            var builder = new DbContextOptionsBuilder<eAgendaMedicaDbContext>()
-                .UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=eAgendaMedicaTeste;Integrated Security=True;");
-
-            dbCtx = new eAgendaMedicaDbContext(builder.Options);
+            dbCtx = new eAgendaMedicaDbContext(base.BuilderDbCtx.Options);
 
             repMedico = new RepositorioMedico(dbCtx);
 

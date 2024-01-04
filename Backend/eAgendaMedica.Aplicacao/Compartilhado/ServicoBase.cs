@@ -5,7 +5,6 @@ using Serilog;
 namespace eAgendaMedica.Aplicacao.Compartilhado
 {
     public abstract class ServicoBase<TEntity, TValidador>
-        where TEntity : EntidadeBase<TEntity>
         where TValidador : AbstractValidator<TEntity>, new()
     {
         protected virtual Result Validar(TEntity registro)

@@ -1,12 +1,13 @@
-﻿using eAgendaMedica.Api.ViewModels.ModuloConsulta;
-using eAgendaMedica.Api.ViewModels.ModuloMedico;
+﻿using eAgendaMedica.Api.ViewModels.ModuloMedico;
 using eAgendaMedica.Aplicacao.ModuloMedico;
 using eAgendaMedica.Dominio.ModuloMedico;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eAgendaMedica.Api.Controllers.ModuloMedico
 {
-    [Route("api/medico")]
     [ApiController]
+    [Route("api/medico")]
+    [Authorize]
     public class MedicoController : ControladorApiBase<ListarMedicoViewModel, FormMedicoViewModel, VisualizarMedicoViewModel, Medico>
     {
         private readonly ServicoMedico service;

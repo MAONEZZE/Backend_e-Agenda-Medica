@@ -1,6 +1,4 @@
-﻿using eAgendaMedica.Dominio.ModuloMedico;
-
-namespace eAgendaMedica.Testes.Dominio.ModuloPaciente
+﻿namespace eAgendaMedica.Testes.Dominio.ModuloPaciente
 {
     [TestClass]
     public  class PacienteTest

@@ -13,21 +13,21 @@
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-hint>Nome</mat-hint>
                 <mat-label>Digite o nome do Medico (mínimo 3 caracteres)</mat-label>
-                <input type="text" matInput formControlName="nome">
+                <input data-cy="nome" type="text" matInput formControlName="nome">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-hint>Cpf</mat-hint>
                 <mat-label>xxx.xxx.xxx-xx</mat-label>
-                <input type="text" matInput mask="999.999.999-99" formControlName="cpf">
+                <input data-cy="cpf" type="text" matInput mask="999.999.999-99" formControlName="cpf">
               </mat-form-field>
             </div>
             <div>
               <mat-form-field class="w-100 mb-3" appearance="outline" [floatLabel]="getFloatLabelValue()">
                 <mat-hint>Crm</mat-hint>
                 <mat-label>xxxxx-Unidade Federal (SP)</mat-label>
-                <input type="text" matInput formControlName="crm">
+                <input data-cy="crm" type="text" matInput formControlName="crm">
               </mat-form-field>
             </div>
           </div>
@@ -36,7 +36,7 @@
         </mat-card-content>
 
         <mat-card-footer class="d-flex justify-content-end gap-4 p-3">
-          <button mat-raised-button type="submit" color="accent" class="px-3">
+          <button data-cy="btnGravar" mat-raised-button type="submit" color="accent" class="px-3">
             <mat-icon class="me-2">download</mat-icon>
             Gravar
           </button>

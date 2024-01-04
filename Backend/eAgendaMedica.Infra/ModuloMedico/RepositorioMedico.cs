@@ -1,7 +1,6 @@
 ﻿using eAgendaMedica.Dominio.Compartilhado;
 using eAgendaMedica.Dominio.ModuloMedico;
 using eAgendaMedica.Infra.Compartilhado;
-using Microsoft.EntityFrameworkCore;
 
 namespace eAgendaMedica.Infra.ModuloMedico
 {

@@ -1,7 +1,5 @@
 ﻿using eAgendaMedica.Api.ViewModels.ModuloCirurgia;
 using eAgendaMedica.Dominio.ModuloCirurgia;
-using eAgendaMedica.Dominio.ModuloPaciente;
-using System.Globalization;
 
 namespace eAgendaMedica.Api.Config.AutomapperConfig.ModuloCirurgia
 {
