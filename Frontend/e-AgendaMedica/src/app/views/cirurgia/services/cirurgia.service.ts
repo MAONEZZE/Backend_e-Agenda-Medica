@@ -7,7 +7,7 @@ import { FormCirurgiaVM } from '../models/form-cirurgia.view-model';
   providedIn: 'root'
 })
 export class CirurgiaService {
-  private url: string = "https://localhost:7124/api/cirurgia";
+  private url: string = "https://e-agenda-medica-api-sz61.onrender.com/api/cirurgia";
 
   constructor(private http: HttpClient) { }
 

@@ -6,7 +6,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class PacienteService {
-  private url: string = "https://localhost:7124/api/paciente";
+  private url: string = "https://e-agenda-medica-api-sz61.onrender.com/api/paciente";
 
   constructor(private http: HttpClient) { }
 
